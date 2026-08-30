@@ -13,6 +13,7 @@ _brain_updated_clean.txt
 # ---- Intermediates from local pipelines (large, not needed in repo) ----
 _page1_full.png
 _logo_topsection.png
+_audit_*.png
 Brand Elements/_raw_black_bg/
 Brand Elements/_qa_on_brand_green/
 Product Photos/_raw/_alpha_debug_hero.png
@@ -21,3 +22,24 @@ Product Photos/_raw/_alpha_debug_hero.png
 .env
 .env.*
 *.key
+
+# ---- v2 element pipeline intermediates (large, regenerable) ----
+Brand Elements/system-v2/_raw/
+Brand Elements/system-v2/_qa/
+
+# ---- Lifestyle photo pipeline intermediates ----
+Lifestyle Photos/_prompts/_ref_*.png
+Lifestyle Photos/_run.log
+Lifestyle Photos/_sheet_*.jpg
+Lifestyle Photos/_v1_superseded/
+
+# ---- /clone-site output (large, regenerable, contains third-party assets) ----
+# Cloned sites are working reference material, not Athlon Rub source. The Onnit
+# clone alone is ~90 MB of Onnit's own photography and licensed webfonts, which
+# must not end up in this repo.
+output/
+
+# ---- Reference material, not Athlon Rub source ----
+# Screenshots of other companies' sites, kept locally for design reference.
+# Third-party content: does not belong in a public repo.
+Website Inspiration/
