@@ -268,3 +268,161 @@ body { font-family: var(--font-body); }
   margin: 0 auto;
   opacity: 0.16;
 }
+
+/* ==========================================================================
+   LEGIBILITY PASS
+   The licensing scrub removed the base theme's brand textures, which were also
+   carrying the dark surfaces that its light type sat on. Sections kept the
+   light type and lost the ground under it: measured cream bg at luminance 231
+   against white text at 255. Restore a dark surface everywhere light type is
+   used, and scrim every section where type sits over a photograph.
+   ========================================================================== */
+
+/* 1. The two 50/50 sections. Their background came from a pattern image that
+      no longer exists; give them the brand surface instead. */
+.image-text-50-50--theme-brown { background-color: var(--athlon-green-deep) !important; }
+.image-text-50-50--theme-green { background-color: var(--athlon-green) !important; }
+.image-text-50-50--theme-brown .image-text-50-50__content,
+.image-text-50-50--theme-green .image-text-50-50__content { color: var(--athlon-cream); }
+
+/* 2. Type over photography. Every one of these sections puts white type on an
+      image; without a scrim the result depends entirely on which photo landed
+      there. A consistent gradient makes the treatment deliberate. */
+.featured-reviews__background::after,
+.slim-banner__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.featured-reviews__background::after {
+  background: linear-gradient(180deg, rgba(10, 31, 21, 0.86) 0%, rgba(10, 31, 21, 0.55) 45%, rgba(10, 31, 21, 0.78) 100%);
+}
+/* The scrim goes on __overlay's own background. __background holds the cards,
+   so a scrim there tints them; __background-image contains a <picture> that
+   paints above a ::after. An element's own background always paints beneath
+   its children, so the overlay is the one layer that darkens the photo and
+   leaves the cards and headline untouched. */
+.image-and-cards__overlay {
+  background-image: linear-gradient(180deg, rgba(10, 31, 21, 0.90) 0%, rgba(10, 31, 21, 0.74) 42%, rgba(10, 31, 21, 0.66) 100%) !important;
+}
+.slim-banner__link::before {
+  background: linear-gradient(90deg, rgba(10, 31, 21, 0.2) 0%, rgba(10, 31, 21, 0.75) 45%, rgba(10, 31, 21, 0.92) 100%);
+}
+.featured-reviews__background { position: absolute; inset: 0; }
+/* NOT .image-and-cards__background — it is position:relative with a
+   min-height and is what gives that section its 900px. Making it absolute
+   collapsed the section to 0 and spilled its content over the page. */
+.featured-reviews__inner,
+.image-and-cards__inner,
+.slim-banner__content { position: relative; z-index: 2; }
+
+/* 3. Cards sitting on those photos were translucent white over a busy image.
+      Make them solid so the copy is readable at every carousel position. */
+.image-and-cards__slide,
+.featured-reviews__slide {
+  background: color-mix(in srgb, var(--athlon-cream) 96%, transparent) !important;
+  color: var(--athlon-black);
+}
+
+/* 4. Icon slots. The brand marks have different aspect ratios, so in a fixed
+      circle they rendered at wildly different visual weights. */
+.image-and-cards__card-image-wrapper,
+.image-and-cards__card-image {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.image-and-cards__card-image-wrapper img,
+.image-and-cards__card-image img {
+  width: 62%;
+  height: 62%;
+  object-fit: contain;
+}
+
+/* 5. The wysiwyg bands were sized for a short line of display type and now
+      carry several hundred px of empty cream above and below. */
+.section--wysiwyg { padding-block: var(--iam-spacing-xl) !important; }
+.section--wysiwyg .rich-text { margin-block: 0 !important; }
+
+/* ==========================================================================
+   CONSISTENCY PASS
+   ========================================================================== */
+
+/* Surfaces: the FAQ was the only pure-black band left on a page that otherwise
+   alternates cream / green / gold, so it read as an outlier. */
+.section--collapsible-content,
+.collapsible-content { background-color: var(--athlon-green-deep) !important; }
+.collapsible-content__panel,
+.accordion,
+.accordion__wrapper { background-color: var(--athlon-cream) !important; }
+
+/* Type: the content cards were the one place headings fell back to the body
+   font, at a lighter weight than every other section heading. */
+.card--content .card__title,
+.card--content .card__heading,
+.content-cards .card__title,
+[class*="content-cards"] [class*="__title"] {
+  font-family: var(--font-heading) !important;
+  font-stretch: 70%;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+
+/* Headlines: "NOT A COUNTER-IRRITANT." was overflowing the top of its section
+   and hyphenating mid-word. Never hyphenate display type. */
+.image-text-50-50__heading,
+.image-text-50-50 h2,
+.section__header,
+.hero__title,
+[class*="__heading"] {
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  overflow-wrap: normal;
+}
+.image-text-50-50__heading,
+.image-text-50-50 h2 { font-size: clamp(28px, 3.1vw, 46px); line-height: 0.92; }
+
+/* Quote attribution: the markup is
+   <cite> — Athlon Rub <span class="quote-block__quote-role">…</span></cite>
+   so the role ran on after the name and the block right-aligned into a ragged
+   two-line clump. */
+.quote-block__quote-author { text-align: left; }
+.quote-block__quote-author cite { display: block; font-style: normal; }
+.quote-block__quote-role {
+  display: block;
+  margin-top: 4px;
+  font-weight: 400;
+  opacity: 0.8;
+  text-transform: none;
+}
+
+/* Slim banner: keep the supporting line off a one-word orphan. */
+.slim-banner__copy p,
+.slim-banner__content p { max-width: 34ch; text-wrap: balance; }
+
+/* The showcase card is a flex column and its form is `flex: 1 1 0%`, so with
+   the purchase stack removed the form still absorbed every remaining pixel —
+   ~350px of empty panel between the product name and the price. Size to
+   content instead. */
+.product-showcase-card__form { flex: 0 0 auto !important; }
+.product-showcase-card__media { max-width: 260px; }
+
+/* The overlap panel's gold sat at partial opacity over a busy photograph, so
+   the body copy and CTA landed on visual noise. Make the panel solid. */
+.image-text-overlap__content {
+  background: linear-gradient(100deg, var(--athlon-gold) 0%, var(--athlon-gold) 58%, rgba(212, 175, 55, 0.92) 100%);
+}
+.image-text-overlap__content,
+.image-text-overlap__content .rte { color: var(--athlon-black); }
+.image-text-overlap__heading { color: var(--athlon-black) !important; }
+
+/* The overlap CTA was gold on what is now a gold panel. */
+.image-text-overlap .button,
+.image-text-overlap__content .button {
+  background-color: var(--athlon-green-deep) !important;
+  border-color: var(--athlon-green-deep) !important;
+  color: var(--athlon-cream) !important;
+}
