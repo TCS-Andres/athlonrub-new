@@ -1,0 +1,42 @@
+/* Clone overrides — reproduce the end state that stripped third-party app
+   scripts produce on the live site. Loaded last, after the theme stylesheets.
+   Every value here was measured on the original, not guessed. */
+
+/* 1. OrderGroove subscription widget (static.ordergroove.com, stripped).
+      Its runtime upgrades the <og-*> custom elements and renders only the
+      matching branch. Measured on the original: every node under a NESTED
+      <og-when> (the upsell + its modal) has height 0 — 108 of 108 collapsed
+      nodes sit under `og-offer > og-when > og-when`. Without the script all
+      branches render, inflating the product card by ~600px @1440.
+      CONFIRMED by DOM diff: _probe/og-diff.json */
+og-offer og-when og-when { display: none !important; }
+
+/* 2. Videowise shoppable-video carousel (cdn2.videowise.com, closed shadow
+      root — not capturable from the DOM). Reserve the original's measured
+      height so every section below it keeps the right offset. This region is
+      MASKED in the pixel diff and reported as a known gap, not as a match.
+      Measured on the original: 390->328  768->324  1024->445  1280->566  1440->641 */
+[id$="1784795814ba7413c0"] .apps-section { min-height: 328px; }
+@media (min-width: 768px)  { [id$="1784795814ba7413c0"] .apps-section { min-height: 324px; } }
+@media (min-width: 1024px) { [id$="1784795814ba7413c0"] .apps-section { min-height: 445px; } }
+@media (min-width: 1280px) { [id$="1784795814ba7413c0"] .apps-section { min-height: 566px; } }
+@media (min-width: 1440px) { [id$="1784795814ba7413c0"] .apps-section { min-height: 641px; } }
+
+/* 3. Featured-reviews track height. Swiper's vendor rule
+      `.swiper-wrapper{height:100%}` resolves against a different percentage
+      basis in the clone (used height 565px) than on the live site (339px),
+      which pushed .featured-reviews to 791px and bled its background over the
+      section below. DOM, inline styles and every other computed property in
+      this subtree are identical — verified node-by-node in _probe/. Forcing
+      the track back to auto reproduces the original's geometry exactly:
+      track 339px, .featured-reviews 565px. CONFIRMED by measurement. */
+.featured-reviews__track.swiper-wrapper,
+.image-and-cards__track.swiper-wrapper,
+.featured-collections .swiper-wrapper { height: auto !important; }
+/* NOT the hero track: Swiper sizes that one with an inline height (640px @1440)
+   and an !important rule here would override it. Measured track heights,
+   original vs clone before this rule:
+     featured-collections  452 -> 554 @1440,  276 -> 356 @390
+     image-and-cards       303 -> 375 @1440,  294 -> 336 @390
+     featured-reviews      339 -> 565 @1440
+     hero                  640 -> 640 @1440   (already correct, left alone) */

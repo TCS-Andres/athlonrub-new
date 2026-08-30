@@ -1,0 +1,270 @@
+/* ==========================================================================
+   Athlon Rub brand layer
+   --------------------------------------------------------------------------
+   Loaded last. Re-skins the cloned theme by overriding its OWN token
+   vocabulary (--black, --yellow, --grey-*, --font-*) plus the --rx-* knobs
+   the tokenizer extracted. Almost nothing here is a new rule; it is the
+   existing design system pointed at Athlon Rub's palette.
+
+   Palette source: Brand Elements/system-v2/README.md, sampled from the
+   PALETA PRINCIPAL panel of the official logo sheet.
+   ========================================================================== */
+
+:root {
+  /* --- Athlon Rub official palette ------------------------------------- */
+  --athlon-green:       #0F2B1E;   /* primary surface */
+  --athlon-green-deep:  #0A1F15;   /* footer / deepest surface */
+  --athlon-gold:        #D4AF37;   /* primary accent */
+  --athlon-gold-dim:    #B9952B;   /* accent hover / pressed */
+  --athlon-black:       #0A0A0A;   /* ink */
+  --athlon-cream:       #EAE9CB;   /* light surface */
+  --athlon-cream-deep:  #DEDCB8;   /* light surface, second step */
+
+  /* --- theme vocabulary, repointed ------------------------------------- */
+  --black:        var(--athlon-black);
+  --white:        #ffffff;
+  --grey-100:     var(--athlon-cream);        /* page background */
+  --grey-300:     #9A9578;
+  --grey-400:     #D6D3B4;
+  --grey-400-alt: #8C8A72;
+  --grey-500:     #4A4A3E;
+  --grey-500-alt: #3D3D33;
+  --grey-700:     #23291F;
+  --yellow:       var(--athlon-gold);
+  --yellow-100:   var(--athlon-gold-dim);
+
+  --font-body:            "Inter", Helvetica, Arial, sans-serif;
+  --font-heading:         "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-heading-regular: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* --- the tokenizer's extracted knobs --------------------------------- */
+  --rx-color-text: var(--athlon-black);
+  --rx-color-bg:   var(--athlon-cream);
+  --rx-color-3:    #9A9578;
+  --rx-color-4:    #3D3D33;
+  --rx-color-5:    #4A4A3E;
+  --rx-color-6:    var(--athlon-gold);        /* was the base theme's #ffb200 */
+  --rx-color-7:    #1C2A22;
+  --rx-color-9:    #4A4A3E;
+  --rx-color-10:   var(--athlon-green);       /* slim banner surface */
+  --rx-font-1:     "Inter", Helvetica, Arial, sans-serif;
+  --rx-font-2:     "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   Type. Founders Grotesk Cond SmBd and Söhne are commercially licensed Klim
+   faces and cannot ship. Archivo (variable, wdth axis) carries the condensed
+   uppercase display voice; Inter stands in for Söhne. Both SIL OFL.
+   The measured scale is kept — only the width axis is dialled in so the
+   headline sets at roughly the original's character width.
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.button, .hero__title, .section__header,
+[class*="__heading"], [class*="__title"] {
+  font-family: var(--font-heading);
+  font-stretch: 70%;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+
+body { font-family: var(--font-body); }
+
+/* --------------------------------------------------------------------------
+   Dark surfaces. The base theme alternates light grey against pure black; Athlon
+   alternates cream against the deep green. These are the four places the
+   theme paints a black surface.
+   -------------------------------------------------------------------------- */
+.section--content-cards,
+.image-text-overlap,
+.logo-list,
+.footer {
+  background-color: var(--athlon-green);
+}
+
+.footer { background-color: var(--athlon-green-deep); }
+
+/* the showcase card themes: black card -> green card, yellow card -> gold */
+.product-showcase-card--theme-black .product-showcase-card__background {
+  background-image: linear-gradient(135deg, var(--athlon-green), #0000);
+}
+.product-showcase-card--theme-yellow .product-showcase-card__background {
+  background-image: linear-gradient(135deg, var(--athlon-gold), #efe2c200);
+}
+.product-showcase-card--theme-black iam-add-to-cart-button button {
+  color: var(--athlon-green);
+  background-color: var(--athlon-gold);
+  border-color: var(--athlon-gold);
+}
+.product-showcase-card--theme-yellow iam-add-to-cart-button button {
+  color: var(--athlon-cream);
+  background-color: var(--athlon-green);
+  border-color: var(--athlon-green);
+}
+
+/* --------------------------------------------------------------------------
+   Accent details
+   -------------------------------------------------------------------------- */
+.slim-banner { background-color: var(--athlon-green); }
+.slim-banner__heading { color: var(--athlon-gold); }
+
+.featured-reviews .swiper-pagination-bullet { background: var(--athlon-gold) !important; }
+
+.button:not(.button--secondary) {
+  background-color: var(--athlon-black);
+  border-color: var(--athlon-black);
+  color: var(--athlon-cream);
+}
+.slim-banner__button.button,
+.image-text-overlap .button {
+  background-color: var(--athlon-gold);
+  border-color: var(--athlon-gold);
+  color: var(--athlon-black);
+}
+
+/* --------------------------------------------------------------------------
+   Hero. The original's hero photo is a pale-blue studio shot, so the theme's
+   "dark_on_media" treatment (near-black type straight on the image) reads
+   fine. Athlon's hero is a dark gym frame, where the same treatment is
+   illegible. Scrim the left third and flip the type to cream.
+   -------------------------------------------------------------------------- */
+.hero__media { position: relative; }
+.hero__slide[class*="theme-dark_on_media"] .hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    rgba(10, 10, 10, 0.88) 0%,
+    rgba(10, 10, 10, 0.66) 38%,
+    rgba(10, 10, 10, 0.10) 68%,
+    rgba(10, 10, 10, 0) 82%);
+}
+.hero__slide[class*="theme-dark_on_media"] .hero__content { position: relative; z-index: 2; }
+.hero__slide[class*="theme-dark_on_media"] .hero__title,
+.hero__slide[class*="theme-dark_on_media"] .hero__eyebrow,
+.hero__slide[class*="theme-dark_on_media"] .hero__content p,
+.hero__slide[class*="theme-dark_on_media"] .hero__content .rte {
+  color: var(--athlon-cream);
+}
+
+/* "TRAIN. COMPETE." is 15 characters against the original's 11, so at the
+   measured 118px it wrapped to four lines and pushed the CTA out of frame.
+   Drop the display size rather than let the headline reflow. */
+.hero__title {
+  font-size: clamp(34px, 5.6vw, 84px);
+  line-height: 0.86;
+}
+
+.hero__button.button {
+  background-color: var(--athlon-gold);
+  border-color: var(--athlon-gold);
+  color: var(--athlon-black);
+}
+
+/* --------------------------------------------------------------------------
+   Header. The original's logo is a wide SVG wordmark; Athlon's is a tall
+   crest-over-wordmark lockup, which collapses to 0x0 in a slot sized by width.
+   -------------------------------------------------------------------------- */
+.header__logo {
+  height: 34px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+}
+.header {
+  background-color: var(--athlon-green);
+}
+.header a,
+.header .header-menu__link,
+.header button {
+  color: var(--athlon-cream);
+}
+.header .icon,
+.header svg { color: var(--athlon-cream); fill: currentColor; }
+
+/* The theme sizes its logo slot for a wide SVG wordmark (height:18px) and
+   colours top-level nav from a rule this layer cannot outrank by specificity
+   alone. Both are re-skin decisions, so force them here. */
+.header .header__logo,
+.header__logo {
+  height: 36px !important;
+  width: auto !important;
+}
+.header .header-menu__link,
+.header .header__link,
+.header .search-box__toggle,
+.header .header__actions a,
+.header .header__actions button,
+.header .in-page-link {
+  color: var(--athlon-cream) !important;
+}
+.header .icon,
+.header svg:not([fill]) { color: var(--athlon-cream) !important; }
+
+/* --------------------------------------------------------------------------
+   Product showcase. The original's purchase UI is a Shopify + OrderGroove
+   stack that does not exist in a static build. Replaced with a price block
+   that links to the live store.
+   -------------------------------------------------------------------------- */
+.athlon-buy { margin-top: var(--iam-spacing-md); }
+.athlon-buy__price {
+  font-family: var(--font-heading);
+  font-stretch: 70%;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1;
+  color: inherit;
+}
+.athlon-buy__size {
+  font-family: var(--font-body);
+  font-size: 14px;
+  opacity: 0.8;
+  margin-top: 6px;
+  margin-bottom: var(--iam-spacing-md);
+}
+.athlon-buy__cta { display: inline-block; }
+.product-showcase-card--theme-yellow .athlon-buy__cta {
+  background-color: var(--athlon-green); border-color: var(--athlon-green); color: var(--athlon-cream);
+}
+.product-showcase-card--theme-black .athlon-buy__cta {
+  background-color: var(--athlon-gold); border-color: var(--athlon-gold); color: var(--athlon-black);
+}
+
+/* The product photography is shot on white. On a coloured panel that reads as
+   an accidental box, so make it a deliberate card. */
+.product-showcase-card__media,
+.image-text-overlap__media {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* The footer's decorative art was the original's wordmark; the crest carries
+   the same job without needing a full-bleed photograph behind it. */
+.footer {
+  --footer-background-image-desktop: none;
+  --footer-background-image-mobile: none;
+  background-image: none !important;
+}
+.footer .footer__background,
+.footer [class*="background"] { display: none !important; }
+
+/* Removing the purchase stack left a tall void inside the showcase cards,
+   because the card was sized around it. Let the card size to its content. */
+.product-showcase-card { min-height: 0 !important; }
+.product-showcase-card__form { margin-top: var(--iam-spacing-md); }
+.product-showcase-card__benefits img { width: 28px; height: auto; }
+
+/* Footer watermark: the theme sizes this slot for a full-bleed wordmark.
+   Athlon's lockup is a crest over type, so cap it and drop it back to a
+   watermark rather than letting it drive a 1930px-tall footer. */
+.footer-logo__wrapper,
+.footer-logo__container { max-height: 220px; overflow: hidden; }
+.footer-logo__image {
+  max-height: 200px;
+  width: auto;
+  margin: 0 auto;
+  opacity: 0.16;
+}
