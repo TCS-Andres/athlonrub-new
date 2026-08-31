@@ -1200,8 +1200,8 @@ main.main { background-color: #FFFFFF; }
    kept the base theme's #ececec. The section is 1440 wide against a 1344
    inner, so the grey showed as a band down each 48px gutter.
    ========================================================================== */
-.section--margin,
-.shopify-section.section--margin,
+/* Scoped to the roster only. `.section--margin` also matches the rich-text
+   bands, and at (0,2,0) it outranked their own rules. */
 [id$="featured_collections_TB8QfN"],
 .section--featured-collections { background-color: #FFFFFF !important; }
 
@@ -1219,4 +1219,46 @@ main.main { background-color: #FFFFFF; }
 }
 @media (max-width: 767px) {
   .hero__content { padding-left: 6px; padding-right: 14px; }
+}
+
+/* ==========================================================================
+   MOBILE FIXES — carousel padding, overlap media, the white void
+   ========================================================================== */
+@media (max-width: 767px) {
+  /* one card per swipe (Swiper is retuned in JS); give the track side padding
+     so the single card is not flush to both edges */
+  .featured-collections .swiper,
+  .image-and-cards__slider,
+  .featured-reviews__slider { padding-inline: 16px; overflow: visible; }
+  .image-and-cards__slide,
+  .featured-reviews__slide,
+  .featured-collections .swiper-slide { border-radius: 10px; }
+
+  /* The science panel's media had a white card treatment meant for the desktop
+     layout, where the bottle sits on gold. Stacked on a phone the white box
+     bleeds past the gold panel. Drop the card here. */
+  .image-text-overlap__media {
+    background: transparent !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+  }
+  .image-text-overlap__media img { border-radius: 10px; }
+
+  /* The "IN REAL BAGS" band sat as ~200px of white between the dark showcase
+     and the reviews photo, reading as a gap rather than a section. Give it the
+     brand surface and tighten it. */
+  [id$="rich_text_rpday9"],
+  [id$="rich_text_rpday9"] .rich-text {
+    background-color: var(--athlon-green-deep) !important;
+  }
+  /* Break out of the page grid's 16px inset so the band is full-bleed, and
+     zero the .section--margin block margins that left a white seam above and
+     below it between two dark sections. */
+  [id$="rich_text_rpday9"] {
+    margin: 0 -16px !important;
+    width: calc(100% + 32px) !important;
+    padding: 26px 20px !important;
+  }
+  [id$="rich_text_rpday9"] .section__header,
+  [id$="rich_text_rpday9"] strong { color: var(--athlon-cream) !important; }
 }
