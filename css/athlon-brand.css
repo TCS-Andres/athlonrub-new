@@ -575,3 +575,57 @@ body { font-family: var(--font-body); }
   .hero__ambient { display: none; }
   .hero__ambient-fallback { display: block; }
 }
+
+/* ==========================================================================
+   WHITE HEADER + WHITE LIGHT SURFACES
+   Matching athlonrub.com: a white nav bar with the horizontal wordmark, and
+   white rather than cream for the page's light sections.
+   ========================================================================== */
+:root {
+  --grey-100: #FFFFFF;              /* page background: cream -> white */
+  --rx-color-bg: #FFFFFF;
+  --athlon-surface: #FFFFFF;
+}
+body { background-color: #FFFFFF; }
+
+/* Header: white bar, dark type. Overrides the green-header rules above. */
+.header,
+.header--default { background-color: #FFFFFF !important; }
+.header .header-menu__link,
+.header .header__link,
+.header .search-box__toggle,
+.header .header__actions a,
+.header .header__actions button,
+.header .in-page-link,
+.athlon-nav__link {
+  color: var(--athlon-green-deep) !important;
+}
+.header .icon,
+.header svg:not([fill]) { color: var(--athlon-green-deep) !important; }
+.header .header__logo,
+.header__logo { height: 34px !important; }
+.header { border-bottom: 1px solid color-mix(in srgb, var(--athlon-green) 12%, transparent); }
+
+/* the dropdown panel stays dark for contrast against the white bar */
+.athlon-nav__panel { background: var(--athlon-green-deep); }
+.athlon-nav__sublink { color: var(--athlon-cream) !important; }
+
+/* Light sections that were cream are now white, so the band around
+   "Built for the real roster" reads as one surface rather than two. */
+.section--header,
+.featured-collections,
+.section--featured-collections,
+.section--wysiwyg,
+.rich-text,
+main.main { background-color: #FFFFFF; }
+
+/* cards that sat on cream */
+.image-and-cards__slide,
+.featured-reviews__slide {
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: var(--athlon-black);
+}
+.image-and-cards__card-image-wrapper,
+.image-and-cards__card-image {
+  background: color-mix(in srgb, var(--athlon-green) 6%, #fff);
+}
