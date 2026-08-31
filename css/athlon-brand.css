@@ -52,9 +52,9 @@
 }
 
 /* --------------------------------------------------------------------------
-   Type. Founders Grotesk Cond SmBd and Söhne are commercially licensed Klim
-   faces and cannot ship. Archivo (variable, wdth axis) carries the condensed
-   uppercase display voice; Inter stands in for Söhne. Both SIL OFL.
+   Type. The original theme's display and body faces are commercially licensed
+   (see _probe/scrub-css.mjs, which strips them); they and cannot ship. Archivo (variable, wdth axis) carries the condensed
+   uppercase display voice; Inter stands in for "Inter". Both SIL OFL.
    The measured scale is kept — only the width axis is dialled in so the
    headline sets at roughly the original's character width.
    -------------------------------------------------------------------------- */
@@ -875,119 +875,19 @@ main.main { background-color: #FFFFFF; }
 /* ==========================================================================
    SUPPORTING PAGES
    ========================================================================== */
-/* <main> is a grid with a subgrid column template, so a plain section lands in
-   a single narrow column. Span the whole grid and lay out normally inside. */
-.athlon-page__hero,
-.athlon-page__section {
+/* <main> is a grid whose columns run [full-start] 32px [main-start] ... so a
+   section lands in the `main` track and stops 48px short of each edge. The
+   home page's bands are full-bleed, so these must be too — the inner wrapper
+   is what constrains the content width. */
+.apg,
+.apg-hero,
+.apg-cta,
+.apg-next {
   grid-column: 1 / -1;
   display: block;
   width: 100%;
 }
-.athlon-page__hero {
-  background: var(--athlon-green-deep);
-  padding-block: clamp(56px, 7vw, 104px);
-}
-.athlon-page__hero-inner {
-  max-width: 1180px;
-  margin-inline: auto;
-  padding-inline: clamp(20px, 4vw, 60px);
-}
-.athlon-page__eyebrow {
-  font-family: var(--font-body);
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--athlon-gold);
-  margin-bottom: 14px;
-}
-.athlon-page__title {
-  font-family: var(--font-heading);
-  font-stretch: 70%;
-  font-weight: 700;
-  font-size: clamp(38px, 6vw, 78px);
-  line-height: 0.92;
-  text-transform: uppercase;
-  color: var(--athlon-cream);
-  margin: 0;
-}
 
-.athlon-page__section { padding-block: clamp(40px, 5vw, 76px); background: #FFFFFF; }
-.athlon-page__section--alt { background: color-mix(in srgb, var(--athlon-green) 5%, #fff); }
-.athlon-page__inner {
-  max-width: 1180px;
-  margin-inline: auto;
-  padding-inline: clamp(20px, 4vw, 60px);
-}
-.athlon-page__heading {
-  font-family: var(--font-heading);
-  font-stretch: 70%;
-  font-weight: 700;
-  font-size: clamp(28px, 3.2vw, 44px);
-  line-height: 1;
-  text-transform: uppercase;
-  color: var(--athlon-green-deep);
-  margin: 0 0 18px;
-}
-.athlon-page__sub {
-  font-family: var(--font-heading);
-  font-stretch: 70%;
-  font-weight: 700;
-  font-size: clamp(18px, 1.9vw, 24px);
-  text-transform: uppercase;
-  color: var(--athlon-green-deep);
-  margin: 28px 0 8px;
-}
-.athlon-page__p {
-  font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.65;
-  color: color-mix(in srgb, var(--athlon-black) 82%, transparent);
-  max-width: 74ch;
-  margin: 0 0 14px;
-}
-.athlon-page__list { margin: 8px 0 0; padding-left: 20px; max-width: 74ch; }
-.athlon-page__list li {
-  font-family: var(--font-body);
-  font-size: 16.5px;
-  line-height: 1.6;
-  margin-bottom: 10px;
-  color: color-mix(in srgb, var(--athlon-black) 82%, transparent);
-}
-
-/* shop listing */
-.athlon-shop {
-  list-style: none;
-  margin: 28px 0 0;
-  padding: 0;
-  display: grid;
-  gap: 26px;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-}
-.athlon-shop__link { display: block; color: inherit; text-decoration: none; }
-.athlon-shop__media {
-  display: block;
-  aspect-ratio: 1;
-  overflow: hidden;
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--athlon-green) 5%, #fff);
-}
-.athlon-shop__media img { width: 100%; height: 100%; object-fit: contain; }
-.athlon-shop__name {
-  display: block;
-  margin-top: 12px;
-  font-family: var(--font-heading);
-  font-stretch: 70%;
-  font-weight: 700;
-  font-size: 17px;
-  text-transform: uppercase;
-  color: var(--athlon-green-deep);
-}
-.athlon-shop__price { display: block; margin-top: 4px; font-family: var(--font-body); font-size: 15px; }
-
-@media (max-width: 767px) {
-  .athlon-page__p { font-size: 15.5px; }
-  .athlon-shop { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 18px; }
-}
 
 /* The header's nav wrapper is `overflow: hidden auto`, so a dropdown taller
    than the 96px bar was clipped away — the panel opened but nothing showed. */
@@ -1055,60 +955,6 @@ main.main { background-color: #FFFFFF; }
 /* ==========================================================================
    SUPPORTING PAGES — branded treatment
    ========================================================================== */
-.athlon-page__hero--media { position: relative; overflow: hidden; }
-.athlon-page__hero--media::before {
-  content: "";
-  position: absolute; inset: 0;
-  background-image: var(--page-hero-image);
-  background-size: cover; background-position: center 40%;
-  opacity: 0.42;
-}
-.athlon-page__hero--media::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(10,31,21,.94) 0%, rgba(10,31,21,.72) 46%, rgba(10,31,21,.42) 100%);
-}
-.athlon-page__hero--media .athlon-page__hero-inner { position: relative; z-index: 2; }
-.athlon-page__hero-inner::after {
-  content: "";
-  display: block;
-  width: 68px; height: 3px;
-  margin-top: 22px;
-  background: var(--athlon-gold);
-}
-
-.athlon-page__figure { margin: 30px 0 0; }
-.athlon-page__figure img {
-  width: 100%; height: auto; display: block;
-  border-radius: 10px;
-  aspect-ratio: 16 / 10; object-fit: cover;
-}
-
-.athlon-page__cta {
-  grid-column: 1 / -1; display: block;
-  background: var(--athlon-gold);
-  padding-block: clamp(40px, 5vw, 76px);
-}
-.athlon-page__cta-inner {
-  max-width: 1180px; margin-inline: auto;
-  padding-inline: clamp(20px, 4vw, 60px);
-  text-align: center;
-}
-.athlon-page__cta-title {
-  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
-  font-size: clamp(26px, 3.2vw, 44px); line-height: 1; text-transform: uppercase;
-  color: var(--athlon-black); margin: 0 0 10px;
-}
-.athlon-page__cta-copy {
-  font-family: var(--font-body); font-size: 16px;
-  color: color-mix(in srgb, var(--athlon-black) 78%, transparent); margin: 0 0 22px;
-}
-.athlon-page__cta-link {
-  display: inline-block; padding: 15px 30px; border-radius: 40px;
-  background: var(--athlon-green-deep); color: var(--athlon-cream) !important;
-  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
-  font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none;
-}
 
 /* ==========================================================================
    PRODUCT LINEUP (home, high slot) — built for conversion
@@ -1488,4 +1334,620 @@ main.main { background-color: #FFFFFF; }
     height: 300px !important;
     padding: 16px;
   }
+}
+
+/* ------------------------------------------------------------------
+   Science panel: the three-bottle cutout.
+   The media used to be a white card because the source shot was on a white
+   sweep. It now carries product-trio.webp, whose studio background is gone, so
+   there is no card at all — the range stands on the gold with its own shadow
+   and is allowed to overhang the panel, which is what makes a cutout read as
+   a cutout rather than a pasted rectangle.
+   ------------------------------------------------------------------ */
+.image-text-overlap__panel { overflow: visible; }
+.image-text-overlap__media--cutout {
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  height: 486px !important;
+  top: -62px !important;
+}
+.image-text-overlap__media--cutout picture { display: block; width: 100%; height: 100%; }
+.image-text-overlap__media--cutout img {
+  object-fit: contain !important;
+  object-position: center bottom;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  filter: drop-shadow(0 24px 30px rgba(10, 31, 21, 0.32));
+}
+
+@media (max-width: 767px) {
+  .image-text-overlap__media--cutout {
+    position: relative !important;
+    inset: auto !important;
+    margin: 0 20px 10px;
+    height: 320px !important;
+  }
+}
+
+/* ==========================================================================
+   Supporting pages (.apg-*)
+   --------------------------------------------------------------------------
+   The pages are composed from a small set of layout primitives rather than a
+   stack of full-width text blocks: ping-pong media/copy rows, stat bands,
+   card grids, ingredient chips, numbered steps, galleries and a three-bottle
+   lineup that closes every page.
+   ========================================================================== */
+
+.apg { padding-block: clamp(52px, 6vw, 92px); background: #FFFFFF; }
+.apg--tint { background: color-mix(in srgb, var(--athlon-green) 4%, #fff); }
+.apg__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 64px);
+}
+.apg__inner--narrow { max-width: 860px; }
+.apg__head { margin-bottom: clamp(26px, 3vw, 44px); }
+.apg__head--center { text-align: center; }
+.apg__head--center .apg-p { margin-inline: auto; }
+
+.apg-eyebrow {
+  margin: 0 0 10px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--athlon-gold-dim);
+}
+.apg-h2 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: var(--athlon-green);
+}
+.apg-p {
+  margin: 14px 0 0;
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.66;
+  color: var(--grey-500);
+  max-width: 62ch;
+}
+.apg-p--lead { font-size: 17.5px; }
+.apg-note {
+  margin: 22px 0 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--grey-500);
+  max-width: 70ch;
+}
+.apg-note--center { text-align: center; margin-inline: auto; }
+
+.apg-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--athlon-green);
+  border-bottom: 2px solid var(--athlon-gold);
+  padding-bottom: 4px;
+  transition: gap 0.2s ease;
+}
+.apg-link:hover { gap: 16px; color: var(--athlon-green); }
+.apg-link--sm { margin-top: auto; padding-top: 14px; font-size: 12.5px; align-self: flex-start; }
+
+/* ------------------------------------------------------------------- hero */
+.apg-hero {
+  position: relative;
+  background: var(--athlon-green);
+  padding-block: clamp(64px, 9vw, 128px);
+  overflow: hidden;
+}
+.apg-hero--media::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: var(--apg-hero);
+  background-size: cover;
+  background-position: center 38%;
+}
+.apg-hero--media::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(96deg, rgba(10,31,21,0.92) 0%, rgba(10,31,21,0.78) 46%, rgba(10,31,21,0.34) 100%);
+}
+.apg-hero__inner {
+  position: relative; z-index: 2;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 64px);
+}
+.apg-hero__eyebrow {
+  margin: 0 0 14px;
+  font-family: var(--font-heading);
+  font-size: 12px; line-height: 1.4; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--athlon-gold);
+}
+.apg-hero__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 6vw, 82px);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--athlon-cream);
+}
+.apg-hero__title::after {
+  content: "";
+  display: block;
+  width: 68px; height: 3px;
+  margin-top: 22px;
+  background: var(--athlon-gold);
+}
+.apg-hero__deck {
+  margin: 22px 0 0;
+  max-width: 54ch;
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.6;
+  color: rgba(234, 233, 203, 0.86);
+}
+
+/* ------------------------------------------------------- ping-pong split */
+.apg-split__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 4.5vw, 72px);
+  align-items: center;
+}
+.apg-split__media { margin: 0; }
+.apg-split__media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 20px 44px rgba(10, 31, 21, 0.14);
+}
+.apg-split--flip .apg-split__media { order: 2; }
+.apg-split__body { min-width: 0; }
+
+/* --------------------------------------------------------------- checklist */
+.apg-check { list-style: none; margin: 20px 0 0; padding: 0; }
+.apg-check li {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 9px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--athlon-green) 10%, transparent);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--grey-500);
+}
+.apg-check li:last-child { border-bottom: 0; }
+.apg-check li strong { color: var(--athlon-green); font-weight: 700; }
+.apg-check__mark { width: 16px; height: 11px; margin-top: 7px; }
+
+/* ------------------------------------------------------------------ stats */
+.apg-stats { background: var(--athlon-green); }
+.apg-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 60px);
+}
+.apg-stat { border-top: 3px solid var(--athlon-gold); padding-top: 20px; }
+.apg-stat__n {
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 5.4vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--athlon-gold);
+}
+.apg-stat__label {
+  margin-top: 8px;
+  font-family: var(--font-heading);
+  font-size: 13px; line-height: 1.4; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--athlon-cream);
+}
+.apg-stat__note {
+  margin: 10px 0 0;
+  font-family: var(--font-body);
+  font-size: 15px; line-height: 1.55;
+  color: rgba(234, 233, 203, 0.72);
+}
+
+/* ------------------------------------------------------------------ cards */
+.apg-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 30px);
+}
+.apg-card {
+  display: flex; flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid color-mix(in srgb, var(--athlon-green) 12%, transparent);
+  border-radius: 14px;
+  padding: clamp(22px, 2.4vw, 32px);
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+.apg-card:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(10, 31, 21, 0.12); }
+.apg-card__icon { display: block; width: auto; height: 46px; margin-bottom: 18px; }
+.apg-card__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 20px; line-height: 1.24;
+  color: var(--athlon-green);
+}
+.apg-card__p {
+  margin: 12px 0 0;
+  font-family: var(--font-body);
+  font-size: 15.5px; line-height: 1.6;
+  color: var(--grey-500);
+}
+
+/* ------------------------------------------------------------------ chips */
+.apg-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 12px; margin: 0; padding: 0; }
+.apg-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px 11px 12px;
+  border: 1px solid color-mix(in srgb, var(--athlon-green) 14%, transparent);
+  border-radius: 999px;
+  background: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--athlon-green);
+}
+.apg-chip img { width: 22px; height: 22px; object-fit: contain; }
+
+/* ------------------------------------------------------------------ steps */
+.apg-steps__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 44px);
+  margin: 0; padding: 0;
+  counter-reset: none;
+}
+.apg-step { border-top: 3px solid var(--athlon-gold); padding-top: 20px; }
+.apg-step__n {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(34px, 3.6vw, 50px);
+  line-height: 1;
+  color: color-mix(in srgb, var(--athlon-green) 40%, #fff);
+}
+.apg-step__title {
+  margin: 12px 0 0;
+  font-family: var(--font-heading);
+  font-size: 21px; line-height: 1.2;
+  color: var(--athlon-green);
+}
+.apg-step__p {
+  margin: 10px 0 0;
+  font-family: var(--font-body);
+  font-size: 15.5px; line-height: 1.6;
+  color: var(--grey-500);
+}
+
+/* ------------------------------------------------------- trio / gallery */
+.apg-trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 30px); }
+.apg-trio__item {
+  display: block;
+  text-decoration: none;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #FFFFFF;
+  border: 1px solid color-mix(in srgb, var(--athlon-green) 12%, transparent);
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+.apg-trio__item:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(10, 31, 21, 0.14); }
+.apg-trio__media { display: block; aspect-ratio: 3 / 2; overflow: hidden; }
+.apg-trio__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.apg-trio__n {
+  display: block; padding: 20px 24px 0;
+  font-family: var(--font-heading); font-size: 13px; line-height: 1.4; font-weight: 700;
+  letter-spacing: 0.18em; color: var(--athlon-gold-dim);
+}
+.apg-trio__title {
+  display: block; padding: 6px 24px 0;
+  font-family: var(--font-heading); font-size: 24px; line-height: 1.15;
+  color: var(--athlon-green);
+}
+.apg-trio__p {
+  display: block; padding: 10px 24px 26px;
+  font-family: var(--font-body); font-size: 15.5px; line-height: 1.6;
+  color: var(--grey-500);
+}
+
+.apg-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 28px); }
+.apg-gallery__item { margin: 0; }
+.apg-gallery__item img {
+  display: block; width: 100%;
+  aspect-ratio: 3 / 2; object-fit: cover;
+  border-radius: 12px;
+}
+/* Graphics with text baked in must not be cropped, and need enough width for
+   that text to be legible — two across, with a lone third centred. */
+.apg-gallery--wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.apg-gallery--wide .apg-gallery__item img { aspect-ratio: 16 / 9; object-fit: contain; background: var(--athlon-green-deep); }
+.apg-gallery--wide > :last-child:nth-child(odd) { grid-column: 1 / -1; width: calc(50% - clamp(9px, 1.2vw, 14px)); margin-inline: auto; }
+@media (max-width: 767px) {
+  .apg-gallery--wide { grid-template-columns: 1fr; }
+  .apg-gallery--wide > :last-child:nth-child(odd) { grid-column: auto; width: 100%; }
+}
+.apg-gallery__item figcaption {
+  margin-top: 12px;
+  font-family: var(--font-body); font-size: 14.5px; line-height: 1.55;
+  color: var(--grey-500);
+}
+
+/* ----------------------------------------------------------------- people */
+.apg-people { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 30px); }
+.apg-person { margin: 0; text-align: center; }
+.apg-person__img {
+  display: block;
+  width: 100%; aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 999px;
+  border: 3px solid var(--athlon-gold);
+}
+.apg-person__img--mono {
+  display: grid; place-items: center;
+  background: var(--athlon-green);
+  color: var(--athlon-gold);
+  font-family: var(--font-heading); font-size: 34px; letter-spacing: 0.04em;
+}
+.apg-person__name {
+  display: block; margin-top: 16px;
+  font-family: var(--font-heading); font-size: 18px; line-height: 1.3;
+  color: var(--athlon-green);
+}
+.apg-person__role {
+  display: block; margin-top: 5px;
+  font-family: var(--font-body); font-size: 13.5px; line-height: 1.5;
+  color: var(--grey-500);
+}
+
+/* -------------------------------------------------------------------- faq */
+.apg-faq { border-top: 1px solid color-mix(in srgb, var(--athlon-green) 14%, transparent); }
+.apg-faq__item { border-bottom: 1px solid color-mix(in srgb, var(--athlon-green) 14%, transparent); }
+.apg-faq__q {
+  list-style: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  padding: 22px 0;
+  font-family: var(--font-heading);
+  font-size: clamp(17px, 1.7vw, 21px); line-height: 1.3;
+  color: var(--athlon-green);
+}
+.apg-faq__q::-webkit-details-marker { display: none; }
+.apg-faq__q::after {
+  content: "+";
+  flex: none;
+  font-family: var(--font-heading); font-size: 26px; line-height: 1;
+  color: var(--athlon-gold);
+}
+.apg-faq__item[open] .apg-faq__q::after { content: "\2013"; }
+.apg-faq__a p {
+  margin: 0 0 24px;
+  max-width: 70ch;
+  font-family: var(--font-body); font-size: 16px; line-height: 1.66;
+  color: var(--grey-500);
+}
+
+/* ---------------------------------------------------------------- offices */
+.apg-offices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
+.apg-office { border-top: 3px solid var(--athlon-gold); padding-top: 18px; }
+.apg-office__name {
+  margin: 0 0 12px;
+  font-family: var(--font-heading); font-size: 17px; line-height: 1.35;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--athlon-green);
+}
+.apg-office ul { list-style: none; margin: 0; padding: 0; }
+.apg-office li {
+  font-family: var(--font-body); font-size: 15.5px; line-height: 1.85;
+  color: var(--grey-500);
+}
+.apg-office a { color: var(--athlon-green); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ------------------------------------------------------------------- next */
+.apg-next { background: var(--athlon-green-deep); padding-block: clamp(30px, 3.4vw, 46px); }
+.apg-next__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.apg-next__link {
+  display: block; text-decoration: none;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 12px;
+  padding: 22px 26px;
+  transition: background 0.22s ease;
+}
+.apg-next__link:hover { background: rgba(212, 175, 55, 0.1); }
+.apg-next__label {
+  display: block;
+  font-family: var(--font-heading); font-size: 11.5px; line-height: 1.4; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--athlon-gold);
+}
+.apg-next__title {
+  display: block; margin-top: 6px;
+  font-family: var(--font-heading); font-size: 26px; line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--athlon-cream);
+}
+
+/* ----------------------------------------------------------------- lineup */
+.apg-lineup { background: color-mix(in srgb, var(--athlon-green) 5%, #fff); }
+.apg-lineup__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 30px);
+  align-items: stretch;
+}
+.apg-buy {
+  position: relative;
+  display: flex; flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid color-mix(in srgb, var(--athlon-green) 12%, transparent);
+  border-radius: 16px;
+  padding: 28px 26px 26px;
+  text-align: center;
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
+}
+.apg-buy:hover { transform: translateY(-5px); box-shadow: 0 22px 46px rgba(10, 31, 21, 0.14); }
+.apg-buy--best { border-color: var(--athlon-gold); box-shadow: 0 14px 34px rgba(212, 175, 55, 0.2); }
+.apg-buy__flag {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  background: var(--athlon-gold); color: var(--athlon-black);
+  font-family: var(--font-heading); font-size: 11px; line-height: 1.3; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 999px; white-space: nowrap;
+}
+.apg-buy__media {
+  display: flex; align-items: flex-end; justify-content: center;
+  height: 226px; margin-bottom: 18px;
+}
+/* --bh is the bottle's height relative to the Pro, so the three cards show the
+   actual size difference rather than each bottle filling its own box. */
+.apg-buy__media img {
+  width: auto; max-width: 100%;
+  height: var(--bh, 100%);
+  object-fit: contain; object-position: center bottom;
+  filter: drop-shadow(0 14px 18px rgba(10, 31, 21, 0.22));
+}
+.apg-buy__name {
+  margin: 0;
+  font-family: var(--font-heading); font-size: 26px; line-height: 1.1;
+  text-transform: uppercase; color: var(--athlon-green);
+}
+.apg-buy__size {
+  margin: 6px 0 0;
+  font-family: var(--font-heading); font-size: 12.5px; line-height: 1.4; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--athlon-gold-dim);
+}
+.apg-buy__note {
+  margin: 12px 0 0;
+  font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+  color: var(--grey-500);
+}
+.apg-buy__price {
+  margin: 16px 0 0;
+  font-family: var(--font-heading); font-size: 30px; line-height: 1;
+  color: var(--athlon-green);
+}
+.apg-buy__cta {
+  display: block; margin-top: 18px;
+  padding: 15px 20px;
+  border-radius: 999px;
+  background: var(--athlon-green);
+  color: var(--athlon-cream);
+  font-family: var(--font-heading); font-size: 14px; line-height: 1.35; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.apg-buy__cta:hover { background: var(--athlon-gold); color: var(--athlon-black); }
+.apg-buy--best .apg-buy__cta { background: var(--athlon-gold); color: var(--athlon-black); }
+.apg-buy--best .apg-buy__cta:hover { background: var(--athlon-green); color: var(--athlon-cream); }
+
+/* ------------------------------------------------------------------- shop */
+.apg-shop {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: clamp(18px, 2.4vw, 28px);
+}
+.apg-shop__link { display: block; text-decoration: none; color: inherit; }
+.apg-shop__media {
+  display: block; aspect-ratio: 1 / 1;
+  background: #FFFFFF;
+  border: 1px solid color-mix(in srgb, var(--athlon-green) 10%, transparent);
+  border-radius: 12px; overflow: hidden;
+}
+.apg-shop__media img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.apg-shop__name {
+  display: block; margin-top: 12px;
+  font-family: var(--font-heading); font-size: 15.5px; line-height: 1.3;
+  color: var(--athlon-green);
+}
+.apg-shop__price {
+  display: block; margin-top: 4px;
+  font-family: var(--font-body); font-size: 15px; line-height: 1.4; color: var(--grey-500);
+}
+
+/* -------------------------------------------------------------------- cta */
+.apg-cta { background: var(--athlon-gold); padding-block: clamp(48px, 6vw, 86px); text-align: center; }
+.apg-cta__inner { max-width: 760px; margin-inline: auto; padding-inline: 20px; }
+.apg-cta__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3.6vw, 48px); line-height: 1.04;
+  text-transform: uppercase; color: var(--athlon-black);
+}
+.apg-cta__copy {
+  margin: 14px 0 0;
+  font-family: var(--font-body); font-size: 17px; color: rgba(10, 10, 10, 0.78);
+}
+.apg-cta__link {
+  display: inline-block; margin-top: 26px;
+  padding: 17px 40px; border-radius: 999px;
+  background: var(--athlon-green); color: var(--athlon-cream);
+  font-family: var(--font-heading); font-size: 14px; line-height: 1.35; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+}
+.apg-cta__link:hover { background: var(--athlon-green-deep); color: #FFFFFF; }
+
+/* ----------------------------------------------------------------- tablet */
+@media (max-width: 1023px) {
+  .apg-people { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .apg-cards,
+  .apg-trio,
+  .apg-gallery,
+  .apg-offices,
+  .apg-lineup__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .apg-lineup__grid > :last-child { grid-column: 1 / -1; }
+}
+
+/* ----------------------------------------------------------------- mobile */
+@media (max-width: 767px) {
+  .apg { padding-block: 42px; }
+  .apg-split__grid { grid-template-columns: 1fr; gap: 24px; }
+  .apg-split--flip .apg-split__media { order: 0; }   /* image first on a phone, always */
+  .apg-split__media img { aspect-ratio: 3 / 2; }
+  .apg-p, .apg-check li { font-size: 15.5px; }
+  .apg-stats__grid,
+  .apg-steps__grid,
+  .apg-cards,
+  .apg-trio,
+  .apg-gallery,
+  .apg-offices,
+  .apg-people,
+  .apg-next__grid,
+  .apg-lineup__grid { grid-template-columns: 1fr; gap: 18px; }
+  .apg-lineup__grid > :last-child { grid-column: auto; }
+  .apg-buy { padding: 24px 22px; }
+  .apg-buy__media { height: 196px; }
+  .apg-buy--best { margin-top: 14px; }
+  .apg-hero { padding-block: 58px 52px; }
+  .apg-hero__title::after { margin-top: 16px; }
+  .apg-shop { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 }
