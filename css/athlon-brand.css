@@ -1194,3 +1194,29 @@ main.main { background-color: #FFFFFF; }
   .athlon-lineup__buy { flex-wrap: wrap; }
   .athlon-lineup__cta { flex: 1 1 auto; }
 }
+
+/* ==========================================================================
+   Roster section: the inner div went white earlier but the SECTION element
+   kept the base theme's #ececec. The section is 1440 wide against a 1344
+   inner, so the grey showed as a band down each 48px gutter.
+   ========================================================================== */
+.section--margin,
+.shopify-section.section--margin,
+[id$="featured_collections_TB8QfN"],
+.section--featured-collections { background-color: #FFFFFF !important; }
+
+/* ==========================================================================
+   Hero: the content column starts at the theme's 48px grid gutter, which puts
+   the headline hard against the left edge on a 1440 viewport. Pull it inboard
+   while keeping it left-aligned.
+   ========================================================================== */
+.hero__content { padding-inline: 0; }
+@media (min-width: 768px) {
+  .hero__content {
+    padding-left: clamp(24px, 3.2vw, 58px);
+    padding-right: clamp(20px, 2.5vw, 44px);
+  }
+}
+@media (max-width: 767px) {
+  .hero__content { padding-left: 6px; padding-right: 14px; }
+}
