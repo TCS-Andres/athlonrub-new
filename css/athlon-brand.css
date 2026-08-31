@@ -822,9 +822,22 @@ main.main { background-color: #FFFFFF; }
   /* Section headings: the theme's h2 sat at 48px against a 118px hero.
      Excludes the footer — its column headings are h2s too, and at 56px
      COMPANY / PROGRAMS / SUPPORT collided into each other. */
+  /* Section headings only. `[class*="__heading"]` also matches CARD headings
+     such as .card--review__heading, which kept its 22px line-height while the
+     font went to 56px — the two wrapped lines then overlapped by 34px. Always
+     set line-height alongside a font-size bump on inherited components. */
   .section__header,
   main h2, main .h2,
-  main [class*="__heading"] { font-size: clamp(34px, 3.9vw, 56px); }
+  main [class*="__heading"]:not([class*="card"]) {
+    font-size: clamp(34px, 3.9vw, 56px);
+    line-height: 1.02;
+  }
+  /* card-level headings keep their own scale */
+  main [class*="card"][class*="__heading"],
+  .card--review__heading {
+    font-size: 20px !important;
+    line-height: 1.2 !important;
+  }
   .footer h2, .footer .h2, .footer [class*="__heading"],
   .menu__heading, .footer-menu__heading { font-size: 17px !important; }
   .featured-collections__heading,
@@ -1349,3 +1362,92 @@ main.main { background-color: #FFFFFF; }
   .athlon-bundles__grid { grid-template-columns: 1fr; }
   .athlon-bundles__media { aspect-ratio: 16 / 11; }
 }
+
+/* ==========================================================================
+   ROUTINE BLOCK ("Warm up. Loosen up. Lock in.")
+   It reuses the theme's day/night pack layout: sun and moon icons, and rules
+   in brown (#bf7845) and bright green (#25ae65). Both are off-brand and the
+   day/night split is meaningless here.
+   ========================================================================== */
+.athlon-step-icon {
+  display: grid !important;
+  place-items: center;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--athlon-gold) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--athlon-gold) 55%, transparent);
+}
+.athlon-step-num {
+  font-family: var(--font-heading);
+  font-stretch: 70%;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--athlon-gold);
+  line-height: 1;
+}
+/* the 3px rules beside each step inherited the day/night colours */
+.image-text-50-50__icon-content-text {
+  border-left-color: color-mix(in srgb, var(--athlon-gold) 60%, transparent) !important;
+}
+
+@media (max-width: 767px) {
+  /* the heading sat flush against the bottom of the full-bleed photo */
+  [id$="image_text_50_50_4bUhhY"] .image-text-50-50__content { padding-top: 26px !important; }
+  [id$="image_text_50_50_4bUhhY"] .image-text-50-50__icon-content-text {
+    padding-left: 16px !important;
+    margin-left: 2px;
+  }
+  [id$="image_text_50_50_4bUhhY"] .image-text-50-50__icon-content-text ul { padding-left: 18px; margin-top: 6px; }
+  [id$="image_text_50_50_4bUhhY"] .image-text-50-50__icon-content-text li { margin-bottom: 8px; }
+  /* space between the two steps */
+  [id$="image_text_50_50_4bUhhY"] .image-text-50-50__icon-content + .image-text-50-50__icon-content { margin-top: 22px; }
+}
+
+/* ==========================================================================
+   BRAND MARKS (system-v2) replacing the base theme's generic icons
+   ========================================================================== */
+.athlon-persona-mark {
+  display: block;
+  height: 30px;
+  margin-bottom: 10px;
+}
+.athlon-persona-mark img { height: 100%; width: auto; object-fit: contain; display: block; }
+
+.athlon-star {
+  width: 15px; height: 15px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+
+.athlon-chevron {
+  width: 17px; height: auto;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+.athlon-chevron--left { transform: scaleX(-1); }
+
+/* routine step marks sit in the gold ring */
+.athlon-step-icon img { width: 60%; height: 60%; object-fit: contain; }
+
+/* Carousel arrows: the theme alternates a light and a dark button, so a single
+   chevron colour was invisible on one of them. One treatment for both. */
+.featured-collections__arrow,
+.image-and-cards__arrow,
+.featured-reviews__arrow,
+[class*="__arrow--prev"],
+[class*="__arrow--next"] {
+  background: var(--athlon-green-deep) !important;
+  border-color: var(--athlon-green-deep) !important;
+}
+.featured-collections__arrow:hover,
+.image-and-cards__arrow:hover,
+.featured-reviews__arrow:hover { background: var(--athlon-gold) !important; border-color: var(--athlon-gold) !important; }
+.athlon-chevron { filter: brightness(0) saturate(100%) invert(93%) sepia(9%) saturate(430%) hue-rotate(9deg) brightness(98%) contrast(92%); }
+[class*="__arrow"]:hover .athlon-chevron { filter: brightness(0); }
+[class*="__arrow"]:disabled,
+[class*="__arrow"].swiper-button-disabled { opacity: 0.35; }
