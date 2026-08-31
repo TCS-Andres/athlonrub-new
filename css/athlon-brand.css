@@ -1449,6 +1449,11 @@ main.main { background-color: #FFFFFF; }
   transition: gap 0.2s ease;
 }
 .apg-link:hover { gap: 16px; color: var(--athlon-green); }
+/* The chevron's width/height attributes describe its intrinsic 64x42, so the
+   display size has to come from CSS — as a flex item it would otherwise sit at
+   its full 64px and overrun the link's underline. */
+.apg-link img { flex: none; width: 16px; height: auto; }
+.apg-next__link img { width: 20px; height: auto; }
 .apg-link--sm { margin-top: auto; padding-top: 14px; font-size: 12.5px; align-self: flex-start; }
 
 /* ------------------------------------------------------------------- hero */
@@ -1543,7 +1548,7 @@ main.main { background-color: #FFFFFF; }
 }
 .apg-check li:last-child { border-bottom: 0; }
 .apg-check li strong { color: var(--athlon-green); font-weight: 700; }
-.apg-check__mark { width: 16px; height: 11px; margin-top: 7px; }
+.apg-check__mark { width: 16px; height: auto; margin-top: 7px; }
 
 /* ------------------------------------------------------------------ stats */
 .apg-stats { background: var(--athlon-green); }
@@ -1589,7 +1594,17 @@ main.main { background-color: #FFFFFF; }
   transition: transform 0.24s ease, box-shadow 0.24s ease;
 }
 .apg-card:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(10, 31, 21, 0.12); }
-.apg-card__icon { display: block; width: auto; height: 46px; margin-bottom: 18px; }
+/* .apg-card is a column flex container (so the CTA can sit at the bottom), and
+   a column flex item stretches across the cross axis — `width: auto` resolved
+   to the full card width and the fixed height stretched the artwork ~6x.
+   align-self stops the stretch so the icon sizes from its own aspect. */
+.apg-card__icon {
+  display: block;
+  align-self: flex-start;
+  width: auto;
+  height: 46px;
+  margin-bottom: 18px;
+}
 .apg-card__title {
   margin: 0;
   font-family: var(--font-heading);
