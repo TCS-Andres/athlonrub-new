@@ -629,3 +629,156 @@ main.main { background-color: #FFFFFF; }
 .image-and-cards__card-image {
   background: color-mix(in srgb, var(--athlon-green) 6%, #fff);
 }
+
+/* ==========================================================================
+   FAQ — one surface
+   The panel was cream with white accordion rows inside it: two light colours
+   nested, which read as an accident. One surface, hairline dividers instead.
+   ========================================================================== */
+.collapsible-content__panel,
+.accordion,
+.accordion__wrapper { background-color: #FFFFFF !important; }
+.accordion__item,
+.accordion__title,
+.accordion__content,
+.collapsible-content [class*="accordion"] > * { background-color: transparent !important; }
+.accordion__item { border-bottom: 1px solid color-mix(in srgb, var(--athlon-green) 14%, transparent); }
+.accordion__item:last-child { border-bottom: 0; }
+
+/* ==========================================================================
+   DESKTOP HEADER — more height, nav toward the centre
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .header__container,
+  .header__nav-wrapper,
+  .header--default { min-height: 96px; }
+  .header .header-menu { margin-inline: auto; }   /* centre between logo and utility */
+  .athlon-nav { gap: 40px; }
+  .header .header__logo,
+  .header__logo { height: 40px !important; }
+}
+
+/* ==========================================================================
+   MOBILE
+   ========================================================================== */
+@media (max-width: 767px) {
+  /* quick-nav strip: readable, scrollable, not clipped mid-word */
+  .quick-nav__list {
+    display: flex;
+    gap: 18px;
+    padding: 10px 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .quick-nav__list::-webkit-scrollbar { display: none; }
+  .quick-nav__item { flex: 0 0 auto; }
+  .quick-nav__link {
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    color: var(--athlon-green-deep) !important;
+  }
+
+  /* trust bar: the 220px cells overflowed both edges at 390px */
+  .logo-list__item { min-width: 150px; gap: 8px; }
+  .logo-list__image,
+  .logo-list__item img { height: 30px !important; }
+  .athlon-trust__label { font-size: 11px; letter-spacing: 0.05em; white-space: normal; text-align: center; max-width: 150px; }
+
+  /* Body copy was set at the desktop 17px/27.6, which is oversized on a phone.
+     Scoped to prose containers: a blanket `p` rule also hits the hero, whose
+     second headline line is a <p> carrying heading styles — it shrank to 15px
+     while the first line stayed at display size. */
+  .rte p,
+  .image-text-50-50__richtext p,
+  .card__description,
+  .image-and-cards__card-copy,
+  .featured-reviews__slide p,
+  .accordion__content p,
+  .hero__content > p {
+    font-size: 15.5px;
+    line-height: 1.55;
+  }
+  /* NOTE: do not try to "protect" headings with font-size: inherit here — that
+     resolves to the body size and wipes out their own clamp()/scale. The
+     selectors above are already scoped to prose containers. */
+  .hero__title { line-height: 0.92; }
+
+  /* showcase cards: tighten the gap the purchase stack used to fill */
+  .product-showcase-card { padding-bottom: 28px; }
+  .product-showcase-card__title { margin-block: 12px; }
+  .athlon-buy { margin-top: 12px; }
+  .athlon-buy__price { font-size: 34px; }
+  .product-showcase-card__benefits { row-gap: 10px; }
+  .product-showcase-card__benefits img { width: 22px; }
+
+  /* comfortable tap targets */
+  .button, .athlon-buy__cta { min-height: 46px; }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile tap targets. Measured on a 390px viewport: the header icons were
+   15x15 and the quick-nav links 34x16 — well under a comfortable target. The
+   hit area grows via padding; the icons themselves are unchanged.
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .header .search-box__toggle,
+  .header .header__actions a,
+  .header .header__actions button,
+  .header [class*="cart"] a,
+  .header [class*="menu-toggle"],
+  .header button[aria-label] {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .quick-nav__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: 0;
+  }
+  .quick-nav__list { padding-block: 0; }
+}
+
+@media (max-width: 767px) {
+  /* remaining small targets: the drawer toggle, the newsletter submit and the
+     footer social icons */
+  .header [class*="menu"] button,
+  .header button[class*="toggle"],
+  .header .header-menu__toggle,
+  .footer .form--newsletter button,
+  .footer [type="submit"],
+  .footer-social__link {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-social { gap: 4px; }
+  .header__link--logo { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+@media (max-width: 767px) {
+  /* the drawer toggle measured 15x30 */
+  .header__link--menu,
+  .header__mobile-links > * {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* footer nav links were 23px tall; give them a little vertical room without
+     stretching the footer out */
+  .footer-menu__link,
+  .footer .menu__link {
+    display: inline-block;   /* vertical padding is ignored on inline boxes */
+    padding-block: 8px !important;   /* a theme rule zeroes this out */
+  }
+}
