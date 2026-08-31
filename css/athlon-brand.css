@@ -326,18 +326,27 @@ body { font-family: var(--font-body); }
   color: var(--athlon-black);
 }
 
-/* 4. Icon slots. The brand marks have different aspect ratios, so in a fixed
-      circle they rendered at wildly different visual weights. */
+/* 4. Ingredient bubbles. The theme sets `max-width:50px` with no height, so the
+      "circle" was actually a squashed oval, and the mark inside floated at
+      roughly 14px with most of the shape empty. Make it a real circle sized to
+      the type beside it, and let the mark fill it. */
 .image-and-cards__card-image-wrapper,
 .image-and-cards__card-image {
+  width: 64px !important;
+  height: 64px !important;
+  max-width: none !important;
+  border-radius: 50% !important;
+  border: 1.5px solid color-mix(in srgb, var(--athlon-green) 55%, transparent) !important;
+  background: color-mix(in srgb, var(--athlon-green) 7%, transparent);
   display: grid;
   place-items: center;
   overflow: hidden;
+  flex: 0 0 auto;
 }
 .image-and-cards__card-image-wrapper img,
 .image-and-cards__card-image img {
-  width: 62%;
-  height: 62%;
+  width: 58%;
+  height: 58%;
   object-fit: contain;
 }
 
@@ -426,3 +435,42 @@ body { font-family: var(--font-body); }
   border-color: var(--athlon-green-deep) !important;
   color: var(--athlon-cream) !important;
 }
+
+/* --------------------------------------------------------------------------
+   Trust bar. Four unlabelled abstract marks at four different aspect ratios
+   read as clip art. Give each a caption and a common optical height.
+   -------------------------------------------------------------------------- */
+.logo-list { padding-block: var(--iam-spacing-md) !important; }
+.logo-list__item {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 220px;
+}
+.logo-list__image,
+.logo-list__item img {
+  height: 38px !important;
+  width: auto !important;
+  max-width: 64px;
+  object-fit: contain;
+}
+.athlon-trust__label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--athlon-cream) 76%, transparent);
+}
+
+/* --------------------------------------------------------------------------
+   Header lockup. Athlon's mark is a crest stacked over a wordmark; at the 36px
+   the theme's wordmark slot allowed, the wordmark was sub-10px and unreadable.
+   Give the bar room and the lockup a legible size.
+   -------------------------------------------------------------------------- */
+.header .header__logo,
+.header__logo { height: 40px !important; }
+.header__link--logo { display: flex; align-items: center; }
