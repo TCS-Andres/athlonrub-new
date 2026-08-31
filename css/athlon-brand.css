@@ -548,3 +548,30 @@ body { font-family: var(--font-body); }
 .image-text-50-50__media picture { max-height: 560px; }
 .image-text-50-50__media img { object-fit: cover; width: 100%; height: 100%; }
 .image-text-50-50__content { padding-block: 0 !important; }
+
+/* ==========================================================================
+   HERO AMBIENT VIDEO (Athlon's own footage from athlonrub.com)
+   Sits under the existing scrim, so the headline treatment is unchanged.
+   ========================================================================== */
+.hero__ambient {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  z-index: 0;
+}
+.hero__ambient-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("/assets/athlon/hero-ambient-poster.jpg") center 38% / cover no-repeat;
+  display: none;
+}
+/* Motion is decorative here: anyone who has asked the OS to reduce motion gets
+   the poster frame instead of a looping clip. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__ambient { display: none; }
+  .hero__ambient-fallback { display: block; }
+}
