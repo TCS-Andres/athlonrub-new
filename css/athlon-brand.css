@@ -1262,3 +1262,90 @@ main.main { background-color: #FFFFFF; }
   [id$="rich_text_rpday9"] .section__header,
   [id$="rich_text_rpday9"] strong { color: var(--athlon-cream) !important; }
 }
+
+/* ==========================================================================
+   BUNDLES — replaces the base theme's product-showcase band
+   ========================================================================== */
+.athlon-bundles {
+  grid-column: 1 / -1; display: block;
+  background: var(--athlon-green-deep);
+  padding-block: clamp(46px, 5.5vw, 86px);
+}
+.athlon-bundles__inner { max-width: 1280px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 60px); }
+.athlon-bundles__head { text-align: center; margin-bottom: clamp(26px, 3vw, 44px); }
+.athlon-bundles__eyebrow {
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--athlon-gold); margin-bottom: 10px;
+}
+.athlon-bundles__title {
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: clamp(30px, 3.6vw, 52px); line-height: 0.98; text-transform: uppercase;
+  color: var(--athlon-cream); margin: 0 0 10px;
+}
+.athlon-bundles__sub {
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  color: color-mix(in srgb, var(--athlon-cream) 74%, transparent);
+  max-width: 60ch; margin: 0 auto;
+}
+.athlon-bundles__grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: clamp(18px, 2vw, 28px);
+  grid-template-columns: repeat(3, 1fr);
+}
+.athlon-bundles__card {
+  position: relative; display: flex; flex-direction: column;
+  background: color-mix(in srgb, var(--athlon-cream) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--athlon-cream) 16%, transparent);
+  border-radius: 14px; padding: 20px 20px 24px;
+  transition: transform .25s ease, border-color .25s ease;
+}
+.athlon-bundles__card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--athlon-gold) 55%, transparent); }
+.athlon-bundles__card--featured { border-color: var(--athlon-gold); background: color-mix(in srgb, var(--athlon-gold) 9%, transparent); }
+.athlon-bundles__badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--athlon-gold); color: var(--athlon-black);
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: 11.5px; letter-spacing: 0.09em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 40px; white-space: nowrap;
+}
+.athlon-bundles__media {
+  display: block; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: #fff;
+}
+.athlon-bundles__media img { width: 100%; height: 100%; object-fit: contain; }
+.athlon-bundles__body { display: flex; flex-direction: column; flex: 1 1 auto; padding-top: 16px; }
+.athlon-bundles__name {
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: 22px; text-transform: uppercase; color: var(--athlon-cream); margin: 0;
+}
+.athlon-bundles__qty {
+  font-family: var(--font-body); font-size: 13.5px; margin-top: 4px;
+  color: color-mix(in srgb, var(--athlon-cream) 62%, transparent);
+}
+.athlon-bundles__copy {
+  font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+  color: color-mix(in srgb, var(--athlon-cream) 78%, transparent); margin: 12px 0 16px;
+}
+.athlon-bundles__price-row { display: flex; align-items: baseline; gap: 10px; margin-top: auto; }
+.athlon-bundles__price {
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: 30px; line-height: 1; color: var(--athlon-cream);
+}
+.athlon-bundles__was {
+  font-family: var(--font-body); font-size: 15px; text-decoration: line-through;
+  color: color-mix(in srgb, var(--athlon-cream) 45%, transparent);
+}
+.athlon-bundles__save {
+  font-family: var(--font-body); font-size: 12.5px; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--athlon-gold); margin-top: 6px;
+}
+.athlon-bundles__cta {
+  margin-top: 16px; display: inline-flex; align-items: center; justify-content: center;
+  min-height: 46px; padding: 0 22px; border-radius: 40px;
+  background: var(--athlon-gold); color: var(--athlon-black) !important;
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none;
+}
+@media (max-width: 900px) {
+  .athlon-bundles__grid { grid-template-columns: 1fr; }
+  .athlon-bundles__media { aspect-ratio: 16 / 11; }
+}
