@@ -1966,3 +1966,19 @@ main.main { background-color: #FFFFFF; }
   .apg-hero__title::after { margin-top: 16px; }
   .apg-shop { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 }
+
+/* Review rail: the cards now carry the brand's three named testimonials, so
+   each author gets a credential line under the name. */
+.card--review__author { display: flex; flex-direction: column; gap: 3px; }
+.athlon-review__role {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.45;
+  font-style: normal;
+  color: var(--grey-400-alt);
+}
+/* Quote lengths differ a lot, so pin the attribution to the foot of the card
+   and the three line up across the rail. */
+.card--review { display: flex; flex-direction: column; height: 100%; }
+.card--review__quote { margin-bottom: 18px; }
+.card--review__author { margin-top: auto; }
