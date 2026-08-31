@@ -966,3 +966,124 @@ main.main { background-color: #FFFFFF; }
   .athlon-page__p { font-size: 15.5px; }
   .athlon-shop { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 18px; }
 }
+
+/* The header's nav wrapper is `overflow: hidden auto`, so a dropdown taller
+   than the 96px bar was clipped away — the panel opened but nothing showed. */
+.header__nav-wrapper,
+.header__container,
+.header,
+.section--header { overflow: visible !important; }
+.athlon-nav__panel { z-index: 1200; }
+.section--header, .header { z-index: 1000; position: relative; }
+
+/* ==========================================================================
+   THREE-STEP USES BAND (home)
+   ========================================================================== */
+.athlon-steps {
+  grid-column: 1 / -1;
+  display: block;
+  background: var(--athlon-green-deep);
+  padding-block: clamp(48px, 5.5vw, 88px);
+}
+.athlon-steps__inner { max-width: 1280px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 60px); }
+.athlon-steps__eyebrow {
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--athlon-gold); margin-bottom: 12px;
+}
+.athlon-steps__title {
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: clamp(30px, 3.6vw, 52px); line-height: 0.95; text-transform: uppercase;
+  color: var(--athlon-cream); margin: 0 0 clamp(28px, 3vw, 44px);
+}
+.athlon-steps__list {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: clamp(20px, 2.4vw, 34px);
+  grid-template-columns: repeat(3, 1fr);
+  counter-reset: step;
+}
+.athlon-steps__link { display: block; color: inherit; text-decoration: none; }
+.athlon-steps__media {
+  display: block; aspect-ratio: 16 / 10; overflow: hidden;
+  border-radius: 10px; margin-bottom: 18px;
+  background: color-mix(in srgb, var(--athlon-cream) 10%, transparent);
+}
+.athlon-steps__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.athlon-steps__link:hover .athlon-steps__media img { transform: scale(1.04); }
+.athlon-steps__num {
+  display: block; font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: 15px; letter-spacing: 0.12em; color: var(--athlon-gold); margin-bottom: 6px;
+}
+.athlon-steps__label {
+  display: block; font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: clamp(20px, 2vw, 28px); text-transform: uppercase;
+  color: var(--athlon-cream); margin-bottom: 8px;
+}
+.athlon-steps__copy {
+  display: block; font-family: var(--font-body); font-size: 15.5px; line-height: 1.6;
+  color: color-mix(in srgb, var(--athlon-cream) 76%, transparent); margin-bottom: 12px;
+}
+.athlon-steps__cta {
+  display: inline-block; font-family: var(--font-body); font-size: 13px;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--athlon-gold);
+  border-bottom: 1px solid color-mix(in srgb, var(--athlon-gold) 55%, transparent);
+  padding-bottom: 2px;
+}
+@media (max-width: 900px) { .athlon-steps__list { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   SUPPORTING PAGES — branded treatment
+   ========================================================================== */
+.athlon-page__hero--media { position: relative; overflow: hidden; }
+.athlon-page__hero--media::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: var(--page-hero-image);
+  background-size: cover; background-position: center 40%;
+  opacity: 0.42;
+}
+.athlon-page__hero--media::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(10,31,21,.94) 0%, rgba(10,31,21,.72) 46%, rgba(10,31,21,.42) 100%);
+}
+.athlon-page__hero--media .athlon-page__hero-inner { position: relative; z-index: 2; }
+.athlon-page__hero-inner::after {
+  content: "";
+  display: block;
+  width: 68px; height: 3px;
+  margin-top: 22px;
+  background: var(--athlon-gold);
+}
+
+.athlon-page__figure { margin: 30px 0 0; }
+.athlon-page__figure img {
+  width: 100%; height: auto; display: block;
+  border-radius: 10px;
+  aspect-ratio: 16 / 10; object-fit: cover;
+}
+
+.athlon-page__cta {
+  grid-column: 1 / -1; display: block;
+  background: var(--athlon-gold);
+  padding-block: clamp(40px, 5vw, 76px);
+}
+.athlon-page__cta-inner {
+  max-width: 1180px; margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 60px);
+  text-align: center;
+}
+.athlon-page__cta-title {
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: clamp(26px, 3.2vw, 44px); line-height: 1; text-transform: uppercase;
+  color: var(--athlon-black); margin: 0 0 10px;
+}
+.athlon-page__cta-copy {
+  font-family: var(--font-body); font-size: 16px;
+  color: color-mix(in srgb, var(--athlon-black) 78%, transparent); margin: 0 0 22px;
+}
+.athlon-page__cta-link {
+  display: inline-block; padding: 15px 30px; border-radius: 40px;
+  background: var(--athlon-green-deep); color: var(--athlon-cream) !important;
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none;
+}
