@@ -1087,3 +1087,110 @@ main.main { background-color: #FFFFFF; }
   font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
   font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none;
 }
+
+/* ==========================================================================
+   PRODUCT LINEUP (home, high slot) — built for conversion
+   ========================================================================== */
+.athlon-lineup {
+  grid-column: 1 / -1; display: block;
+  background: #FFFFFF;
+  padding-block: clamp(46px, 5.5vw, 86px);
+}
+.athlon-lineup__inner { max-width: 1280px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 60px); }
+.athlon-lineup__head { text-align: center; margin-bottom: clamp(28px, 3vw, 46px); }
+.athlon-lineup__eyebrow {
+  font-family: var(--font-body); font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--athlon-gold-dim); margin-bottom: 10px;
+}
+.athlon-lineup__title {
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: clamp(30px, 3.6vw, 52px); line-height: 0.98; text-transform: uppercase;
+  color: var(--athlon-green-deep); margin: 0 0 10px;
+}
+.athlon-lineup__sub {
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  color: color-mix(in srgb, var(--athlon-black) 70%, transparent);
+  max-width: 56ch; margin: 0 auto;
+}
+.athlon-lineup__grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: clamp(18px, 2vw, 28px);
+  grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
+}
+.athlon-lineup__card {
+  position: relative;
+  display: flex; flex-direction: column;
+  border: 1px solid color-mix(in srgb, var(--athlon-green) 14%, transparent);
+  border-radius: 14px;
+  padding: 22px 22px 24px;
+  background: #FFFFFF;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.athlon-lineup__card:hover { box-shadow: 0 18px 42px rgba(15, 43, 30, 0.13); transform: translateY(-3px); }
+.athlon-lineup__card--featured {
+  border-color: var(--athlon-gold);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.18);
+}
+.athlon-lineup__badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--athlon-gold); color: var(--athlon-black);
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: 11.5px; letter-spacing: 0.09em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 40px; white-space: nowrap;
+}
+.athlon-lineup__media {
+  display: block; aspect-ratio: 10 / 9; border-radius: 10px; overflow: hidden;
+  /* the product photos carry their own near-white backdrop (#fff, #faf8f9,
+     #f6f4f5), so a tinted panel here shows as a rectangle behind the bottle */
+  background: #ffffff;
+}
+.athlon-lineup__media img { width: 100%; height: 100%; object-fit: contain; }
+.athlon-lineup__body { display: flex; flex-direction: column; flex: 1 1 auto; padding-top: 16px; }
+.athlon-lineup__name {
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: 21px; text-transform: uppercase; color: var(--athlon-green-deep); margin: 0;
+}
+.athlon-lineup__name span { color: var(--athlon-gold-dim); }
+.athlon-lineup__size {
+  font-family: var(--font-body); font-size: 13.5px; letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--athlon-black) 58%, transparent); margin-top: 4px;
+}
+.athlon-lineup__best {
+  font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+  color: color-mix(in srgb, var(--athlon-black) 76%, transparent);
+  margin: 12px 0 18px;
+}
+.athlon-lineup__buy {
+  margin-top: auto; display: flex; align-items: center;
+  justify-content: space-between; gap: 14px;
+}
+.athlon-lineup__price {
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: 30px; line-height: 1; color: var(--athlon-green-deep);
+}
+.athlon-lineup__cta {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 46px; padding: 0 22px; border-radius: 40px;
+  background: var(--athlon-green-deep); color: var(--athlon-cream) !important;
+  font-family: var(--font-heading); font-stretch: 70%; font-weight: 700;
+  font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none;
+}
+.athlon-lineup__card--featured .athlon-lineup__cta { background: var(--athlon-gold); color: var(--athlon-black) !important; }
+.athlon-lineup__trust {
+  list-style: none; margin: clamp(24px, 2.6vw, 38px) 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 30px;
+}
+.athlon-lineup__trust li {
+  font-family: var(--font-body); font-size: 12.5px; letter-spacing: 0.07em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--athlon-black) 58%, transparent);
+}
+.athlon-lineup__trust li::before { content: "✓"; color: var(--athlon-gold-dim); margin-right: 7px; }
+
+@media (max-width: 900px) {
+  .athlon-lineup__grid { grid-template-columns: 1fr; }
+  .athlon-lineup__card { padding: 20px; }
+  .athlon-lineup__buy { flex-wrap: wrap; }
+  .athlon-lineup__cta { flex: 1 1 auto; }
+}
