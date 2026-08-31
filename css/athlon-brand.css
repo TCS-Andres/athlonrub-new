@@ -782,3 +782,49 @@ main.main { background-color: #FFFFFF; }
     padding-block: 8px !important;   /* a theme rule zeroes this out */
   }
 }
+
+/* ==========================================================================
+   MOBILE DRAWER — a plain list, not a second mega-menu
+   ========================================================================== */
+.athlon-mnav { list-style: none; margin: 0; padding: 8px 20px 40px; }
+.athlon-mnav__item { border-bottom: 1px solid color-mix(in srgb, var(--athlon-green) 12%, transparent); }
+.athlon-mnav__item:last-child { border-bottom: 0; }
+.athlon-mnav__link {
+  display: block;
+  padding: 16px 0 10px;
+  font-family: var(--font-heading);
+  font-stretch: 70%;
+  font-weight: 700;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: var(--athlon-green-deep) !important;
+}
+.athlon-mnav__sub { list-style: none; margin: 0; padding: 0 0 14px 2px; }
+.athlon-mnav__sub a {
+  display: block;
+  padding: 9px 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: color-mix(in srgb, var(--athlon-black) 72%, transparent) !important;
+}
+
+/* ==========================================================================
+   DESKTOP TYPE — nav links and section headings were undersized
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .athlon-nav__link,
+  .header .header-menu__link { font-size: 16px !important; letter-spacing: 0.01em; }
+  .header .header__actions a,
+  .header .header__actions button,
+  .header .search-box__toggle { font-size: 15px !important; }
+  .athlon-nav__sublink { font-size: 14.5px; }
+
+  /* section headings: the theme's h2 sat at 48px against a 118px hero */
+  .section__header,
+  h2, .h2,
+  [class*="__heading"] { font-size: clamp(34px, 3.9vw, 56px); }
+  .featured-collections__heading,
+  .featured-reviews__heading,
+  .image-and-cards__heading { font-size: clamp(34px, 3.9vw, 56px); }
+  .rte p, .image-text-50-50__richtext p, .card__description { font-size: 18px; line-height: 1.6; }
+}
