@@ -6,19 +6,28 @@
    the tokenizer extracted. Almost nothing here is a new rule; it is the
    existing design system pointed at Athlon Rub's palette.
 
-   Palette source: Brand Elements/system-v2/README.md, sampled from the
-   PALETA PRINCIPAL panel of the official logo sheet.
+   Palette source: Brand Elements/2026-rebrand/Palette 2026.pdf (the 2026
+   rebrand: shield with the gold sash and star). The four palette colours are
+   used as given; everything else below is mixed from them.
    ========================================================================== */
 
 :root {
-  /* --- Athlon Rub official palette ------------------------------------- */
-  --athlon-green:       #0F2B1E;   /* primary surface */
-  --athlon-green-deep:  #0A1F15;   /* footer / deepest surface */
-  --athlon-gold:        #D4AF37;   /* primary accent */
-  --athlon-gold-dim:    #B9952B;   /* accent hover / pressed */
+  /* --- Athlon Rub 2026 palette ----------------------------------------- */
+  --athlon-green:       #0E3D28;   /* primary surface */
+  --athlon-green-dark:  #2F412F;   /* second dark surface */
+  --athlon-gold:        #CA9A3A;   /* primary accent */
+  --athlon-copper:      #934E1F;   /* deep accent */
+  /* the logo's brushed gold (gradient "Degradado 20" in svg/Logo.svg) */
+  --athlon-gold-metal:  linear-gradient(90deg, #f8da88 0%, #af9253 30%, #ca9a3a 50%, #f3c663 72%, #976b33 92%, #936731 100%);
+  --athlon-gold-light:  #F3C663;   /* highlight stop of that gradient */
+
+  /* --- derived ----------------------------------------------------------- */
+  --athlon-green-deep:  var(--athlon-green-dark);                                   /* footer / deepest surface */
+  --athlon-green-ink:   color-mix(in srgb, var(--athlon-green) 45%, var(--athlon-black)); /* scrims and shadows */
+  --athlon-gold-dim:    color-mix(in srgb, var(--athlon-gold) 72%, var(--athlon-copper)); /* accent hover / pressed */
   --athlon-black:       #0A0A0A;   /* ink */
-  --athlon-cream:       #EAE9CB;   /* light surface */
-  --athlon-cream-deep:  #DEDCB8;   /* light surface, second step */
+  --athlon-cream:       #F5F0E6;   /* light surface (same ivory as the 2026 email) */
+  --athlon-cream-deep:  #EBE3D3;   /* light surface, second step */
 
   /* --- theme vocabulary, repointed ------------------------------------- */
   --black:        var(--athlon-black);
@@ -29,7 +38,7 @@
   --grey-400-alt: #8C8A72;
   --grey-500:     #4A4A3E;
   --grey-500-alt: #3D3D33;
-  --grey-700:     #23291F;
+  --grey-700:     var(--athlon-green-dark);
   --yellow:       var(--athlon-gold);
   --yellow-100:   var(--athlon-gold-dim);
 
@@ -44,7 +53,7 @@
   --rx-color-4:    #3D3D33;
   --rx-color-5:    #4A4A3E;
   --rx-color-6:    var(--athlon-gold);        /* was the base theme's #ffb200 */
-  --rx-color-7:    #1C2A22;
+  --rx-color-7:    var(--athlon-green-ink);
   --rx-color-9:    #4A4A3E;
   --rx-color-10:   var(--athlon-green);       /* slim banner surface */
   --rx-font-1:     "Inter", Helvetica, Arial, sans-serif;
@@ -55,7 +64,7 @@
    Type. The original theme's display and body faces are commercially licensed
    (see _probe/scrub-css.mjs, which strips them); they and cannot ship. Archivo (variable, wdth axis) carries the condensed
    uppercase display voice; Inter stands in for "Inter". Both SIL OFL.
-   The measured scale is kept — only the width axis is dialled in so the
+   The measured scale is kept; only the width axis is dialled in so the
    headline sets at roughly the original's character width.
    -------------------------------------------------------------------------- */
 h1, h2, h3, h4, h5, h6,
@@ -164,8 +173,8 @@ body { font-family: var(--font-body); }
 }
 
 /* --------------------------------------------------------------------------
-   Header. The original's logo is a wide SVG wordmark; Athlon's is a tall
-   crest-over-wordmark lockup, which collapses to 0x0 in a slot sized by width.
+   Header. The original's logo is a wide SVG wordmark sized by width; Athlon's
+   2026 wordmark (assets/athlon/2026/wordmark.svg) is sized by height instead.
    -------------------------------------------------------------------------- */
 .header__logo {
   height: 34px;
@@ -241,8 +250,8 @@ body { font-family: var(--font-body); }
   overflow: hidden;
 }
 
-/* The footer's decorative art was the original's wordmark; the crest carries
-   the same job without needing a full-bleed photograph behind it. */
+/* The footer's decorative art was the original's wordmark; the 2026 lockup
+   carries the same job without needing a full-bleed photograph behind it. */
 .footer {
   --footer-background-image-desktop: none;
   --footer-background-image-mobile: none;
@@ -258,14 +267,14 @@ body { font-family: var(--font-body); }
 .product-showcase-card__benefits img { width: 28px; height: auto; }
 
 /* Footer watermark: the theme sizes this slot for a full-bleed wordmark.
-   Athlon's lockup is a crest over type, so cap it and drop it back to a
-   watermark rather than letting it drive a 1930px-tall footer. */
+   Athlon's 2026 lockup (Logo en Dorado) is a shield over type, so cap it and
+   drop it back to a watermark rather than letting it drive a 1930px-tall footer. */
 .footer-logo__wrapper,
 .footer-logo__container { max-height: 220px; overflow: hidden; }
 .footer-logo__image {
   max-height: 200px;
   width: auto;
-  margin: 0 auto;
+  margin: 0 auto 20px;   /* RUB sat flush on the page edge */
   opacity: 0.16;
 }
 
@@ -297,7 +306,7 @@ body { font-family: var(--font-body); }
   pointer-events: none;
 }
 .featured-reviews__background::after {
-  background: linear-gradient(180deg, rgba(10, 31, 21, 0.86) 0%, rgba(10, 31, 21, 0.55) 45%, rgba(10, 31, 21, 0.78) 100%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--athlon-green-ink) 86%, transparent) 0%, color-mix(in srgb, var(--athlon-green-ink) 55%, transparent) 45%, color-mix(in srgb, var(--athlon-green-ink) 78%, transparent) 100%);
 }
 /* The scrim goes on __overlay's own background. __background holds the cards,
    so a scrim there tints them; __background-image contains a <picture> that
@@ -305,13 +314,13 @@ body { font-family: var(--font-body); }
    its children, so the overlay is the one layer that darkens the photo and
    leaves the cards and headline untouched. */
 .image-and-cards__overlay {
-  background-image: linear-gradient(180deg, rgba(10, 31, 21, 0.90) 0%, rgba(10, 31, 21, 0.74) 42%, rgba(10, 31, 21, 0.66) 100%) !important;
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--athlon-green-ink) 90%, transparent) 0%, color-mix(in srgb, var(--athlon-green-ink) 74%, transparent) 42%, color-mix(in srgb, var(--athlon-green-ink) 66%, transparent) 100%) !important;
 }
 .slim-banner__link::before {
-  background: linear-gradient(90deg, rgba(10, 31, 21, 0.2) 0%, rgba(10, 31, 21, 0.75) 45%, rgba(10, 31, 21, 0.92) 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--athlon-green-ink) 20%, transparent) 0%, color-mix(in srgb, var(--athlon-green-ink) 75%, transparent) 45%, color-mix(in srgb, var(--athlon-green-ink) 92%, transparent) 100%);
 }
 .featured-reviews__background { position: absolute; inset: 0; }
-/* NOT .image-and-cards__background — it is position:relative with a
+/* NOT .image-and-cards__background; it is position:relative with a
    min-height and is what gives that section its 900px. Making it absolute
    collapsed the section to 0 and spilled its content over the page. */
 .featured-reviews__inner,
@@ -395,7 +404,7 @@ body { font-family: var(--font-body); }
 .image-text-50-50 h2 { font-size: clamp(28px, 3.1vw, 46px); line-height: 0.92; }
 
 /* Quote attribution: the markup is
-   <cite> — Athlon Rub <span class="quote-block__quote-role">…</span></cite>
+   <cite>Athlon Rub <span class="quote-block__quote-role">…</span></cite>
    so the role ran on after the name and the block right-aligned into a ragged
    two-line clump. */
 .quote-block__quote-author { text-align: left; }
@@ -413,7 +422,7 @@ body { font-family: var(--font-body); }
 .slim-banner__content p { max-width: 34ch; text-wrap: balance; }
 
 /* The showcase card is a flex column and its form is `flex: 1 1 0%`, so with
-   the purchase stack removed the form still absorbed every remaining pixel —
+   the purchase stack removed the form still absorbed every remaining pixel:
    ~350px of empty panel between the product name and the price. Size to
    content instead. */
 .product-showcase-card__form { flex: 0 0 auto !important; }
@@ -427,7 +436,7 @@ body { font-family: var(--font-body); }
    gaps between them, which read as overlapping images. Put the gradient on the
    panel itself so it covers the full width, and drop the photo. */
 .image-text-overlap__panel {
-  background-image: linear-gradient(100deg, var(--athlon-gold) 0%, var(--athlon-gold) 62%, #E0BE55 100%);
+  background-image: linear-gradient(100deg, var(--athlon-gold) 0%, var(--athlon-gold) 62%, var(--athlon-gold-light) 100%);
   overflow: hidden;
   border-radius: 12px;
 }
@@ -476,16 +485,16 @@ body { font-family: var(--font-body); }
 }
 
 /* --------------------------------------------------------------------------
-   Header lockup. Athlon's mark is a crest stacked over a wordmark; at the 36px
-   the theme's wordmark slot allowed, the wordmark was sub-10px and unreadable.
-   Give the bar room and the lockup a legible size.
+   Header logo. The stacked 2026 lockup (shield over wordmark) would set the
+   wordmark under 10px in a header bar, so the bar carries the pack's own
+   wordmark-only version (Fuente Dorada y Rub Verde) at a legible 40px.
    -------------------------------------------------------------------------- */
 .header .header__logo,
 .header__logo { height: 40px !important; }
 .header__link--logo { display: flex; align-items: center; }
 
 /* ==========================================================================
-   NAVIGATION — athlonrub.com's structure
+   NAVIGATION: athlonrub.com's structure
    Dropdowns are CSS-driven (hover + focus-within) rather than relying on the
    base theme's mega-menu JS, which was built around a different catalogue.
    ========================================================================== */
@@ -640,7 +649,7 @@ main.main { background-color: #FFFFFF; }
 }
 
 /* ==========================================================================
-   FAQ — one surface
+   FAQ: one surface
    The panel was cream with white accordion rows inside it: two light colours
    nested, which read as an accident. One surface, hairline dividers instead.
    ========================================================================== */
@@ -655,7 +664,7 @@ main.main { background-color: #FFFFFF; }
 .accordion__item:last-child { border-bottom: 0; }
 
 /* ==========================================================================
-   DESKTOP HEADER — more height, nav toward the centre
+   DESKTOP HEADER: more height, nav toward the centre
    ========================================================================== */
 @media (min-width: 1024px) {
   .header__container,
@@ -698,7 +707,7 @@ main.main { background-color: #FFFFFF; }
 
   /* Body copy was set at the desktop 17px/27.6, which is oversized on a phone.
      Scoped to prose containers: a blanket `p` rule also hits the hero, whose
-     second headline line is a <p> carrying heading styles — it shrank to 15px
+     second headline line is a <p> carrying heading styles; it shrank to 15px
      while the first line stayed at display size. */
   .rte p,
   .image-text-50-50__richtext p,
@@ -710,7 +719,7 @@ main.main { background-color: #FFFFFF; }
     font-size: 15.5px;
     line-height: 1.55;
   }
-  /* NOTE: do not try to "protect" headings with font-size: inherit here — that
+  /* NOTE: do not try to "protect" headings with font-size: inherit here; that
      resolves to the body size and wipes out their own clamp()/scale. The
      selectors above are already scoped to prose containers. */
   .hero__title { line-height: 0.92; }
@@ -729,7 +738,7 @@ main.main { background-color: #FFFFFF; }
 
 /* --------------------------------------------------------------------------
    Mobile tap targets. Measured on a 390px viewport: the header icons were
-   15x15 and the quick-nav links 34x16 — well under a comfortable target. The
+   15x15 and the quick-nav links 34x16; well under a comfortable target. The
    hit area grows via padding; the icons themselves are unchanged.
    -------------------------------------------------------------------------- */
 @media (max-width: 767px) {
@@ -793,7 +802,7 @@ main.main { background-color: #FFFFFF; }
 }
 
 /* ==========================================================================
-   MOBILE DRAWER — a plain list, not a second mega-menu
+   MOBILE DRAWER: a plain list, not a second mega-menu
    ========================================================================== */
 .athlon-mnav { list-style: none; margin: 0; padding: 8px 20px 40px; }
 .athlon-mnav__item { border-bottom: 1px solid color-mix(in srgb, var(--athlon-green) 12%, transparent); }
@@ -818,7 +827,7 @@ main.main { background-color: #FFFFFF; }
 }
 
 /* ==========================================================================
-   DESKTOP TYPE — nav links and section headings were undersized
+   DESKTOP TYPE: nav links and section headings were undersized
    ========================================================================== */
 @media (min-width: 1024px) {
   .athlon-nav__link,
@@ -829,11 +838,11 @@ main.main { background-color: #FFFFFF; }
   .athlon-nav__sublink { font-size: 14.5px; }
 
   /* Section headings: the theme's h2 sat at 48px against a 118px hero.
-     Excludes the footer — its column headings are h2s too, and at 56px
+     Excludes the footer; its column headings are h2s too, and at 56px
      COMPANY / PROGRAMS / SUPPORT collided into each other. */
   /* Section headings only. `[class*="__heading"]` also matches CARD headings
      such as .card--review__heading, which kept its 22px line-height while the
-     font went to 56px — the two wrapped lines then overlapped by 34px. Always
+     font went to 56px; the two wrapped lines then overlapped by 34px. Always
      set line-height alongside a font-size bump on inherited components. */
   .section__header,
   main h2, main .h2,
@@ -877,7 +886,7 @@ main.main { background-color: #FFFFFF; }
    ========================================================================== */
 /* <main> is a grid whose columns run [full-start] 32px [main-start] ... so a
    section lands in the `main` track and stops 48px short of each edge. The
-   home page's bands are full-bleed, so these must be too — the inner wrapper
+   home page's bands are full-bleed, so these must be too; the inner wrapper
    is what constrains the content width. */
 .apg,
 .apg-hero,
@@ -890,7 +899,7 @@ main.main { background-color: #FFFFFF; }
 
 
 /* The header's nav wrapper is `overflow: hidden auto`, so a dropdown taller
-   than the 96px bar was clipped away — the panel opened but nothing showed. */
+   than the 96px bar was clipped away; the panel opened but nothing showed. */
 .header__nav-wrapper,
 .header__container,
 .header,
@@ -953,11 +962,11 @@ main.main { background-color: #FFFFFF; }
 @media (max-width: 900px) { .athlon-steps__list { grid-template-columns: 1fr; } }
 
 /* ==========================================================================
-   SUPPORTING PAGES — branded treatment
+   SUPPORTING PAGES: branded treatment
    ========================================================================== */
 
 /* ==========================================================================
-   PRODUCT LINEUP (home, high slot) — built for conversion
+   PRODUCT LINEUP (home, high slot): built for conversion
    ========================================================================== */
 .athlon-lineup {
   grid-column: 1 / -1; display: block;
@@ -995,10 +1004,10 @@ main.main { background-color: #FFFFFF; }
   background: #FFFFFF;
   transition: box-shadow .25s ease, transform .25s ease;
 }
-.athlon-lineup__card:hover { box-shadow: 0 18px 42px rgba(15, 43, 30, 0.13); transform: translateY(-3px); }
+.athlon-lineup__card:hover { box-shadow: 0 18px 42px color-mix(in srgb, var(--athlon-green-ink) 13%, transparent); transform: translateY(-3px); }
 .athlon-lineup__card--featured {
   border-color: var(--athlon-gold);
-  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.18);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--athlon-gold) 18%, transparent);
 }
 .athlon-lineup__badge {
   position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
@@ -1090,7 +1099,7 @@ main.main { background-color: #FFFFFF; }
 }
 
 /* ==========================================================================
-   MOBILE FIXES — carousel padding, overlap media, the white void
+   MOBILE FIXES: carousel padding, overlap media, the white void
    ========================================================================== */
 @media (max-width: 767px) {
   /* one card per swipe (Swiper is retuned in JS); give the track side padding
@@ -1132,7 +1141,7 @@ main.main { background-color: #FFFFFF; }
 }
 
 /* ==========================================================================
-   BUNDLES — replaces the base theme's product-showcase band
+   BUNDLES: replaces the base theme's product-showcase band
    ========================================================================== */
 .athlon-bundles {
   grid-column: 1 / -1; display: block;
@@ -1261,14 +1270,21 @@ main.main { background-color: #FFFFFF; }
 }
 
 /* ==========================================================================
-   BRAND MARKS (system-v2) replacing the base theme's generic icons
+   BRAND MARKS (2026 rebrand) replacing the base theme's generic icons.
+   Every mark lives in assets/athlon/2026/ and is built from the official
+   logo pack by Brand Elements/build_site_marks_2026.py:
+     star-mark.svg  the star and sash line from inside the shield
+     rule.svg       the two tapered rules that flank RUB
+     arrow-*.svg    a tapered rule running into a chevron
+     star.svg       plain five-point rating star
    ========================================================================== */
+/* persona cards: the photo says which sport; the rule just marks the title */
 .athlon-persona-mark {
   display: block;
-  height: 30px;
-  margin-bottom: 10px;
+  height: 5px;
+  margin: 4px 0 14px;
 }
-.athlon-persona-mark img { height: 100%; width: auto; object-fit: contain; display: block; }
+.athlon-persona-mark img { height: 100%; width: 72px; display: block; }
 
 .athlon-star {
   width: 15px; height: 15px;
@@ -1279,15 +1295,19 @@ main.main { background-color: #FFFFFF; }
 }
 
 .athlon-chevron {
-  width: 17px; height: auto;
+  width: 18px; height: auto;
   object-fit: contain;
   display: block;
   margin: auto;
 }
 .athlon-chevron--left { transform: scaleX(-1); }
 
-/* routine step marks sit in the gold ring */
-.athlon-step-icon img { width: 60%; height: 60%; object-fit: contain; }
+/* ingredient rings carry the star mark, centred with room around it */
+.image-and-cards__card-image.athlon-ring-mark {
+  object-fit: contain;
+  padding: 19px 14px;
+  box-sizing: border-box;
+}
 
 /* Carousel arrows: the theme alternates a light and a dark button, so a single
    chevron colour was invisible on one of them. One treatment for both. */
@@ -1313,7 +1333,7 @@ main.main { background-color: #FFFFFF; }
   background: #FFFFFF !important;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(10, 31, 21, 0.18);
+  box-shadow: 0 18px 40px color-mix(in srgb, var(--athlon-green-ink) 18%, transparent);
   /* the bottle was touching the card edges top and bottom */
   padding: 22px;
 }
@@ -1340,7 +1360,7 @@ main.main { background-color: #FFFFFF; }
    Science panel: the three-bottle cutout.
    The media used to be a white card because the source shot was on a white
    sweep. It now carries product-trio.webp, whose studio background is gone, so
-   there is no card at all — the range stands on the gold with its own shadow
+   there is no card at all; the range stands on the gold with its own shadow
    and is allowed to overhang the panel, which is what makes a cutout read as
    a cutout rather than a pasted rectangle.
    ------------------------------------------------------------------ */
@@ -1361,7 +1381,7 @@ main.main { background-color: #FFFFFF; }
   width: 100% !important;
   height: 100% !important;
   border-radius: 0 !important;
-  filter: drop-shadow(0 24px 30px rgba(10, 31, 21, 0.32));
+  filter: drop-shadow(0 24px 30px color-mix(in srgb, var(--athlon-green-ink) 32%, transparent));
 }
 
 @media (max-width: 767px) {
@@ -1449,11 +1469,11 @@ main.main { background-color: #FFFFFF; }
   transition: gap 0.2s ease;
 }
 .apg-link:hover { gap: 16px; color: var(--athlon-green); }
-/* The chevron's width/height attributes describe its intrinsic 64x42, so the
-   display size has to come from CSS — as a flex item it would otherwise sit at
+/* The arrow's width/height attributes describe its intrinsic 64x32, so the
+   display size has to come from CSS; as a flex item it would otherwise sit at
    its full 64px and overrun the link's underline. */
-.apg-link img { flex: none; width: 16px; height: auto; }
-.apg-next__link img { width: 20px; height: auto; }
+.apg-link img { flex: none; width: 20px; height: auto; }
+.apg-next__link img { width: 22px; height: auto; }
 .apg-link--sm { margin-top: auto; padding-top: 14px; font-size: 12.5px; align-self: flex-start; }
 
 /* ------------------------------------------------------------------- hero */
@@ -1473,7 +1493,7 @@ main.main { background-color: #FFFFFF; }
 .apg-hero--media::after {
   content: "";
   position: absolute; inset: 0;
-  background: linear-gradient(96deg, rgba(10,31,21,0.92) 0%, rgba(10,31,21,0.78) 46%, rgba(10,31,21,0.34) 100%);
+  background: linear-gradient(96deg, color-mix(in srgb, var(--athlon-green-ink) 92%, transparent) 0%, color-mix(in srgb, var(--athlon-green-ink) 78%, transparent) 46%, color-mix(in srgb, var(--athlon-green-ink) 34%, transparent) 100%);
 }
 .apg-hero__inner {
   position: relative; z-index: 2;
@@ -1510,7 +1530,7 @@ main.main { background-color: #FFFFFF; }
   font-family: var(--font-body);
   font-size: clamp(16px, 1.5vw, 19px);
   line-height: 1.6;
-  color: rgba(234, 233, 203, 0.86);
+  color: color-mix(in srgb, var(--athlon-cream) 86%, transparent);
 }
 
 /* ------------------------------------------------------- ping-pong split */
@@ -1527,7 +1547,7 @@ main.main { background-color: #FFFFFF; }
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 14px;
-  box-shadow: 0 20px 44px rgba(10, 31, 21, 0.14);
+  box-shadow: 0 20px 44px color-mix(in srgb, var(--athlon-green-ink) 14%, transparent);
 }
 .apg-split--flip .apg-split__media { order: 2; }
 .apg-split__body { min-width: 0; }
@@ -1536,7 +1556,7 @@ main.main { background-color: #FFFFFF; }
 .apg-check { list-style: none; margin: 20px 0 0; padding: 0; }
 .apg-check li {
   display: grid;
-  grid-template-columns: 16px 1fr;
+  grid-template-columns: 22px 1fr;
   gap: 12px;
   align-items: start;
   padding: 9px 0;
@@ -1548,7 +1568,7 @@ main.main { background-color: #FFFFFF; }
 }
 .apg-check li:last-child { border-bottom: 0; }
 .apg-check li strong { color: var(--athlon-green); font-weight: 700; }
-.apg-check__mark { width: 16px; height: auto; margin-top: 7px; }
+.apg-check__mark { width: 22px; height: auto; margin-top: 6px; }
 
 /* ------------------------------------------------------------------ stats */
 .apg-stats { background: var(--athlon-green); }
@@ -1576,7 +1596,7 @@ main.main { background-color: #FFFFFF; }
   margin: 10px 0 0;
   font-family: var(--font-body);
   font-size: 15px; line-height: 1.55;
-  color: rgba(234, 233, 203, 0.72);
+  color: color-mix(in srgb, var(--athlon-cream) 72%, transparent);
 }
 
 /* ------------------------------------------------------------------ cards */
@@ -1593,9 +1613,9 @@ main.main { background-color: #FFFFFF; }
   padding: clamp(22px, 2.4vw, 32px);
   transition: transform 0.24s ease, box-shadow 0.24s ease;
 }
-.apg-card:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(10, 31, 21, 0.12); }
+.apg-card:hover { transform: translateY(-4px); box-shadow: 0 18px 38px color-mix(in srgb, var(--athlon-green-ink) 12%, transparent); }
 /* .apg-card is a column flex container (so the CTA can sit at the bottom), and
-   a column flex item stretches across the cross axis — `width: auto` resolved
+   a column flex item stretches across the cross axis; `width: auto` resolved
    to the full card width and the fixed height stretched the artwork ~6x.
    align-self stops the stretch so the icon sizes from its own aspect. */
 .apg-card__icon {
@@ -1604,6 +1624,12 @@ main.main { background-color: #FFFFFF; }
   width: auto;
   height: 46px;
   margin-bottom: 18px;
+}
+/* the card marker is the 2026 logo's tapered rule, not a pictogram */
+.apg-card__icon--rule {
+  width: 72px;
+  height: 5px;
+  margin: 6px 0 20px;
 }
 .apg-card__title {
   margin: 0;
@@ -1633,7 +1659,7 @@ main.main { background-color: #FFFFFF; }
   line-height: 1.4;
   color: var(--athlon-green);
 }
-.apg-chip img { width: 22px; height: 22px; object-fit: contain; }
+.apg-chip img { width: 24px; height: 18px; object-fit: contain; }
 
 /* ------------------------------------------------------------------ steps */
 .apg-steps__grid {
@@ -1676,7 +1702,7 @@ main.main { background-color: #FFFFFF; }
   border: 1px solid color-mix(in srgb, var(--athlon-green) 12%, transparent);
   transition: transform 0.24s ease, box-shadow 0.24s ease;
 }
-.apg-trio__item:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(10, 31, 21, 0.14); }
+.apg-trio__item:hover { transform: translateY(-4px); box-shadow: 0 18px 38px color-mix(in srgb, var(--athlon-green-ink) 14%, transparent); }
 .apg-trio__media { display: block; aspect-ratio: 3 / 2; overflow: hidden; }
 .apg-trio__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .apg-trio__n {
@@ -1703,7 +1729,7 @@ main.main { background-color: #FFFFFF; }
   border-radius: 12px;
 }
 /* Graphics with text baked in must not be cropped, and need enough width for
-   that text to be legible — two across, with a lone third centred. */
+   that text to be legible; two across, with a lone third centred. */
 .apg-gallery--wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .apg-gallery--wide .apg-gallery__item img { aspect-ratio: 16 / 9; object-fit: contain; background: var(--athlon-green-deep); }
 .apg-gallery--wide > :last-child:nth-child(odd) { grid-column: 1 / -1; width: calc(50% - clamp(9px, 1.2vw, 14px)); margin-inline: auto; }
@@ -1792,12 +1818,12 @@ main.main { background-color: #FFFFFF; }
 .apg-next__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .apg-next__link {
   display: block; text-decoration: none;
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  border: 1px solid color-mix(in srgb, var(--athlon-gold) 35%, transparent);
   border-radius: 12px;
   padding: 22px 26px;
   transition: background 0.22s ease;
 }
-.apg-next__link:hover { background: rgba(212, 175, 55, 0.1); }
+.apg-next__link:hover { background: color-mix(in srgb, var(--athlon-gold) 10%, transparent); }
 .apg-next__label {
   display: block;
   font-family: var(--font-heading); font-size: 11.5px; line-height: 1.4; font-weight: 700;
@@ -1829,8 +1855,8 @@ main.main { background-color: #FFFFFF; }
   text-align: center;
   transition: transform 0.24s ease, box-shadow 0.24s ease;
 }
-.apg-buy:hover { transform: translateY(-5px); box-shadow: 0 22px 46px rgba(10, 31, 21, 0.14); }
-.apg-buy--best { border-color: var(--athlon-gold); box-shadow: 0 14px 34px rgba(212, 175, 55, 0.2); }
+.apg-buy:hover { transform: translateY(-5px); box-shadow: 0 22px 46px color-mix(in srgb, var(--athlon-green-ink) 14%, transparent); }
+.apg-buy--best { border-color: var(--athlon-gold); box-shadow: 0 14px 34px color-mix(in srgb, var(--athlon-gold) 20%, transparent); }
 .apg-buy__flag {
   position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
   background: var(--athlon-gold); color: var(--athlon-black);
@@ -1848,7 +1874,7 @@ main.main { background-color: #FFFFFF; }
   width: auto; max-width: 100%;
   height: var(--bh, 100%);
   object-fit: contain; object-position: center bottom;
-  filter: drop-shadow(0 14px 18px rgba(10, 31, 21, 0.22));
+  filter: drop-shadow(0 14px 18px color-mix(in srgb, var(--athlon-green-ink) 22%, transparent));
 }
 .apg-buy__name {
   margin: 0;

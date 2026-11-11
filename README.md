@@ -1,6 +1,6 @@
 # Athlon Rub
 
-Brand asset repo for [Athlon Rub](https://athlonrub.com) — a next-generation
+Brand asset repo for [Athlon Rub](https://athlonrub.com), a next-generation
 Thai-oil topical liniment for athletes. FDA-registered cosmetic, manufactured
 in an FDA, ISO and GMP certified lab in the USA.
 
@@ -8,19 +8,27 @@ in an FDA, ISO and GMP certified lab in the USA.
 
 ```
 Athlon Rub/
+├─ index.html                 # Website home page (static rebuild)
+├─ pages/, collections/       # Supporting pages and the shop page
+├─ css/athlon-brand.css       # Brand layer: 2026 palette tokens + re-skin rules
+├─ assets/athlon/2026/        # Every logo, emblem and icon the site uses
+│
 ├─ Home Page/
-│  ├─ index.html              # The home page, single-file (HTML + embedded CSS)
-│  └─ _extract_logo.py        # Pulls the primary logo out of the brand PDF
-│                               and alpha-extracts it for web use
+│  └─ _extract_logo.py        # Pulled the retired pre-2026 logo out of the
+│                               old brand PDF (kept for reference)
 │
 ├─ Brand Elements/
-│  ├─ 00_logo_full.png        # Primary brand lockup (shield + ATHLON RUB)
-│  ├─ 00_logo_shield.png      # Shield crest only (no wordmark)
-│  ├─ system-v2/              # CURRENT element system: 23 flat marks,
-│  │                            4 colourways, 2K + web. See its README.
-│  ├─ generate_flat_system.py # v2 generation pipeline
-│  ├─ make_colorways.py       # v2 colourway + web export step
-│  ├─ 01–10_*.png             # v1 accents (superseded, see note below)
+│  ├─ 2026-rebrand/           # CURRENT: the official 2026 logo pack
+│  │                            (svg/, png/, badges/, Palette 2026.pdf,
+│  │                            Logo Versions 2026.pdf)
+│  ├─ build_site_marks_2026.py # Builds assets/athlon/2026/ from that pack
+│  ├─ 00_logo_full.png        # Retired pre-2026 lockup ("A" crest)
+│  ├─ 00_logo_shield.png      # Retired pre-2026 crest
+│  ├─ system-v2/              # Retired element system built on the "A"
+│  │                            crest: 23 flat marks. Do not use.
+│  ├─ generate_flat_system.py # v2 generation pipeline (retired)
+│  ├─ make_colorways.py       # v2 colourway + web export step (retired)
+│  ├─ 01–10_*.png             # v1 accents (retired)
 │  ├─ generate_elements.py    # v1 generation pipeline
 │  └─ regenerate_three.py     # v1 retry script
 │
@@ -45,35 +53,55 @@ Athlon Rub/
 └─ .gitignore                # Excludes the Master Brain docs (sensitive)
 ```
 
-## The home page
+## The website
 
-Single-file static landing page at `Home Page/index.html`. Open directly in
-a browser — no build step. Loads Google Fonts (Oswald + Inter) and references
-the PNGs in `Brand Elements/`. Section flow mirrors `tidl.com`:
+Static site at the repo root (`index.html`, `pages/*/index.html`,
+`collections/all/index.html`), served as-is by GitHub Pages with no build
+step. `css/athlon-brand.css` is the brand layer loaded last; its `:root`
+block holds the 2026 palette tokens.
 
-```
-nav → hero → credibility strip → clean-credentials chips → where to find us
-→ persona grid → how-to-use → product grid → bundles → find-your-fit CTA
-→ why it hits different → heritage band → reviews → stat band
-→ featured product → FAQ → instagram feed → newsletter → footer
-```
-
-All copy stays inside Athlon Rub's FDA-cosmetic claim guardrails — no
+All copy stays inside Athlon Rub's FDA-cosmetic claim guardrails: no
 *pain / heal / anti-inflammatory / treat / cure* language. Benefits framed
 as what individual ingredients are known to do.
 
 ## Brand elements
 
-The current system is **`Brand Elements/system-v2/`**: 23 flat single-colour
-marks in four colourways, documented in
-[`system-v2/README.md`](Brand%20Elements/system-v2/README.md).
+The current identity is the **2026 rebrand** in
+`Brand Elements/2026-rebrand/`: Manuel Medina's shield with a diagonal gold
+sash and star, ATHLON in brushed gold, RUB between two tapered gold rules.
+Everything the website shows is built from that pack by
+`Brand Elements/build_site_marks_2026.py` into `assets/athlon/2026/`:
 
-- **Tier 1, crest system (01–10).** Crest frame and icon, star, apex monogram,
-  ascend and forward chevrons, support rules, laurel, ribbon, star divider.
-- **Tier 2, benefit icons (11–18).** Fast-absorbing, warming, non-greasy,
-  botanical, lab-certified, tested-clean, heritage motif, spray bottle.
-- **Tier 3, persona icons (19–23).** One per persona tile: combat, endurance,
-  lifting, paddle, therapist.
+| File | What it is | Where the site uses it |
+|---|---|---|
+| `wordmark.svg` | Fuente Dorada y Rub Verde (vector) | Header, mobile drawer (white) |
+| `logo-gold.png` | Logo en Dorado | Footer watermark (dark green) |
+| `emblem.png` | Full-colour shield, cut from Logo@3x.png | Footer AdChoices link |
+| `favicon.png` | Full-colour shield, square | Favicon, touch icon |
+| `og.png` | Logo en Dorado on `#0E3D28`, 1200x630 | Social share card |
+| `star-mark.svg` | The star and sash line from inside the shield | Trust bar, ingredient rings, checklists, ingredient chips |
+| `rule.svg` | The two tapered rules that flank RUB | Persona cards, benefit and contact cards |
+| `arrow-gold.svg`, `arrow-green.svg` | Tapered rule into a chevron | Text links, carousel arrows, newsletter button |
+| `star.svg` | Plain five-point star | Review ratings |
+| `emblem-gold.svg`, `wordmark-gold.svg` | Flat gold shield; gold wordmark | Spares for dark surfaces |
+
+Icons with no 2026 equivalent (benefit pictograms, persona silhouettes, the
+spray and absorb step icons) were retired rather than redrawn: the routine
+steps are numbered and the cards carry the logo's rule. Of the certification
+badges in `2026-rebrand/badges/`, only Made in USA and BPA Free are confirmed
+claims.
+
+Rebuild after changing the pack:
+
+```bash
+/usr/bin/python3 "Brand Elements/build_site_marks_2026.py"
+```
+
+### Retired: system-v2 and the "A" crest
+
+`Brand Elements/system-v2/` and `00_logo_*` belong to the pre-2026 "A" apex
+crest identity. They are kept for reference only; nothing on the website uses
+them.
 
 ### On v1 (`01`–`10_*.png`)
 
@@ -85,12 +113,11 @@ every attribute mark on the logo sheet is flat and single-colour. v1's shield
 was also a generic heater shield rather than the Lumpini belt-buckle crest
 that the Master Brain identifies as brand IP.
 
-`Home Page/index.html` still references v1. Swapping it to v2 is a separate
-task.
-
 ## Regenerating elements
 
-Set your kie.ai API key:
+The 2026 website marks need no API: see the rebuild command under Brand
+elements. For the retired v2 pipeline and the lifestyle photography, set your
+kie.ai API key:
 
 ```bash
 export KIE_API_KEY=your_key_from_kie_ai
@@ -99,7 +126,8 @@ export KIE_API_KEY=your_key_from_kie_ai
 Then:
 
 ```bash
-# Generate all 23 v2 elements (writes to Brand Elements/system-v2/gold/)
+# Retired v2 system, kept for reference: generate all 23 v2 elements
+# (writes to Brand Elements/system-v2/gold/)
 python3 "Brand Elements/generate_flat_system.py"
 
 # Regenerate only specific elements by id
@@ -111,7 +139,7 @@ python3 "Brand Elements/generate_flat_system.py" --reprocess
 # Derive the green / cream / white colourways and the 512px web exports
 python3 "Brand Elements/make_colorways.py"
 
-# Re-extract the logo from the brand PDF
+# Re-extract the retired pre-2026 logo from the old brand PDF
 python3 "Home Page/_extract_logo.py"
 
 # Lifestyle photography: all 24, one set, or named shots
@@ -120,7 +148,7 @@ python3 "Lifestyle Photos/generate_lifestyle.py" A
 python3 "Lifestyle Photos/generate_lifestyle.py" A03 B07
 ```
 
-The generation pipeline is: API submission → polling → download →
+The (retired) v2 generation pipeline is: API submission → polling → download →
 black-to-alpha conversion → flatten to exact `#D4AF37` → auto-crop → QA
 composite onto green and cream. `make_colorways.py` then swaps RGB while
 preserving alpha, so every colourway keeps identical anti-aliased edges.
@@ -132,19 +160,19 @@ two failure modes specific to this set, is documented in
 
 ## Brand palette
 
-Official values, sampled from PALETA PRINCIPAL on the logo sheet.
+The 2026 palette, from `Brand Elements/2026-rebrand/Palette 2026.pdf`. These
+are the `:root` tokens in `css/athlon-brand.css`.
 
-| Token | Official hex | Use |
+| Token | Hex | Use |
 |---|---|---|
-| Green | `#0F2B1E` | Primary surface: nav, hero, heritage band |
-| Gold  | `#D4AF37` | Primary accent: buttons, dividers, stars, all elements |
-| Black | `#0A0A0A` | Body text, deep surfaces |
-| Cream | `#EAE9CB` | Light backgrounds |
+| `--athlon-green` | `#0E3D28` | Primary surface: hero bands, trust bar, routine block |
+| `--athlon-green-dark` | `#2F412F` | Second dark surface: footer, heritage band |
+| `--athlon-gold` | `#CA9A3A` | Primary accent: buttons, rules, stars, every flat mark |
+| `--athlon-copper` | `#934E1F` | Deep accent; mixed into `--athlon-gold-dim` for hover and small gold type |
+| `--athlon-gold-metal` | `#f8da88` `#af9253` `#ca9a3a` `#f3c663` `#976b33` `#936731` | The logo's brushed-gold gradient |
 
-The home page currently ships slightly different values, carried over from
-before the logo sheet was available: `--green: #0F2F2F`, `--gold: #D9AF37`,
-`--ink: #0B1A1A`. The v2 elements are rendered in the official `#D4AF37`, so
-aligning the CSS tokens to the table above is worth doing in one pass.
+Neutrals sit outside the palette sheet: ink `#0A0A0A` and the ivory light
+surface `#F5F0E6` (the same ivory the 2026 Black Friday email uses).
 
 ## Compliance notes
 
