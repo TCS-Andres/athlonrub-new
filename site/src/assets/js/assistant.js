@@ -112,7 +112,7 @@
     toggle.setAttribute("aria-expanded", String(open));
     root.classList.toggle("is-open", open);
     state.open = open; store.set(state);
-    if (open) { log.scrollTop = log.scrollHeight; setTimeout(() => input.focus(), 30); }
+    if (open) { autosize(); log.scrollTop = log.scrollHeight; setTimeout(() => input.focus(), 30); }
   }
 
   async function send(text) {
@@ -174,9 +174,12 @@
     input.focus();
   }
 
+  // Grow with the message up to 5 lines; only then allow scrolling.
   function autosize() {
-    input.style.height = "auto";
-    input.style.height = Math.min(input.scrollHeight, 120) + "px";
+    input.style.height = "40px";
+    const h = input.value ? Math.min(input.scrollHeight, 128) : 40;
+    input.style.height = h + "px";
+    input.style.overflowY = input.scrollHeight > 128 ? "auto" : "hidden";
   }
 
   toggle.addEventListener("click", () => setOpen(panel.hidden));

@@ -878,19 +878,23 @@ ul, ol { margin: 0; padding: 0; }
 .assistant.is-open .assistant__launcher { display: none; }
 .assistant__panel {
   position: absolute; right: 0; bottom: 0; width: min(400px, calc(100vw - 2 * var(--s-5))); height: min(640px, calc(100svh - var(--s-8)));
-  display: flex; flex-direction: column; background: var(--green-950); color: var(--on-dark);
-  border: 1px solid var(--line-dark); box-shadow: 0 30px 80px -20px rgba(0,0,0,.7);
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+  display: flex; flex-direction: column; overflow: hidden; background: var(--green-950); color: var(--on-dark);
+  border: 1px solid var(--line-dark); border-top: 2px solid var(--gold); box-shadow: 0 30px 80px -20px rgba(0,0,0,.7);
 }
 .assistant__panel[hidden] { display: none; }
 .assistant__head { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-3) var(--s-3) var(--s-4); border-bottom: 1px solid var(--line-dark); background: var(--green-900); }
 .assistant__head > img { width: 30px; height: auto; }
 .assistant__head > div { flex: 1; min-width: 0; }
-.assistant__title { font-family: var(--font-display); font-stretch: var(--stretch-wide); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin: 0; }
-.assistant__sub { font-size: var(--fs-xs); color: var(--on-dark-3); margin: 0; }
+.assistant__title { font-family: var(--font-display); font-stretch: 100%; font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.assistant__sub { font-size: var(--fs-xs); color: var(--on-dark-3); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .assistant__head .icon-btn { width: 36px; height: 36px; }
 .assistant__head .icon-ui { width: 18px; height: 18px; }
-.assistant__log { flex: 1; overflow-y: auto; padding: var(--s-4); display: flex; flex-direction: column; gap: var(--s-3); overscroll-behavior: contain; }
+.assistant__log {
+  flex: 1; min-height: 0; overflow-y: auto; padding: var(--s-4); display: flex; flex-direction: column; gap: var(--s-3); overscroll-behavior: contain;
+  scrollbar-width: thin; scrollbar-color: rgba(202, 154, 58, 0.35) transparent;
+}
+.assistant__log::-webkit-scrollbar { width: 6px; }
+.assistant__log::-webkit-scrollbar-thumb { background: rgba(202, 154, 58, 0.35); border-radius: 3px; }
 .a-msg { max-width: 92%; padding: 10px 14px; line-height: 1.5; font-size: var(--fs-sm); }
 .a-msg p { margin: 0 0 0.6em; }
 .a-msg p:last-child, .a-msg ul:last-child, .a-msg ol:last-child { margin-bottom: 0; }
@@ -918,22 +922,34 @@ ul, ol { margin: 0; padding: 0; }
 .assistant__chips[hidden] { display: none; }
 .assistant__chips button { padding: 7px 11px; background: transparent; color: var(--on-dark-2); border: 1px solid var(--line-dark); cursor: pointer; font-size: var(--fs-xs); border-radius: 999px; }
 .assistant__chips button:hover { border-color: var(--gold); color: var(--on-dark); }
-.assistant__form { display: flex; align-items: flex-end; gap: 8px; margin: 0 var(--s-4); padding: 6px 6px 6px 12px; background: rgba(238,232,218,.05); border: 1px solid var(--line-dark); }
+
+/* Footer bar: input row, then the disclaimer on its own line */
+.assistant__foot { flex: none; display: grid; gap: 10px; padding: 12px var(--s-4) 14px; background: var(--green-900); border-top: 1px solid var(--line-dark); }
+.assistant__form { display: flex; align-items: flex-end; gap: 8px; margin: 0; padding: 5px 5px 5px 14px; background: var(--green-950); border: 1px solid rgba(202, 154, 58, 0.35); transition: border-color var(--t-fast); }
 .assistant__form:focus-within { border-color: var(--gold); }
-.assistant__form textarea { flex: 1; resize: none; border: 0; background: transparent; color: var(--on-dark); font: inherit; font-size: 1rem; line-height: 1.4; padding: 8px 0; max-height: 120px; }
+.assistant__form textarea {
+  flex: 1; min-width: 0; height: 40px; max-height: 128px; resize: none; overflow-y: hidden;
+  border: 0; background: transparent; color: var(--on-dark); font: inherit; font-size: 1rem; line-height: 24px; padding: 8px 0;
+}
 .assistant__form textarea:focus { outline: none; }
-.assistant__form textarea::placeholder { color: var(--on-dark-3); }
-.assistant__send { display: grid; place-items: center; width: 40px; height: 40px; flex: none; background: var(--gold); color: var(--green-950); border: 0; cursor: pointer; }
+.assistant__form textarea::placeholder { color: var(--on-dark-3); opacity: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.assistant__send {
+  display: grid; place-items: center; width: 40px; height: 40px; flex: none; background: var(--gold); color: var(--green-950); border: 0; cursor: pointer;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%); transition: background var(--t-fast);
+}
+.assistant__send:hover { background: var(--gold-300); }
 .assistant__send svg { width: 18px; height: 18px; }
 .assistant__send:disabled { opacity: .5; cursor: progress; }
-.assistant__fine { margin: 0; padding: var(--s-2) var(--s-4) var(--s-3); font-size: 0.6875rem; line-height: 1.45; color: var(--on-dark-3); }
-.assistant__fine a { color: var(--gold); }
+.assistant__fine { margin: 0; font-size: 0.6875rem; line-height: 1.5; color: var(--on-dark-3); text-align: center; text-wrap: balance; }
+.assistant__fine a { color: var(--gold); white-space: nowrap; }
 @media (max-width: 639px) {
   .assistant { right: var(--s-3); bottom: var(--s-3); }
   .assistant__launcher span { display: none; }
   .assistant__launcher { padding: 0 14px; }
   .assistant.is-open { inset: 0; }
-  .assistant__panel { position: fixed; inset: 0; width: 100%; height: 100%; clip-path: none; border: 0; }
+  .assistant__panel { position: fixed; inset: 0; width: 100%; height: 100%; height: 100dvh; border: 0; border-top: 2px solid var(--gold); }
+  .assistant__head { padding-top: max(var(--s-3), env(safe-area-inset-top)); }
+  .assistant__foot { padding-bottom: max(14px, env(safe-area-inset-bottom)); }
 }
 @media (max-width: 999px) { .template-product .assistant:not(.is-open) { bottom: 84px; } }
 
