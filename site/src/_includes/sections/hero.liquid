@@ -4,8 +4,8 @@
     {%- assign d = images[s.image] -%}
     {%- assign m = images[s.image_mobile] -%}
     <picture>
-      {%- if m %}<source media="(max-width: 767px)" srcset="{{ m.srcSm }} {{ m.smW }}w, {{ m.src }} {{ m.w }}w" sizes="100vw">{% endif %}
-      <img src="{{ d.src }}" srcset="{{ d.srcSm }} {{ d.smW }}w, {{ d.src }} {{ d.w }}w" sizes="100vw" width="{{ d.w }}" height="{{ d.h }}" alt="{{ d.alt }}" fetchpriority="high" decoding="async">
+      {%- if m %}<source media="(max-width: 767px)" srcset="{{ m.srcSm | v }} {{ m.smW }}w, {{ m.src | v }} {{ m.w }}w" sizes="100vw">{% endif %}
+      <img src="{{ d.src | v }}" srcset="{{ d.srcSm | v }} {{ d.smW }}w, {{ d.src | v }} {{ d.w }}w" sizes="100vw" width="{{ d.w }}" height="{{ d.h }}" alt="{{ d.alt }}" fetchpriority="high" decoding="async">
     </picture>
   </div>
   <div class="container">

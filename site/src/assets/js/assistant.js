@@ -36,7 +36,7 @@
   function card(handle) {
     const p = byHandle[handle];
     if (!p) return "";
-    const img = `/assets/img/products/${p.cutout}.webp`;
+    const img = p.image || `/assets/img/products/${p.cutout}.webp`;
     return `<div class="a-card">
       <a class="a-card__img" href="/products/${p.handle}/"><img src="${img}" alt="" loading="lazy"></a>
       <div class="a-card__body">
@@ -103,6 +103,8 @@
   function draw() {
     log.innerHTML = "";
     bubble("bot", render(GREETING));
+    // Suggestions sit right under the greeting until the first message.
+    if (!state.messages.length) log.appendChild(chips);
     for (const m of state.messages) bubble(m.role === "user" ? "user" : "bot", m.role === "user" ? `<p>${esc(m.content)}</p>` : render(m.content));
     chips.hidden = state.messages.length > 0;
   }

@@ -9,7 +9,7 @@
   data-title="{{ product.title }}"
   data-size="{{ product.size }}"
   data-price="{{ product.price }}"
-  data-image="/assets/img/products/{{ product.cutout }}.webp">
+  data-image="{{ '/assets/img/products/' | append: product.cutout | append: '.webp' | v }}">
   <span>{{ label | default: 'Add to bag' }}</span>
   {%- unless hide_price %}<span aria-hidden="true">·</span><span>{{ product.price | money }}</span>{% endunless -%}
 </button>

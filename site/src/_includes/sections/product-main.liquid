@@ -20,7 +20,7 @@
         <div class="gallery__thumbs">
           <button type="button" class="gallery__thumb gallery__thumb--cutout" aria-current="true" aria-label="Show product photo">{% render 'snippets/bottle', cutout: product.cutout, images: images, alt: '' %}</button>
           {%- for sc in product.scenes %}
-          <button type="button" class="gallery__thumb" aria-current="false" aria-label="Show photo {{ forloop.index | plus: 1 }}"><img src="{{ images[sc].srcSm }}" width="{{ images[sc].smW }}" alt="" loading="lazy"></button>
+          <button type="button" class="gallery__thumb" aria-current="false" aria-label="Show photo {{ forloop.index | plus: 1 }}"><img src="{{ images[sc].srcSm | v }}" width="{{ images[sc].smW }}" alt="" loading="lazy"></button>
           {%- endfor %}
         </div>
       </div>
