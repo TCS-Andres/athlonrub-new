@@ -1,0 +1,22 @@
+{%- assign s = section.settings -%}
+{%- assign bottles = products | where: 'type', 'bottle' -%}
+<section class="section section--dark surface-field">
+  <div class="container">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow">{{ s.eyebrow | default: 'Size guide' }}</p>
+      <h2 class="h2">{{ s.heading | default: 'Which bottle is yours?' }}</h2>
+    </div>
+    <div class="grid grid--3">
+      {%- for b in bottles %}
+      <a class="p-card chamfer" href="/products/{{ b.handle }}/" data-reveal style="--d:{{ forloop.index0 | times: 80 }}ms">
+        <div class="p-card__body" style="gap:var(--s-4)">
+          <p class="p-card__meta">{{ b.size }}</p>
+          <h3 class="p-card__name">{{ b.short }}</h3>
+          <ul class="star-list small" style="color:var(--on-dark-2)">{%- for x in b.best_for %}<li><span>{{ x }}</span></li>{%- endfor %}</ul>
+          <span class="link-arrow">Shop {{ b.short }} · {{ b.price | money }} {% render 'snippets/arrow' %}</span>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

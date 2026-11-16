@@ -1,0 +1,24 @@
+{%- assign s = section.settings -%}
+<section class="section section--paper" id="roster">
+  <div class="container">
+    <div class="section-head section-head--split" data-reveal>
+      <div class="stack-sm">
+        <p class="eyebrow eyebrow--start">{{ s.eyebrow }}</p>
+        <h2 class="h1">{{ s.heading }}</h2>
+      </div>
+      <p class="lead">{{ s.text }}</p>
+    </div>
+    <div class="rail" role="list">
+      {%- for b in section.blocks %}
+      <article class="roster-card chamfer" role="listitem" data-reveal style="--d:{{ forloop.index0 | times: 70 }}ms">
+        <div class="media">{% render 'snippets/img', name: b.image, images: images, sizes: '(min-width: 1100px) 20vw, (min-width: 640px) 42vw, 78vw' %}</div>
+        <div class="roster-card__body">
+          {% assign ic = 'icons/' | append: b.icon %}{% render ic %}
+          <h3 class="roster-card__title">{{ b.title }}</h3>
+          <p class="roster-card__text">{{ b.text }}</p>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

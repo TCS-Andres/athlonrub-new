@@ -1,0 +1,53 @@
+{
+  "main": [
+    { "title": "Shop", "url": "/collections/all/", "links": [
+      { "title": "All products", "url": "/collections/all/" },
+      { "title": "Travel 100 mL", "url": "/products/athlon-rub-all-sports-oil-athlete-travel-size/" },
+      { "title": "Pro 250 mL", "url": "/products/athlon-rub-8-oz-240-ml-bottle/" },
+      { "title": "Coach 500 mL", "url": "/products/athlon-rub-16-oz-480-ml-bottle/" },
+      { "title": "Bundles", "url": "/collections/all/#bundles" }
+    ]},
+    { "title": "Uses", "url": "/pages/uses/", "links": [
+      { "title": "How to use", "url": "/pages/uses/" },
+      { "title": "Warm-Up", "url": "/pages/warm-up-1/" },
+      { "title": "Performance", "url": "/pages/performance/" },
+      { "title": "Recovery", "url": "/pages/recovery/" }
+    ]},
+    { "title": "About", "url": "/pages/about-athlon-rub/", "links": [
+      { "title": "Our story", "url": "/pages/about-athlon-rub/" },
+      { "title": "The founder", "url": "/pages/about/" },
+      { "title": "The formula", "url": "/pages/formula/" }
+    ]},
+    { "title": "Testimonials", "url": "/pages/testimonials/" },
+    { "title": "FAQ", "url": "/pages/faqs/" },
+    { "title": "Contact", "url": "/pages/contact-us/" }
+  ],
+  "footer": [
+    { "title": "Shop", "links": [
+      { "title": "All products", "url": "/collections/all/" },
+      { "title": "Travel 100 mL", "url": "/products/athlon-rub-all-sports-oil-athlete-travel-size/" },
+      { "title": "Pro 250 mL", "url": "/products/athlon-rub-8-oz-240-ml-bottle/" },
+      { "title": "Coach 500 mL", "url": "/products/athlon-rub-16-oz-480-ml-bottle/" },
+      { "title": "Bundles", "url": "/collections/all/#bundles" }
+    ]},
+    { "title": "Learn", "links": [
+      { "title": "How to use", "url": "/pages/uses/" },
+      { "title": "Warm-Up", "url": "/pages/warm-up-1/" },
+      { "title": "Performance", "url": "/pages/performance/" },
+      { "title": "Recovery", "url": "/pages/recovery/" },
+      { "title": "The formula", "url": "/pages/formula/" }
+    ]},
+    { "title": "Company", "links": [
+      { "title": "Our story", "url": "/pages/about-athlon-rub/" },
+      { "title": "The founder", "url": "/pages/about/" },
+      { "title": "Testimonials", "url": "/pages/testimonials/" },
+      { "title": "Blog", "url": "https://athlonrub.com/blogs/news" }
+    ]},
+    { "title": "Help", "links": [
+      { "title": "FAQ", "url": "/pages/faqs/" },
+      { "title": "Contact us", "url": "/pages/contact-us/" },
+      { "title": "Subscriptions", "url": "https://athlonrub.com/pages/subscription-program" },
+      { "title": "Affiliate program", "url": "https://athlonrub.com/pages/affiliate-program" }
+    ]}
+  ]
+}

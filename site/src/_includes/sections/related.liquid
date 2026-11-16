@@ -1,0 +1,15 @@
+{%- assign others = products | reject_handle: product.handle -%}
+<section class="section section--paper">
+  <div class="container">
+    <div class="section-head section-head--split" data-reveal>
+      <div class="stack-sm"><p class="eyebrow eyebrow--start">Complete the kit</p><h2 class="h2">More from Athlon Rub.</h2></div>
+      <div><a class="btn btn--outline" href="/collections/all/">Shop all {% render 'snippets/arrow' %}</a></div>
+    </div>
+    <div class="collection-grid">
+      {%- for p in others limit: 3 %}
+      {% render 'snippets/product-card', product: p, images: images, index: forloop.index0 %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":{{ product.title | json }},"description":{{ product.summary | json }},"image":"{{ site.url }}/assets/img/products/{{ product.cutout }}.webp","brand":{"@type":"Brand","name":"Athlon Rub"},"offers":{"@type":"Offer","url":"{{ site.url }}/products/{{ product.handle }}","priceCurrency":"USD","price":"{{ product.price | divided_by: 100.0 }}"}}</script>

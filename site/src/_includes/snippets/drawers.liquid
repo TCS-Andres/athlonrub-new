@@ -1,0 +1,57 @@
+<div class="overlay" data-overlay></div>
+
+<aside class="drawer drawer--left" id="menu-drawer" aria-label="Menu" data-drawer="menu" aria-hidden="true">
+  <div class="drawer__head">
+    <img src="/assets/brand/wordmark-gold.svg" alt="Athlon Rub" width="120" height="24" style="width:120px">
+    <button class="icon-btn" type="button" data-close aria-label="Close menu">
+      <svg class="icon-ui" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body">
+    <ul class="mobile-nav">
+      {%- for item in nav.main %}
+      <li>
+        {%- if item.links %}
+        <details>
+          <summary>{{ item.title }}<svg viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M0 0h10L5 6z"/></svg></summary>
+          <ul>{%- for link in item.links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor %}</ul>
+        </details>
+        {%- else %}
+        <a href="{{ item.url }}">{{ item.title }}</a>
+        {%- endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+  <div class="drawer__foot">
+    <a class="btn btn--block" href="/collections/all/">Shop Athlon Rub {% render 'snippets/arrow' %}</a>
+    <p class="fine" style="color:var(--on-dark-3)">{{ site.email }} · {{ site.phone }}</p>
+  </div>
+</aside>
+
+<aside class="drawer drawer--right" id="cart-drawer" aria-label="Your bag" data-drawer="cart" aria-hidden="true">
+  <div class="drawer__head">
+    <p class="drawer__title">Your bag <span data-cart-count-text></span></p>
+    <button class="icon-btn" type="button" data-close aria-label="Close bag">
+      <svg class="icon-ui" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body">
+    <div class="ship-meter" data-ship-meter data-threshold="{{ site.free_shipping_cents }}">
+      <p data-ship-text>Free shipping on orders over {{ site.free_shipping_cents | money_without_trailing_zeros }}</p>
+      <div class="ship-meter__bar"><div class="ship-meter__fill" data-ship-fill></div></div>
+    </div>
+    <ul class="cart-lines" data-cart-lines></ul>
+    <div class="cart-empty" data-cart-empty>
+      {% render 'icons/gear-bag' %}
+      <p>Your bag is empty.</p>
+      <a class="btn" href="/collections/all/">Shop the lineup {% render 'snippets/arrow' %}</a>
+    </div>
+  </div>
+  <div class="drawer__foot" data-cart-foot hidden>
+    <div class="subtotal"><span>Subtotal</span><span data-cart-subtotal>$0.00</span></div>
+    <p class="fine" style="color:var(--on-dark-3)">Shipping and taxes calculated at checkout.</p>
+    <a class="btn btn--block btn--lg" data-checkout href="{{ site.store_url }}/cart">Checkout {% render 'snippets/arrow' %}</a>
+    <p class="fine" style="color:var(--on-dark-3);display:flex;gap:8px;align-items:center;justify-content:center">{% render 'icons/secure' %} Secure checkout on athlonrub.com</p>
+  </div>
+</aside>

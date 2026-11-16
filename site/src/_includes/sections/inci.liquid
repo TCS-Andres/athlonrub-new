@@ -1,0 +1,17 @@
+{%- assign s = section.settings -%}
+{%- assign style = s.style | default: 'paper' -%}
+<section class="section section--{{ style }}" id="ingredient-list">
+  <div class="container">
+    <div class="split" style="align-items:start">
+      <div class="stack" data-reveal>
+        <p class="eyebrow eyebrow--start">{{ s.eyebrow }}</p>
+        <h2 class="h2">{{ s.heading }}</h2>
+        <p class="lead">{{ s.text }}</p>
+        {%- if s.note %}<p class="fine">{{ s.note }}</p>{% endif %}
+      </div>
+      <ol class="inci" data-reveal style="--d:120ms">
+        {%- for i in formula.inci %}<li><span>{{ i.name }}</span><span>{{ i.latin }}</span></li>{%- endfor %}
+      </ol>
+    </div>
+  </div>
+</section>

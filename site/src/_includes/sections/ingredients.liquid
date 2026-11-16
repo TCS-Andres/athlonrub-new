@@ -1,0 +1,27 @@
+{%- assign s = section.settings -%}
+<section class="section section--green" id="ingredients">
+  <div class="container">
+    <div class="section-head section-head--split" data-reveal>
+      <div class="stack-sm">
+        <p class="eyebrow eyebrow--start">{{ s.eyebrow }}</p>
+        <h2 class="h1">{{ s.heading }}</h2>
+      </div>
+      <div class="stack-sm">
+        <p class="lead">{{ s.text }}</p>
+        {%- if s.cta_label %}<a class="link-arrow" href="{{ s.cta_url }}">{{ s.cta_label }} {% render 'snippets/arrow' %}</a>{% endif %}
+      </div>
+    </div>
+    <div class="ingredients">
+      {%- for b in section.blocks %}
+      <article class="ingredient" data-reveal style="--d:{{ forloop.index0 | times: 80 }}ms">
+        <div class="media">{% render 'snippets/img', name: b.image, images: images, sizes: '(min-width: 1100px) 25vw, (min-width: 640px) 50vw, 100vw' %}</div>
+        <div class="ingredient__body">
+          <p class="ingredient__latin">{{ b.latin }}</p>
+          <h3 class="ingredient__name">{{ b.name }}</h3>
+          <p class="ingredient__text">{{ b.text }}</p>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

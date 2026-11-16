@@ -1,0 +1,16 @@
+{%- comment -%} settings: eyebrow, heading, text, image, position, crumbs [{title,url}], cta_label, cta_url {%- endcomment -%}
+{%- assign s = section.settings -%}
+<section class="page-hero">
+  {%- if s.image %}<div class="page-hero__media">{% render 'snippets/img', name: s.image, images: images, sizes: '100vw', loading: 'eager', position: s.position %}</div>{% endif %}
+  <div class="container">
+    <div class="page-hero__inner">
+      {%- if s.crumbs %}
+      <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">Home</a></li>{%- for c in s.crumbs %}<li>{% if c.url %}<a href="{{ c.url }}">{{ c.title }}</a>{% else %}<span aria-current="page">{{ c.title }}</span>{% endif %}</li>{%- endfor %}</ol></nav>
+      {%- endif %}
+      <p class="eyebrow eyebrow--start" style="color:var(--gold)">{{ s.eyebrow }}</p>
+      <h1 class="h1">{{ s.heading }}</h1>
+      {%- if s.text %}<p class="lead">{{ s.text }}</p>{% endif %}
+      {%- if s.cta_label %}<div class="row"><a class="btn btn--lg" href="{{ s.cta_url }}">{{ s.cta_label }} {% render 'snippets/arrow' %}</a></div>{% endif %}
+    </div>
+  </div>
+</section>

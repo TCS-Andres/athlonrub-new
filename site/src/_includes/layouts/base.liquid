@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  {%- assign page_title = title | default: site.tagline -%}
+  <title>{% if title %}{{ title }} | {{ site.name }}{% else %}{{ site.name }} | {{ site.tagline }}{% endif %}</title>
+  <meta name="description" content="{{ description | default: site.description }}">
+  <link rel="canonical" href="{{ site.url }}{{ canonical | default: page.url }}">
+  <meta name="theme-color" content="#06190F">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ description | default: site.description }}">
+  <meta property="og:image" content="/assets/brand/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Inter:wght@400;500;600;700&display=swap">
+  {%- if preload_image %}
+  <link rel="preload" as="image" href="{{ images[preload_image].src }}" imagesrcset="{{ images[preload_image].srcSm }} {{ images[preload_image].smW }}w, {{ images[preload_image].src }} {{ images[preload_image].w }}w" imagesizes="100vw" fetchpriority="high">
+  {%- endif %}
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script>document.documentElement.classList.replace('no-js','js');</script>
+  {%- if jsonld %}<script type="application/ld+json">{{ jsonld }}</script>{% endif %}
+</head>
+<body class="template-{{ template | default: 'page' }}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% include 'sections/announcement' %}
+  {% include 'sections/header' %}
+  <main id="main">
+    {{ content }}
+  </main>
+  {% include 'sections/footer' %}
+  {% include 'snippets/drawers' %}
+  {% include 'snippets/assistant' %}
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/assistant.js" defer></script>
+</body>
+</html>

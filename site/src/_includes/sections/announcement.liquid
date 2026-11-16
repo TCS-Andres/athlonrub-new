@@ -1,0 +1,9 @@
+<div class="announce" role="region" aria-label="Store announcements">
+  <div class="announce__track" data-announce>
+    {%- for msg in site.announcement %}
+    <p class="announce__item{% if forloop.first %} is-active{% endif %}"{% unless forloop.first %} aria-hidden="true"{% endunless %}>
+      <img src="/assets/brand/star.svg" alt="" width="12" height="12">{{ msg }}
+    </p>
+    {%- endfor %}
+  </div>
+</div>

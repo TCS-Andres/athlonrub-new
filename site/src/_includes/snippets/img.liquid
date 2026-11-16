@@ -1,0 +1,12 @@
+{%- comment -%}
+  Responsive scene image from the manifest (src/_data/images.json).
+  Params: name, sizes, loading ("lazy" | "eager"), class, position (object-position)
+  Shopify port: replace with  image_url + image_tag  on a section image setting.
+{%- endcomment -%}
+{%- assign im = images[name] -%}
+{%- assign position = position | default: im.focus -%}
+{%- if im and im.src -%}
+<img src="{{ im.src }}"{% if im.srcSm %} srcset="{{ im.srcSm }} {{ im.smW }}w, {{ im.src }} {{ im.w }}w" sizes="{{ sizes | default: '100vw' }}"{% endif %} width="{{ im.w }}" height="{{ im.h }}" alt="{{ alt | default: im.alt }}" loading="{{ loading | default: 'lazy' }}" decoding="async"{% if loading == 'eager' %} fetchpriority="high"{% endif %}{% if class %} class="{{ class }}"{% endif %}{% if position %} style="object-position: {{ position }}"{% endif %}>
+{%- else -%}
+<span class="media--placeholder" style="position:absolute;inset:0">{{ name }}</span>
+{%- endif -%}

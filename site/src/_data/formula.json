@@ -1,0 +1,15 @@
+{
+  "inci": [
+    { "name": "Arnica", "latin": "Arnica montana" },
+    { "name": "Turmeric root oil", "latin": "Curcuma longa" },
+    { "name": "Wintergreen", "latin": "Methyl salicylate" },
+    { "name": "Thai Plai", "latin": "Zingiber cassumunar" },
+    { "name": "Safflower seed oil", "latin": "Carthamus tinctorius" },
+    { "name": "Menthol", "latin": "Menthol" },
+    { "name": "Vitamin E", "latin": "Tocopherol" },
+    { "name": "Eucalyptus leaf oil", "latin": "Eucalyptus globulus" },
+    { "name": "Soybean oil", "latin": "Glycine soja" },
+    { "name": "Beta-carotene", "latin": "Beta-carotene" },
+    { "name": "Polysorbate 80", "latin": "Emulsifier" }
+  ]
+}

@@ -1,0 +1,40 @@
+{%- comment -%}
+  The three bottles on one gold plinth at true relative size. The cutouts share
+  one mm-per-px scale, so each tile's height is set from the bottle's real height.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign items = products | by_handles: s.handles -%}
+<section class="section section--dark surface-field lineup" id="lineup">
+  <div class="container">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow">{{ s.eyebrow }}</p>
+      <h2 class="h1">{{ s.heading }}</h2>
+      <p class="lead">{{ s.text }}</p>
+    </div>
+    <div class="lineup__stage">
+      {%- for p in items %}
+      {%- assign bim = images[p.cutout] -%}
+      {%- assign rel = bim.h | times: 100 | divided_by: 1029.0 -%}
+      <article class="p-tile" data-reveal style="--d:{{ forloop.index0 | times: 90 }}ms">
+        <a class="p-tile__bottle" href="/products/{{ p.handle }}/" style="--rel: {{ rel | round: 2 }}%" aria-label="{{ p.title }}, {{ p.size }}">
+          {%- if p.badge %}<span class="p-tile__badge">{{ p.badge }}</span>{% endif -%}
+          {% render 'snippets/bottle', cutout: p.cutout, images: images, alt: p.title %}
+        </a>
+        <div class="p-tile__info">
+          <h3 class="p-tile__name"><a href="/products/{{ p.handle }}/" style="text-decoration:none">{{ p.short }}</a></h3>
+          <p class="p-tile__size">{{ p.size }}</p>
+          <p class="p-tile__tag">{{ p.tagline }}</p>
+          <p class="p-tile__price">{{ p.price | money }}</p>
+          {% render 'snippets/add-button', product: p, class: 'btn--sm', hide_price: true %}
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+    <ul class="perks">
+      <li>{% render 'icons/shipping' %}Free shipping over {{ site.free_shipping_cents | money_without_trailing_zeros }}</li>
+      <li>{% render 'icons/guarantee' %}30-day guarantee</li>
+      <li>{% render 'icons/worldwide' %}Ships worldwide</li>
+      <li>{% render 'icons/recovery' %}Subscribe and save 20%</li>
+    </ul>
+  </div>
+</section>

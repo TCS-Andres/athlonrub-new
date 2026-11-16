@@ -1,0 +1,12 @@
+{%- assign s = section.settings -%}
+<section class="cta-band">
+  <div class="cta-band__media">{% render 'snippets/img', name: s.image, images: images, sizes: '100vw', position: s.position %}</div>
+  <div class="container">
+    <div class="cta-band__inner" data-reveal>
+      <p class="eyebrow eyebrow--start" style="color:var(--gold)">{{ s.eyebrow }}</p>
+      <h2 class="h1">{{ s.heading }}</h2>
+      {%- if s.text %}<p class="lead" style="color:var(--on-dark-2)">{{ s.text }}</p>{% endif %}
+      <div class="row"><a class="btn btn--lg" href="{{ s.cta_url }}">{{ s.cta_label }} {% render 'snippets/arrow' %}</a></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+<header class="header" data-header>
+  <div class="container header__bar">
+    <a class="header__logo" href="/" aria-label="Athlon Rub home">
+      <img class="emblem" src="/assets/brand/emblem.png" alt="" width="253" height="320">
+      <img class="wordmark" src="/assets/brand/wordmark-gold.svg" alt="Athlon Rub" width="956" height="187">
+    </a>
+
+    <nav class="header__nav" aria-label="Main">
+      <ul class="nav">
+        {%- for item in nav.main %}
+        {%- assign is_current = false -%}
+        {%- if page.url contains item.url and item.url != '/' -%}{%- assign is_current = true -%}{%- endif -%}
+        <li class="nav__item">
+          {%- if item.links %}
+          <a class="nav__link" href="{{ item.url }}" aria-haspopup="true"{% if is_current %} aria-current="page"{% endif %}>
+            {{ item.title }}
+            <svg viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M0 0h10L5 6z"/></svg>
+          </a>
+          <ul class="nav__menu">
+            {%- for link in item.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor %}
+          </ul>
+          {%- else %}
+          <a class="nav__link" href="{{ item.url }}"{% if is_current %} aria-current="page"{% endif %}>{{ item.title }}</a>
+          {%- endif %}
+        </li>
+        {%- endfor %}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <a class="icon-btn" href="https://athlonrub.com/account/login" aria-label="Account">
+        <svg class="icon-ui" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M3.8 21c1-4.2 4.3-6.6 8.2-6.6s7.2 2.4 8.2 6.6"/></svg>
+      </a>
+      <button class="icon-btn" type="button" data-open="cart" aria-label="Open bag" aria-controls="cart-drawer" aria-expanded="false">
+        <svg class="icon-ui" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4.5 8h15l-1.2 12.5H5.7z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg>
+        <span class="cart-count" data-cart-count data-count="0">0</span>
+      </button>
+      <button class="icon-btn menu-toggle" type="button" data-open="menu" aria-label="Open menu" aria-controls="menu-drawer" aria-expanded="false">
+        <svg class="icon-ui" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
+      </button>
+    </div>
+  </div>
+</header>

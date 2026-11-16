@@ -1,0 +1,15 @@
+{%- comment -%}
+  Add-to-bag button. Params: product, label, class.
+  Preview: handled by assets/js/main.js (local bag, checkout via Shopify cart permalink).
+  Shopify port: wrap in {% form 'product', product %} or POST to /cart/add.js with the variant id.
+{%- endcomment -%}
+<button type="button" class="btn {{ class }}" data-add
+  data-variant="{{ product.variant_id }}"
+  data-handle="{{ product.handle }}"
+  data-title="{{ product.title }}"
+  data-size="{{ product.size }}"
+  data-price="{{ product.price }}"
+  data-image="/assets/img/products/{{ product.cutout }}.webp">
+  <span>{{ label | default: 'Add to bag' }}</span>
+  {%- unless hide_price %}<span aria-hidden="true">·</span><span>{{ product.price | money }}</span>{% endunless -%}
+</button>

@@ -1,0 +1,13 @@
+{%- comment -%} settings: style, eyebrow, heading. blocks: { num, label } {%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign style = s.style | default: 'dark' -%}
+<section class="section section--tight section--{{ style }}{% if style == 'dark' %} surface-field{% endif %}">
+  <div class="container">
+    {%- if s.heading %}<div class="section-head" data-reveal>{% if s.eyebrow %}<p class="eyebrow eyebrow--start">{{ s.eyebrow }}</p>{% endif %}<h2 class="h2">{{ s.heading }}</h2></div>{% endif %}
+    <ul class="stats" style="--cols: {{ section.blocks.size }}">
+      {%- for b in section.blocks %}
+      <li class="stat" data-reveal style="--d:{{ forloop.index0 | times: 80 }}ms"><span class="stat__num{% if style == 'dark' or style == 'green' %} text-gold-sweep{% endif %}">{{ b.num }}</span><span class="stat__label">{{ b.label }}</span></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>

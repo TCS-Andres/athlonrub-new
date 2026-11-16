@@ -1,0 +1,13 @@
+{%- assign s = section.settings -%}
+<section class="section section--paper-2">
+  <div class="container">
+    <figure class="feature-quote" style="margin:0">
+      <div class="media chamfer-lg" style="aspect-ratio:4/5" data-reveal><img src="/assets/img/real/{{ s.photo }}.webp" width="445" height="556" alt="{{ s.name }}" loading="lazy" style="object-position:50% 20%"></div>
+      <div class="stack" data-reveal style="--d:120ms">
+        <svg class="quote__mark" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true" style="width:56px;height:42px;color:var(--gold-ink)"><path d="M0 26V15.6C0 6.9 4.6 1.6 13.4 0l1.5 3.6C9.9 5 7.6 8 7.4 12.4H14V26zm19 0V15.6C19 6.9 23.6 1.6 32.4 0l1.5 3.6C28.9 5 26.6 8 26.4 12.4H33V26z"/></svg>
+        <blockquote>{{ s.quote }}</blockquote>
+        <figcaption><p class="h4">{{ s.name }}</p><p class="fine">{{ s.title }}</p></figcaption>
+      </div>
+    </figure>
+  </div>
+</section>
