@@ -1,0 +1,24 @@
+{%- assign s = section.settings -%}
+{%- assign style = s.style | default: 'paper-2' -%}
+<section class="section section--{{ style }}{% if style == 'dark' %} surface-field{% endif %}">
+  <div class="container">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow">{{ s.eyebrow }}</p>
+      <h2 class="h1">{{ s.heading }}</h2>
+      {%- if s.text %}<p class="lead">{{ s.text }}</p>{% endif %}
+    </div>
+    <div class="moments">
+      {%- for b in section.blocks %}
+      <a class="moment chamfer" href="{{ b.url }}" data-reveal style="--d:{{ forloop.index0 | times: 90 }}ms">
+        <div class="media">{% render 'snippets/img', name: b.image, images: images, sizes: '(min-width: 900px) 33vw, 100vw' %}</div>
+        <div class="moment__body">
+          <span class="moment__num" aria-hidden="true">{{ b.num }}</span>
+          <div class="moment__head">{% assign ic = 'icons/' | append: b.icon %}{% render ic %}<h3 class="h3">{{ b.title }}</h3></div>
+          <p class="moment__text">{{ b.text }}</p>
+          <span class="link-arrow">Read more {% render 'snippets/arrow' %}</span>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

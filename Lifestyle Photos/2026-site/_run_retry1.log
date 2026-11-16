@@ -1,0 +1,8 @@
+use-warmup: prompt 4417 chars
+step-shake: prompt 3272 chars
+step-rub: prompt 2024 chars
+credits before: 524.61
+  step-rub: OK step-rub_r2.png (4907 KB, task 7bcc2c9819a491727a998c30f11b0d4f)
+  step-shake: OK step-shake_r2.png (4402 KB, task 091bfa42f6f75fb6cdd8cf834fe1df62)
+  use-warmup: OK use-warmup_r2.png (5150 KB, task d11496c4a918e5c7770a4d0a9c98a8f1)
+credits after: 456.39  (spent 68.22 for 3 shots)

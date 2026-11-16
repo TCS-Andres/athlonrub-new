@@ -1,0 +1,20 @@
+{%- comment -%} Real photography with captions. blocks: { src (path), w, h, caption, alt } {%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign style = s.style | default: 'paper-2' -%}
+<section class="section section--{{ style }}">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow eyebrow--start">{{ s.eyebrow }}</p>
+      <h2 class="h2">{{ s.heading }}</h2>
+      {%- if s.text %}<p class="lead">{{ s.text }}</p>{% endif %}
+    </div>
+    <div class="media-grid">
+      {%- for b in section.blocks %}
+      <figure data-reveal style="--d:{{ forloop.index0 | times: 60 }}ms">
+        <div class="media chamfer ratio-4x3" style="aspect-ratio:4/3"><img src="{{ b.src }}" width="{{ b.w }}" height="{{ b.h }}" alt="{{ b.alt | default: b.caption }}" loading="lazy" decoding="async"></div>
+        <figcaption>{{ b.caption }}</figcaption>
+      </figure>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

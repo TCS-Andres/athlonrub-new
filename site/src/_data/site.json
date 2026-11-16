@@ -1,0 +1,23 @@
+{
+  "name": "Athlon Rub",
+  "tagline": "Train. Compete. Recover. Repeat.",
+  "description": "Athlon Rub is a fast-absorbing, non-greasy all-sports oil built on the Thai Oil tradition. Warm up, perform and recover with one formula in three sizes.",
+  "url": "https://athlonrub.com",
+  "store_url": "https://athlonrub.com",
+  "free_shipping_cents": 7500,
+  "announcement": [
+    "Free shipping on orders over $75",
+    "Every order covered by our 30-day guarantee",
+    "Subscribe and save 20% on Travel, Pro and Coach"
+  ],
+  "email": "info@athlonrub.com",
+  "phone": "+1 786 540-7767",
+  "phone_href": "+17865407767",
+  "hq": "Miami, Florida, USA",
+  "social": [],
+  "legal": [
+    { "title": "Privacy policy", "url": "https://athlonrub.com/policies/privacy-policy" },
+    { "title": "Terms of service", "url": "https://athlonrub.com/policies/terms-of-service" },
+    { "title": "Proposition 65", "url": "https://athlonrub.com/pages/proposition-65" }
+  ]
+}

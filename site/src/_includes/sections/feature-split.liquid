@@ -1,0 +1,41 @@
+{%- comment -%}
+  Image + copy. settings: style (paper|paper-2|dark|green), image, image_ratio, reverse, wide_media,
+  eyebrow, heading, text (paragraphs split on blank lines), cta_label, cta_url, quote.
+  blocks: checklist items { icon, title, text } or { text } for a star list.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign style = s.style | default: 'paper' -%}
+<section class="section section--{{ style }}{% if style == 'dark' %} surface-field{% endif %}">
+  <div class="container">
+    <div class="split{% if s.reverse %} split--reverse{% endif %}{% if s.wide_media %} split--wide-media{% endif %}">
+      <div class="split__media" data-reveal>
+        <div class="media chamfer-lg ratio-{{ s.image_ratio | default: '4x5' }}">
+          {% render 'snippets/img', name: s.image, images: images, sizes: '(min-width: 900px) 55vw, 100vw', position: s.position %}
+        </div>
+      </div>
+      <div class="split__body" data-reveal style="--d:120ms">
+        {%- if s.eyebrow %}<p class="eyebrow eyebrow--start">{{ s.eyebrow }}</p>{% endif %}
+        <h2 class="h2">{{ s.heading }}</h2>
+        {%- if s.text %}
+        {%- assign paras = s.text | strip | split: '
+
+' -%}
+        <div class="lead">{%- for para in paras %}<p>{{ para }}</p>{%- endfor %}</div>
+        {%- endif %}
+        {%- if section.blocks %}
+          {%- if section.blocks[0].icon %}
+          <ul class="checklist">
+            {%- for b in section.blocks %}
+            <li><span class="icon-chip">{% assign ic = 'icons/' | append: b.icon %}{% render ic %}</span><div><strong>{{ b.title }}</strong><p>{{ b.text }}</p></div></li>
+            {%- endfor %}
+          </ul>
+          {%- else %}
+          <ul class="star-list">{%- for b in section.blocks %}<li><span>{{ b.text }}</span></li>{%- endfor %}</ul>
+          {%- endif %}
+        {%- endif %}
+        {%- if s.quote %}<p class="pull">{{ s.quote }}</p>{% endif %}
+        {%- if s.cta_label %}<div class="row"><a class="btn{% if style == 'paper' or style == 'paper-2' %} btn--green{% endif %}" href="{{ s.cta_url }}">{{ s.cta_label }} {% render 'snippets/arrow' %}</a></div>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>

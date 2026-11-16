@@ -1,0 +1,8 @@
+{%- comment -%}
+  Transparent product cutout. Params: cutout (e.g. "bottle-pro"), alt, loading, class, hd (true for the
+  native-resolution file).
+{%- endcomment -%}
+{%- assign file = cutout -%}
+{%- if hd and cutout contains 'bottle' -%}{%- assign file = cutout | append: '-hd' -%}{%- endif -%}
+{%- assign bim = images[file] -%}
+<img src="{{ '/assets/img/products/' | append: file | append: '.webp' | v }}" width="{{ bim.w }}" height="{{ bim.h }}" alt="{{ alt | default: bim.alt }}" loading="{{ loading | default: 'lazy' }}" decoding="async"{% if class %} class="{{ class }}"{% endif %}>

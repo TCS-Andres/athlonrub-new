@@ -43,3 +43,12 @@ output/
 # Screenshots of other companies' sites, kept locally for design reference.
 # Third-party content: does not belong in a public repo.
 Website Inspiration/
+
+# ---- v3 site imagery pipeline intermediates ----
+Lifestyle Photos/2026-site/_raw/
+Lifestyle Photos/2026-site/_prompts/_ref_*.png
+Lifestyle Photos/2026-site/_refs.json
+Brand Elements/2026-icons/_raw/
+
+# ---- Client-confidential notes (public repo) ----
+site/docs/decision-log.md

@@ -1,0 +1,9 @@
+<section class="trust" aria-label="Why Athlon Rub">
+  <div class="container">
+    <ul class="trust__list">
+      {%- for b in section.blocks %}
+      <li class="trust__item">{% assign ic = 'icons/' | append: b.icon %}{% render ic %}<span>{{ b.text }}</span></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>

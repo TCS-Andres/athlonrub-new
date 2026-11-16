@@ -1,0 +1,256 @@
+{
+  "hero-desktop": {
+    "alt": "A Pro bottle of Athlon Rub on a ring apron in a dim Muay Thai gym while a cornerman works oil into a seated fighter's shoulder",
+    "w": 2400,
+    "h": 1350,
+    "src": "/assets/img/scenes/hero-desktop-lg.webp",
+    "srcSm": "/assets/img/scenes/hero-desktop-sm.webp",
+    "smW": 1200
+  },
+  "hero-mobile": {
+    "alt": "A Pro bottle of Athlon Rub on a ring apron, a cornerman working oil into a seated fighter's shoulder behind it",
+    "w": 1584,
+    "h": 2816,
+    "src": "/assets/img/scenes/hero-mobile-lg.webp",
+    "srcSm": "/assets/img/scenes/hero-mobile-sm.webp",
+    "smW": 800
+  },
+  "product-stage": {
+    "alt": "Athlon Rub Pro bottle on a dark green stone plinth with arnica flowers and Thai Plai root",
+    "w": 2400,
+    "h": 1350,
+    "src": "/assets/img/scenes/product-stage-lg.webp",
+    "srcSm": "/assets/img/scenes/product-stage-sm.webp",
+    "smW": 1200,
+    "focus": "72% 50%"
+  },
+  "product-trio": {
+    "alt": "The three Athlon Rub sizes, Travel, Pro and Coach, side by side on a stone plinth",
+    "w": 2400,
+    "h": 1600,
+    "src": "/assets/img/scenes/product-trio-lg.webp",
+    "srcSm": "/assets/img/scenes/product-trio-sm.webp",
+    "smW": 1200
+  },
+  "roster-combat": {
+    "alt": "A Muay Thai fighter wrapping her hands on a gym bench beside a bottle of Athlon Rub",
+    "w": 1600,
+    "h": 2133,
+    "src": "/assets/img/scenes/roster-combat-lg.webp",
+    "srcSm": "/assets/img/scenes/roster-combat-sm.webp",
+    "smW": 800
+  },
+  "roster-endurance": {
+    "alt": "A runner working oil into his calf at the edge of a running track at dusk, a Travel bottle by his shoe",
+    "w": 1600,
+    "h": 2133,
+    "src": "/assets/img/scenes/roster-endurance-lg.webp",
+    "srcSm": "/assets/img/scenes/roster-endurance-sm.webp",
+    "smW": 800
+  },
+  "roster-lifting": {
+    "alt": "A strength athlete kneeling by a barbell, working oil into her shoulder, a Pro bottle on a bumper plate",
+    "w": 1600,
+    "h": 2133,
+    "src": "/assets/img/scenes/roster-lifting-lg.webp",
+    "srcSm": "/assets/img/scenes/roster-lifting-sm.webp",
+    "smW": 800
+  },
+  "roster-paddle": {
+    "alt": "A pickleball player courtside pressing oil into his forearm, paddle, ball and Travel bottle on the bench",
+    "w": 1600,
+    "h": 2133,
+    "src": "/assets/img/scenes/roster-paddle-lg.webp",
+    "srcSm": "/assets/img/scenes/roster-paddle-sm.webp",
+    "smW": 800
+  },
+  "roster-therapist": {
+    "alt": "A sports massage therapist working oil into an athlete's thigh, a Coach bottle on the table",
+    "w": 1600,
+    "h": 2133,
+    "src": "/assets/img/scenes/roster-therapist-lg.webp",
+    "srcSm": "/assets/img/scenes/roster-therapist-sm.webp",
+    "smW": 800
+  },
+  "use-warmup": {
+    "alt": "A boxer with wrapped hands working Athlon Rub into his shoulder on a gym bench before training, a Pro bottle beside him",
+    "w": 1600,
+    "h": 2133,
+    "src": "/assets/img/scenes/use-warmup-lg.webp",
+    "srcSm": "/assets/img/scenes/use-warmup-sm.webp",
+    "smW": 800
+  },
+  "use-performance": {
+    "alt": "Between rounds, a cornerman works oil into a fighter's thigh, a Pro bottle on the ring apron",
+    "w": 1600,
+    "h": 2133,
+    "src": "/assets/img/scenes/use-performance-lg.webp",
+    "srcSm": "/assets/img/scenes/use-performance-sm.webp",
+    "smW": 800
+  },
+  "use-recovery": {
+    "alt": "After training, a woman on a locker-room bench works oil into her thigh beside a Coach bottle",
+    "w": 1600,
+    "h": 2133,
+    "src": "/assets/img/scenes/use-recovery-lg.webp",
+    "srcSm": "/assets/img/scenes/use-recovery-sm.webp",
+    "smW": 800
+  },
+  "ingredient-arnica": {
+    "alt": "Arnica montana flowers on dark stone beside a bead of amber oil",
+    "w": 1600,
+    "h": 1600,
+    "src": "/assets/img/scenes/ingredient-arnica-lg.webp",
+    "srcSm": "/assets/img/scenes/ingredient-arnica-sm.webp",
+    "smW": 800
+  },
+  "ingredient-plai": {
+    "alt": "Thai Plai rhizomes, one cut open to show the yellow interior, beside a bead of amber oil",
+    "w": 1600,
+    "h": 1600,
+    "src": "/assets/img/scenes/ingredient-plai-lg.webp",
+    "srcSm": "/assets/img/scenes/ingredient-plai-sm.webp",
+    "smW": 800
+  },
+  "ingredient-turmeric": {
+    "alt": "Fresh turmeric roots, one split to show orange flesh, beside a bead of amber oil",
+    "w": 1600,
+    "h": 1600,
+    "src": "/assets/img/scenes/ingredient-turmeric-lg.webp",
+    "srcSm": "/assets/img/scenes/ingredient-turmeric-sm.webp",
+    "smW": 800
+  },
+  "ingredient-wintergreen": {
+    "alt": "Wintergreen sprigs with red berries on dark stone beside a bead of amber oil",
+    "w": 1600,
+    "h": 1600,
+    "src": "/assets/img/scenes/ingredient-wintergreen-lg.webp",
+    "srcSm": "/assets/img/scenes/ingredient-wintergreen-sm.webp",
+    "smW": 800
+  },
+  "oil-macro": {
+    "alt": "Macro of a single drop of amber oil resting on the skin of a forearm",
+    "w": 2400,
+    "h": 1350,
+    "src": "/assets/img/scenes/oil-macro-lg.webp",
+    "srcSm": "/assets/img/scenes/oil-macro-sm.webp",
+    "smW": 1200
+  },
+  "step-shake": {
+    "alt": "A hand shaking a Pro bottle of Athlon Rub",
+    "w": 2400,
+    "h": 1600,
+    "src": "/assets/img/scenes/step-shake-lg.webp",
+    "srcSm": "/assets/img/scenes/step-shake-sm.webp",
+    "smW": 1200
+  },
+  "step-pump": {
+    "alt": "One press of the pump dispensing a coin-sized amount of amber oil into an open palm",
+    "w": 2400,
+    "h": 1600,
+    "src": "/assets/img/scenes/step-pump-lg.webp",
+    "srcSm": "/assets/img/scenes/step-pump-sm.webp",
+    "smW": 1200
+  },
+  "step-rub": {
+    "alt": "Both hands working oil into a calf muscle, the leg resting on a bench",
+    "w": 2400,
+    "h": 1600,
+    "src": "/assets/img/scenes/step-rub-lg.webp",
+    "srcSm": "/assets/img/scenes/step-rub-sm.webp",
+    "smW": 1200
+  },
+  "heritage-camp": {
+    "alt": "A traditional open-air Muay Thai camp in Thailand at dawn, wooden ring and heavy bags",
+    "w": 2400,
+    "h": 1350,
+    "src": "/assets/img/scenes/heritage-camp-lg.webp",
+    "srcSm": "/assets/img/scenes/heritage-camp-sm.webp",
+    "smW": 1200
+  },
+  "cta-locker": {
+    "alt": "A Pro bottle on a locker-room bench while a boxer tapes his hands",
+    "w": 2400,
+    "h": 1029,
+    "src": "/assets/img/scenes/cta-locker-lg.webp",
+    "srcSm": "/assets/img/scenes/cta-locker-sm.webp",
+    "smW": 1200
+  },
+  "pdp-travel-bag": {
+    "alt": "An open gym bag with gloves, wraps and a Travel bottle of Athlon Rub in the side pocket",
+    "w": 1600,
+    "h": 2133,
+    "src": "/assets/img/scenes/pdp-travel-bag-lg.webp",
+    "srcSm": "/assets/img/scenes/pdp-travel-bag-sm.webp",
+    "smW": 800
+  },
+  "bottle-travel": {
+    "alt": "Athlon Rub Travel, 3.4 fl oz / 100 mL",
+    "w": 241,
+    "h": 660,
+    "src": "/assets/img/products/bottle-travel.webp",
+    "png": "/assets/img/products/bottle-travel.png",
+    "mm": 135
+  },
+  "bottle-travel-hd": {
+    "alt": "Athlon Rub Travel, 3.4 fl oz / 100 mL",
+    "w": 375,
+    "h": 1027,
+    "src": "/assets/img/products/bottle-travel-hd.webp",
+    "png": "/assets/img/products/bottle-travel-hd.png",
+    "mm": 135
+  },
+  "bottle-pro": {
+    "alt": "Athlon Rub Pro, 8.5 fl oz / 250 mL",
+    "w": 256,
+    "h": 955,
+    "src": "/assets/img/products/bottle-pro.webp",
+    "png": "/assets/img/products/bottle-pro.png",
+    "mm": 195
+  },
+  "bottle-pro-hd": {
+    "alt": "Athlon Rub Pro, 8.5 fl oz / 250 mL",
+    "w": 256,
+    "h": 955,
+    "src": "/assets/img/products/bottle-pro-hd.webp",
+    "png": "/assets/img/products/bottle-pro-hd.png",
+    "mm": 195
+  },
+  "bottle-coach": {
+    "alt": "Athlon Rub Coach, 17 fl oz / 500 mL",
+    "w": 453,
+    "h": 1029,
+    "src": "/assets/img/products/bottle-coach.webp",
+    "png": "/assets/img/products/bottle-coach.png",
+    "mm": 210
+  },
+  "bottle-coach-hd": {
+    "alt": "Athlon Rub Coach, 17 fl oz / 500 mL",
+    "w": 395,
+    "h": 897,
+    "src": "/assets/img/products/bottle-coach-hd.webp",
+    "png": "/assets/img/products/bottle-coach-hd.png",
+    "mm": 210
+  },
+  "bundle-6": {
+    "alt": "Six Athlon Rub Pro bottles",
+    "w": 1056,
+    "h": 1051,
+    "src": "/assets/img/products/bundle-6.webp",
+    "png": "/assets/img/products/bundle-6.png"
+  },
+  "bundle-12": {
+    "alt": "Twelve Athlon Rub Pro bottles",
+    "w": 1951,
+    "h": 1051,
+    "src": "/assets/img/products/bundle-12.webp",
+    "png": "/assets/img/products/bundle-12.png"
+  },
+  "bundle-case": {
+    "alt": "A case of Athlon Rub Travel bottles",
+    "w": 1817,
+    "h": 732,
+    "src": "/assets/img/products/bundle-case.webp",
+    "png": "/assets/img/products/bundle-case.png"
+  }
+}

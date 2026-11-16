@@ -1,0 +1,24 @@
+{%- assign s = section.settings -%}
+{%- assign style = s.style | default: 'dark' -%}
+<section class="section section--{{ style }}{% if style == 'dark' %} surface-field{% endif %}" id="how-to">
+  <div class="container">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow">{{ s.eyebrow }}</p>
+      <h2 class="h1">{{ s.heading }}</h2>
+      {%- if s.text %}<p class="lead">{{ s.text }}</p>{% endif %}
+    </div>
+    <ol class="steps" style="list-style:none">
+      {%- for b in section.blocks %}
+      <li class="step chamfer{% unless b.image %} step--text-only{% endunless %}" data-reveal style="--d:{{ forloop.index0 | times: 90 }}ms">
+        {%- if b.image %}<div class="media">{% render 'snippets/img', name: b.image, images: images, sizes: '(min-width: 900px) 33vw, 100vw' %}</div>{% endif %}
+        <div class="step__body">
+          <div class="step__head"><span class="step__num">{{ forloop.index | prepend: '0' }}</span><h3 class="step__title">{{ b.title }}</h3>{% if b.icon %}{% assign ic = 'icons/' | append: b.icon %}{% render ic %}{% endif %}</div>
+          <p class="step__text">{{ b.text }}</p>
+        </div>
+      </li>
+      {%- endfor %}
+    </ol>
+    {%- if s.note %}<p class="center mt-6 fine">{{ s.note }}</p>{% endif %}
+    {%- if s.cta_label %}<div class="row row--center mt-6"><a class="btn" href="{{ s.cta_url }}">{{ s.cta_label }} {% render 'snippets/arrow' %}</a></div>{% endif %}
+  </div>
+</section>

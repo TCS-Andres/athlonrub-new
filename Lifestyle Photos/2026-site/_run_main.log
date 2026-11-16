@@ -1,0 +1,44 @@
+hero-mobile: prompt 4307 chars
+product-trio: prompt 3382 chars
+roster-combat: prompt 3636 chars
+roster-endurance: prompt 4104 chars
+roster-lifting: prompt 4079 chars
+roster-paddle: prompt 4070 chars
+roster-therapist: prompt 4191 chars
+use-warmup: prompt 4102 chars
+use-performance: prompt 4077 chars
+use-recovery: prompt 4042 chars
+ingredient-arnica: prompt 910 chars
+ingredient-plai: prompt 907 chars
+ingredient-turmeric: prompt 876 chars
+ingredient-wintergreen: prompt 905 chars
+oil-macro: prompt 985 chars
+step-shake: prompt 3107 chars
+step-pump: prompt 3590 chars
+step-rub: prompt 1897 chars
+heritage-camp: prompt 1475 chars
+cta-locker: prompt 3549 chars
+pdp-travel-bag: prompt 3040 chars
+credits before: 724.17
+  product-trio: OK product-trio_r1.png (4652 KB, task a075c1e273dbd5db77fbcd0773936253)
+  roster-endurance: OK roster-endurance_r1.png (5390 KB, task 068a44ee5e2a887cb6183f7bf695c071)
+  roster-combat: OK roster-combat_r1.png (5183 KB, task 4426203633ba22e67f1354906b6316ec)
+  hero-mobile: OK hero-mobile_r1.png (5055 KB, task c99ff809ffb3e17b1f828426938a5995)
+  roster-lifting: OK roster-lifting_r1.png (5501 KB, task a65d2a2e306b9fb3b9f71d47741a67b7)
+  roster-paddle: OK roster-paddle_r1.png (5271 KB, task b96ded0b2649d3f5ee3103549e0f3f5b)
+  ingredient-arnica: OK ingredient-arnica_r1.png (5369 KB, task cc586b3b0c8c28ffa9ddf86ce7e99e2a)
+  ingredient-plai: OK ingredient-plai_r1.png (5170 KB, task 803f8a8f9976e185eb0b27fbcba971a3)
+  roster-therapist: OK roster-therapist_r1.png (5063 KB, task f8b9db19c7282cc0469eb2a0a1ef1269)
+  use-recovery: OK use-recovery_r1.png (5244 KB, task 729678625942da6b35041c8295e22ce8)
+  use-performance: OK use-performance_r1.png (5377 KB, task fb0b4a3e2d1f6df243f9b4a49bd0d5ad)
+  use-warmup: OK use-warmup_r1.png (5122 KB, task 62bfe59088d91c1421f5bc330a0ea483)
+  ingredient-turmeric: OK ingredient-turmeric_r1.png (5629 KB, task b990166037e50a671c7f7fd2951fb655)
+  ingredient-wintergreen: OK ingredient-wintergreen_r1.png (5372 KB, task 7f8f0669661c586470548a9b02f0c212)
+  heritage-camp: OK heritage-camp_r1.png (5150 KB, task 1e13784424f2c846a68c4cbfff7d5095)
+  oil-macro: OK oil-macro_r1.png (5631 KB, task e4aca769b16791b8fece9c7a89dc7b32)
+  step-rub: OK step-rub_r1.png (4913 KB, task 459a6391caa8d546176959b0fafbcc93)
+  step-shake: OK step-shake_r1.png (4762 KB, task f78716a6d5d51d5ed98398bbfa9b0ef6)
+  step-pump: OK step-pump_r1.png (4628 KB, task 7c681742a9541076cb04d0a9eb12a9ac)
+  cta-locker: OK cta-locker_r1.png (4799 KB, task ad016286cd439ec66c6faa50b2c2ee66)
+  pdp-travel-bag: OK pdp-travel-bag_r1.png (5173 KB, task 094ecfc34f82a9739d102641845698c0)
+credits after: 524.61  (spent 199.56 for 21 shots)

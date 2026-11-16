@@ -1,0 +1,45 @@
+{%- comment -%}
+  Athlon Rub assistant (AI chat). Behaviour: assets/js/assistant.js. Backend: api/chat.js.
+  Shopify port: keep this markup in a theme snippet and point the endpoint at the Vercel API
+  (data-endpoint), adding the store domain to ALLOWED_ORIGINS.
+{%- endcomment -%}
+<div class="assistant" data-assistant data-endpoint="/api/chat">
+  <button class="assistant__launcher" type="button" data-assistant-toggle aria-expanded="false" aria-controls="assistant-panel">
+    <img src="/assets/brand/emblem.png" alt="" width="253" height="320">
+    <span>Ask Athlon</span>
+  </button>
+  <section class="assistant__panel" id="assistant-panel" role="dialog" aria-label="Athlon Rub assistant" hidden>
+    <header class="assistant__head">
+      <img src="/assets/brand/emblem.png" alt="" width="253" height="320">
+      <div>
+        <p class="assistant__title">Athlon Rub assistant</p>
+        <p class="assistant__sub">Sizing, products and warm-ups</p>
+      </div>
+      <button class="icon-btn" type="button" data-assistant-reset aria-label="Start a new conversation" title="New conversation">
+        <svg class="icon-ui" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4.5h4.5"/></svg>
+      </button>
+      <button class="icon-btn" type="button" data-assistant-close aria-label="Close assistant">
+        <svg class="icon-ui" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </header>
+    <div class="assistant__log" data-assistant-log aria-live="polite"></div>
+    <div class="assistant__chips" data-assistant-chips>
+      <button type="button" data-prompt="Which size is right for me?">Which size is right for me?</button>
+      <button type="button" data-prompt="Build me a warm-up for Muay Thai.">Muay Thai warm-up</button>
+      <button type="button" data-prompt="What's a good warm-up before a run?">Warm-up before a run</button>
+      <button type="button" data-prompt="How do I use Athlon Rub?">How do I use it?</button>
+      <button type="button" data-prompt="What bundles do you have for a gym or team?">Bundles for my gym</button>
+    </div>
+    <div class="assistant__foot">
+      <form class="assistant__form" data-assistant-form>
+        <label class="visually-hidden" for="assistant-input">Message the Athlon Rub assistant</label>
+        <textarea id="assistant-input" rows="1" maxlength="1500" placeholder="Ask about sizing, use or warm-ups" data-assistant-input></textarea>
+        <button class="assistant__send" type="submit" aria-label="Send message" data-assistant-send>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.4 20.4 21 12 3.4 3.6 3.3 10l12.4 2-12.4 2z"/></svg>
+        </button>
+      </form>
+      <p class="assistant__fine">AI assistant. General info only, not medical or coaching advice. Please don't share health details. <a href="/pages/contact-us/">Talk to a person</a></p>
+    </div>
+  </section>
+</div>
+<script id="assistant-products" type="application/json">{{ products | chat_products }}</script>

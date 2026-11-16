@@ -1,0 +1,33 @@
+{%- assign s = section.settings -%}
+<section class="hero" aria-label="Introduction">
+  <div class="hero__media">
+    {%- assign d = images[s.image] -%}
+    {%- assign m = images[s.image_mobile] -%}
+    <picture>
+      {%- if m %}<source media="(max-width: 767px)" srcset="{{ m.srcSm | v }} {{ m.smW }}w, {{ m.src | v }} {{ m.w }}w" sizes="100vw">{% endif %}
+      <img src="{{ d.src | v }}" srcset="{{ d.srcSm | v }} {{ d.smW }}w, {{ d.src | v }} {{ d.w }}w" sizes="100vw" width="{{ d.w }}" height="{{ d.h }}" alt="{{ d.alt }}" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
+  <div class="container">
+    <div class="hero__content">
+      <p class="eyebrow eyebrow--start">{{ s.eyebrow }}</p>
+      <h1 class="display hero__title">
+        {%- for line in s.heading_lines -%}
+        <span{% if forloop.index == s.gold_line %} class="text-gold-sweep"{% endif %}>{{ line }}</span>
+        {%- endfor -%}
+      </h1>
+      <p class="hero__sub">{{ s.text }}</p>
+      <div class="hero__ctas">
+        <a class="btn btn--lg" href="{{ s.cta_url }}">{{ s.cta_label }} {% render 'snippets/arrow' %}</a>
+        {%- if s.cta2_label %}<a class="btn btn--lg btn--ghost" href="{{ s.cta2_url }}">{{ s.cta2_label }}</a>{% endif %}
+      </div>
+      {%- if section.blocks %}
+      <ul class="hero__proof">
+        {%- for b in section.blocks %}
+        <li>{% assign ic = 'icons/' | append: b.icon %}{% render ic %}{{ b.text }}</li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+    </div>
+  </div>
+</section>

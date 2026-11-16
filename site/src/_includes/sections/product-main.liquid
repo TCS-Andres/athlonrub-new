@@ -1,0 +1,111 @@
+{%- comment -%}
+  Product page main section. Expects `product` (from pagination) in scope.
+  Shopify port: product.media for the gallery, product form for the buy box,
+  sibling sizes from a product metafield or a collection.
+{%- endcomment -%}
+{%- assign bottles = products | where: 'type', 'bottle' -%}
+<section class="section section--paper" style="padding-top: clamp(2rem, 1.5rem + 2vw, 3.5rem)">
+  <div class="container">
+    <nav aria-label="Breadcrumb" style="margin-bottom:var(--s-5)">
+      <ol class="crumbs" style="color:var(--ink-3)"><li><a href="/">Home</a></li><li><a href="/collections/all/">Shop</a></li><li><span aria-current="page">{{ product.title }}</span></li></ol>
+    </nav>
+    <div class="pdp">
+      <div class="gallery" data-gallery>
+        <div class="gallery__main chamfer-lg">
+          <div class="gallery__slide gallery__slide--cutout is-active">{% render 'snippets/bottle', cutout: product.cutout, images: images, alt: product.title, loading: 'eager', hd: true %}</div>
+          {%- for sc in product.scenes %}
+          <div class="gallery__slide gallery__slide--scene">{% render 'snippets/img', name: sc, images: images, sizes: '(min-width: 1000px) 55vw, 100vw' %}</div>
+          {%- endfor %}
+        </div>
+        <div class="gallery__thumbs">
+          <button type="button" class="gallery__thumb gallery__thumb--cutout" aria-current="true" aria-label="Show product photo">{% render 'snippets/bottle', cutout: product.cutout, images: images, alt: '' %}</button>
+          {%- for sc in product.scenes %}
+          <button type="button" class="gallery__thumb" aria-current="false" aria-label="Show photo {{ forloop.index | plus: 1 }}"><img src="{{ images[sc].srcSm | v }}" width="{{ images[sc].smW }}" alt="" loading="lazy"></button>
+          {%- endfor %}
+        </div>
+      </div>
+
+      <div class="pdp__info" data-buy>
+        <p class="eyebrow eyebrow--start">{% if product.type == 'bundle' %}Bundle · {{ product.short }}{% else %}All-sports rub · {{ product.size }}{% endif %}</p>
+        <h1 class="h1 pdp__title">{{ product.title }}</h1>
+        <p class="pdp__price">{{ product.price | money }}{% if product.compare_at_price %} <s>{{ product.compare_at_price | money }}</s> {%- assign saving = product.compare_at_price | minus: product.price -%}<span class="save-tag">Save {{ saving | money }}</span>{% endif %}</p>
+        <p class="lead">{{ product.summary }}</p>
+
+        {%- if product.type == 'bottle' %}
+        <div>
+          <p class="option-label">Size</p>
+          <div class="size-picker">
+            {%- for b in bottles %}
+            <a class="size-opt" href="/products/{{ b.handle }}/"{% if b.handle == product.handle %} aria-current="page"{% endif %}>
+              {% render 'snippets/bottle', cutout: b.cutout, images: images, alt: '' %}
+              <strong>{{ b.short }}</strong><span>{{ b.size | split: ' / ' | last }}</span><span>{{ b.price | money }}</span>
+            </a>
+            {%- endfor %}
+          </div>
+        </div>
+        {%- endif %}
+
+        <div>
+          <p class="option-label">Quantity</p>
+          <div class="buy-row">
+            <div class="qty qty--lg" data-stepper role="group" aria-label="Quantity">
+              <button type="button" data-step="-1" aria-label="Decrease quantity">−</button>
+              <input type="number" value="1" min="1" max="99" inputmode="numeric" data-qty-input aria-label="Quantity">
+              <button type="button" data-step="1" aria-label="Increase quantity">+</button>
+            </div>
+            {% render 'snippets/add-button', product: product, class: 'btn--lg btn--green' %}
+          </div>
+        </div>
+
+        {%- if product.subscribe_percent %}
+        <p class="pdp__subscribe">{% render 'icons/recovery' %}<span>Train every week? <a href="{{ site.store_url }}/products/{{ product.handle }}">Subscribe monthly and save {{ product.subscribe_percent }}%</a> on every delivery.</span></p>
+        {%- endif %}
+
+        <ul class="pdp__assure">
+          <li>{% render 'icons/shipping' %}Free shipping on orders over {{ site.free_shipping_cents | money_without_trailing_zeros }}</li>
+          <li>{% render 'icons/guarantee' %}Covered by our 30-day guarantee</li>
+          <li>{% render 'icons/secure' %}Secure checkout on athlonrub.com</li>
+        </ul>
+
+        <div class="pdp__benefits">
+          <div>{% render 'icons/fast-absorbing' %}Fast-absorbing</div>
+          <div>{% render 'icons/warming' %}Warming</div>
+          <div>{% render 'icons/non-greasy' %}Non-greasy</div>
+        </div>
+
+        <div class="accordion">
+          <details open>
+            <summary>Best for<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><ul class="star-list">{%- for x in product.best_for %}<li><span>{{ x }}</span></li>{%- endfor %}</ul></div>
+          </details>
+          <details>
+            <summary>How to use<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>Shake well. Pump a small amount into your palm and work it into the muscles and joints you are about to load. Give it a minute to absorb, then put your kit on. For the strongest warming sensation, apply after a brief sweat or a warm shower. Re-apply between rounds as needed.</p></div>
+          </details>
+          <details>
+            <summary>Ingredients<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>{%- for i in formula.inci %}{{ i.name }} ({{ i.latin }}){% unless forloop.last %}, {% endunless %}{%- endfor %}.</p><p class="fine">No added colorants. Non-GMO. Free of parabens, sulfates and phthalates.</p></div>
+          </details>
+          <details>
+            <summary>What's in the box<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>{{ product.size }}. {{ product.closure }}, shatter-proof amber bottle{% if product.type == 'bundle' %}s{% endif %}.</p></div>
+          </details>
+          <details>
+            <summary>Shipping & guarantee<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>We ship worldwide. Orders over {{ site.free_shipping_cents | money_without_trailing_zeros }} ship free, and every order is covered by our 30-day guarantee.</p></div>
+          </details>
+          <details>
+            <summary>Caution<span class="plus" aria-hidden="true"></span></summary>
+            <div class="answer"><p>For external use only. Avoid contact with eyes and broken skin. Discontinue use if irritation occurs. Keep out of reach of children.</p></div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sticky-buy" data-sticky-buy aria-hidden="true">
+  {% render 'snippets/bottle', cutout: product.cutout, images: images, alt: '' %}
+  <div><p class="sticky-buy__name">{{ product.title }}</p><p class="sticky-buy__price">{{ product.price | money }} · {{ product.size }}</p></div>
+  {% render 'snippets/add-button', product: product, class: 'btn--sm', hide_price: true %}
+</div>

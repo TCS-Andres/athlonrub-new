@@ -1,0 +1,29 @@
+{%- comment -%} settings: style, eyebrow, heading, text, image (real photo path), image_w, image_h, image_alt. blocks: { icon, title, text } {%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign style = s.style | default: 'paper' -%}
+<section class="section section--{{ style }}{% if style == 'dark' %} surface-field{% endif %}">
+  <div class="container">
+    <div class="split{% if s.reverse %} split--reverse{% endif %}" style="align-items:start">
+      <div class="split__media" data-reveal>
+        <div class="media chamfer-lg" style="aspect-ratio:{{ s.image_ratio | default: '2/3' }}">
+          {%- if s.image contains '/' %}<img src="{{ s.image }}" width="{{ s.image_w }}" height="{{ s.image_h }}" alt="{{ s.image_alt }}" loading="lazy" decoding="async">{% else %}{% render 'snippets/img', name: s.image, images: images, sizes: '(min-width: 900px) 50vw, 100vw' %}{% endif %}
+        </div>
+      </div>
+      <div class="stack" data-reveal style="--d:120ms">
+        <p class="eyebrow eyebrow--start">{{ s.eyebrow }}</p>
+        <h2 class="h2">{{ s.heading }}</h2>
+        {%- if s.text %}{%- assign paras = s.text | strip | split: '
+
+' -%}<div class="lead">{%- for para in paras %}<p>{{ para }}</p>{%- endfor %}</div>{% endif %}
+        {%- if section.blocks %}
+        <ol class="timeline">
+          {%- for b in section.blocks %}
+          <li><span class="icon-chip">{% assign ic = 'icons/' | append: b.icon %}{% render ic %}</span><div><p class="h4">{{ b.title }}</p><p class="small" style="margin:0;opacity:.8">{{ b.text }}</p></div></li>
+          {%- endfor %}
+        </ol>
+        {%- endif %}
+        {%- if s.cta_label %}<div class="row"><a class="btn{% if style == 'paper' or style == 'paper-2' %} btn--green{% endif %}" href="{{ s.cta_url }}">{{ s.cta_label }} {% render 'snippets/arrow' %}</a></div>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>

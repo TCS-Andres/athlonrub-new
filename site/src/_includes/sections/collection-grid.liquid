@@ -1,0 +1,16 @@
+{%- assign s = section.settings -%}
+<section class="section section--paper" id="products">
+  <div class="container">
+    <div class="filters" role="group" aria-label="Filter products" data-filters="#collection-grid">
+      <button class="filter" type="button" data-filter="all" aria-pressed="true">All ({{ products.size }})</button>
+      <button class="filter" type="button" data-filter="bottle" aria-pressed="false">Bottles</button>
+      <button class="filter" type="button" data-filter="bundle" aria-pressed="false" id="bundles">Bundles</button>
+    </div>
+    <div class="collection-grid" id="collection-grid">
+      {%- for p in products %}
+      {% render 'snippets/product-card', product: p, images: images, index: forloop.index0 %}
+      {%- endfor %}
+    </div>
+    <p class="fine mt-6">Looking for mats, jerseys, holsters or gym banners? <a href="{{ site.store_url }}/collections/all">See all gear on athlonrub.com</a>.</p>
+  </div>
+</section>

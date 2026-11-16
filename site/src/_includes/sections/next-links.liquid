@@ -1,0 +1,18 @@
+{%- assign s = section.settings -%}
+<section class="section section--tight section--paper">
+  <div class="container">
+    <p class="eyebrow eyebrow--start" style="margin-bottom:var(--s-5)">{{ s.eyebrow | default: 'Keep going' }}</p>
+    <div class="next-links">
+      {%- for b in section.blocks %}
+      <a class="next-link chamfer" href="{{ b.url }}" data-reveal style="--d:{{ forloop.index0 | times: 80 }}ms">
+        <div class="media">{% render 'snippets/img', name: b.image, images: images, sizes: '(min-width: 640px) 50vw, 100vw' %}</div>
+        <div class="next-link__body">
+          <p class="eyebrow eyebrow--start" style="color:var(--gold)">{{ b.eyebrow }}</p>
+          <h2 class="h2">{{ b.title }}</h2>
+          <span class="link-arrow" style="color:var(--gold)">{{ b.label | default: 'Read more' }} {% render 'snippets/arrow' %}</span>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

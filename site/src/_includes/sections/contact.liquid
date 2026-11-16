@@ -1,0 +1,48 @@
+{%- assign s = section.settings -%}
+<section class="section section--paper">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow eyebrow--start">How can we help</p>
+      <h2 class="h2">Three ways to reach us.</h2>
+    </div>
+    <div class="contact-cards">
+      {%- for b in section.blocks %}
+      <div class="contact-card chamfer" data-reveal style="--d:{{ forloop.index0 | times: 70 }}ms">
+        <span class="icon-chip">{% assign ic = 'icons/' | append: b.icon %}{% render ic %}</span>
+        <h3 class="h3">{{ b.title }}</h3>
+        <p class="small" style="color:var(--ink-2)">{{ b.text }}</p>
+        <a href="mailto:{{ site.email }}?subject={{ b.subject | url_encode }}">{{ site.email }}</a>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+<section class="section section--dark surface-field">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow eyebrow--start">Where we are</p>
+      <h2 class="h2">Athlon Rub worldwide.</h2>
+    </div>
+    <div class="locations">
+      <div class="location chamfer" data-reveal>
+        <p class="eyebrow eyebrow--start" style="color:var(--gold)">World HQ</p>
+        <p class="h3">Miami, Florida</p>
+        <p>United States</p>
+        <a href="tel:{{ site.phone_href }}">{{ site.phone }}</a>
+        <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      </div>
+      <div class="location chamfer" data-reveal style="--d:70ms">
+        <p class="eyebrow eyebrow--start" style="color:var(--gold)">United Kingdom</p>
+        <p class="h3">Athlon Rub UK</p>
+        <a href="https://www.athlonrub-co.uk" rel="noopener">www.athlonrub-co.uk</a>
+        <a href="mailto:athlonrubuk@gmail.com">athlonrubuk@gmail.com</a>
+      </div>
+      <div class="location chamfer" data-reveal style="--d:140ms">
+        <p class="eyebrow eyebrow--start" style="color:var(--gold)">South America</p>
+        <p class="h3">Athlon Rub LATAM</p>
+        <p>WhatsApp and email</p>
+        <a href="mailto:mercado@athlonrub.com">mercado@athlonrub.com</a>
+      </div>
+    </div>
+  </div>
+</section>

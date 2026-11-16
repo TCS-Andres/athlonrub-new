@@ -1,0 +1,18 @@
+{%- assign s = section.settings -%}
+{%- assign items = products | by_handles: s.handles -%}
+<section class="section section--paper-2" id="bundles">
+  <div class="container">
+    <div class="section-head section-head--split" data-reveal>
+      <div class="stack-sm">
+        <p class="eyebrow eyebrow--start">{{ s.eyebrow }}</p>
+        <h2 class="h1">{{ s.heading }}</h2>
+      </div>
+      <p class="lead">{{ s.text }}</p>
+    </div>
+    <div class="bundles">
+      {%- for p in items %}
+      {% render 'snippets/product-card', product: p, images: images, index: forloop.index0 %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>

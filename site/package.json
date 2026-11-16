@@ -1,0 +1,18 @@
+{
+  "name": "athlon-rub-site-v3",
+  "private": true,
+  "version": "3.0.0",
+  "description": "Athlon Rub storefront v3: static preview built as Shopify-portable Liquid sections.",
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve --port=8083",
+    "build": "eleventy",
+    "check": "node tools/check.mjs"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.9.0"
+  }
+}

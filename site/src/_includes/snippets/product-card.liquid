@@ -1,0 +1,17 @@
+{%- comment -%} Params: product, images, index {%- endcomment -%}
+<article class="p-card chamfer" data-type="{{ product.type }}" data-reveal style="--d:{{ index | default: 0 | times: 80 }}ms">
+  {%- if product.badge %}<span class="p-card__badge">{{ product.badge }}</span>{% endif %}
+  <a class="p-card__stage{% if product.type == 'bundle' %} p-card__stage--bundle{% endif %}" href="/products/{{ product.handle }}/" aria-label="{{ product.title }}">
+    {% render 'snippets/bottle', cutout: product.cutout, images: images, alt: product.title %}
+  </a>
+  <div class="p-card__body">
+    <p class="p-card__meta">{{ product.size }}</p>
+    <h3 class="p-card__name"><a href="/products/{{ product.handle }}/" style="text-decoration:none">{{ product.title }}</a></h3>
+    <p class="p-card__tag">{{ product.tagline }}</p>
+    <div class="p-card__row">
+      <p class="price">{{ product.price | money }}{% if product.compare_at_price %} <s>{{ product.compare_at_price | money }}</s>{% endif %}</p>
+      {%- if product.compare_at_price %}{%- assign saving = product.compare_at_price | minus: product.price -%}<span class="save-tag">Save {{ saving | money }}</span>{% endif %}
+    </div>
+    {% render 'snippets/add-button', product: product, class: 'btn--block', hide_price: true %}
+  </div>
+</article>

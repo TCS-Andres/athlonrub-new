@@ -1,0 +1,52 @@
+---
+layout: layouts/sections.liquid
+template: product
+pagination:
+  data: products
+  size: 1
+  alias: product
+permalink: "/products/{{ product.handle }}/"
+eleventyComputed:
+  title: "{{ product.title }} ({{ product.size }})"
+  description: "{{ product.summary }}"
+sections:
+  - type: product-main
+  - type: how-to
+    settings:
+      style: dark
+      eyebrow: How to use
+      heading: Shake. Pump. Work it in.
+      text: Sixty seconds, then get to work.
+      note: For the strongest warming sensation, apply after a brief sweat or a warm shower.
+    blocks:
+      - { image: step-shake, icon: shake, title: "Shake", text: "Shake the bottle well so the botanicals are evenly mixed." }
+      - { image: step-pump, icon: pump, title: "Pump", text: "One or two pumps into your palm. A little goes a long way." }
+      - { image: step-rub, icon: rub-in, title: "Work it in", text: "Rub it into the muscles and joints you are about to load. Kit on a minute later." }
+  - type: feature-split
+    settings:
+      style: paper
+      image: oil-macro
+      image_ratio: 4x5
+      position: 40% 50%
+      eyebrow: Built to stay out of your gear
+      heading: Glides on. Soaks in. Gone.
+      text: |
+        An oil-based formula designed to glide over the skin and absorb fast, so it works into the muscle instead of sitting on top. No residue on your gloves, no stains on your gi, nothing in your eyes when you sweat.
+    blocks:
+      - { icon: non-greasy, title: "Non-greasy, non-staining", text: "No added colorants, so clothes, towels and sheets stay clean." }
+      - { icon: shatter-proof, title: "Shatter-proof bottle", text: "Amber plastic that protects the formula and survives the gear bag." }
+      - { icon: botanical, title: "Naturally derived", text: "Arnica, Thai Plai and turmeric in a safflower and soybean oil base." }
+  - type: testimonials
+    settings:
+      style: paper-2
+      eyebrow: From the roster
+      heading: Trusted in the corner.
+      cta_label: All testimonials
+      cta_url: /pages/testimonials/
+  - type: related
+  - type: faq
+    settings:
+      eyebrow: Questions
+      heading: Good to know.
+      limit: 6
+---

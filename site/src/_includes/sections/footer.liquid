@@ -1,0 +1,48 @@
+<footer class="footer">
+  <img class="footer__crest" src="/assets/brand/emblem-gold.svg" alt="" width="476" height="601" loading="lazy">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img class="logo-lockup" src="/assets/brand/logo-gold.png" alt="Athlon Rub" width="640" height="566" loading="lazy">
+        <p>A fast-absorbing, non-greasy all-sports oil built on the Thai Oil tradition. One formula, three sizes. Made in the USA.</p>
+        <form class="signup" data-signup novalidate>
+          <label class="h4" for="signup-email" style="color:var(--on-dark)">Join the roster</label>
+          <p class="small">Training notes, new drops and member offers. No spam.</p>
+          <div class="signup__row">
+            <input id="signup-email" type="email" name="email" placeholder="Email address" autocomplete="email" required>
+            <button class="btn btn--sm" type="submit">Sign up</button>
+          </div>
+          <p class="signup__msg" data-signup-msg role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="footer__cols">
+        {%- for col in nav.footer %}
+        <div>
+          <h3>{{ col.title }}</h3>
+          <ul>{%- for link in col.links %}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor %}</ul>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+
+    <div class="footer__badges" aria-label="Formula and packaging standards">
+      {% render 'icons/badge-made-in-usa' %}
+      {% render 'icons/badge-non-gmo' %}
+      {% render 'icons/badge-paraben-free' %}
+      {% render 'icons/badge-sulfate-free' %}
+      {% render 'icons/badge-phthalate-free' %}
+      {% render 'icons/badge-bpa-free' %}
+      {% render 'icons/badge-aluminum-free' %}
+    </div>
+
+    <div class="footer__bottom">
+      <div class="stack-sm">
+        <p class="disclaimer">For external use only. Athlon Rub is a cosmetic product. It is not intended to diagnose, treat, cure or prevent any disease. Avoid contact with eyes and broken skin. Discontinue use if irritation occurs.</p>
+        <p>© {{ 'now' | date: '%Y' }} Athlon Rub · {{ site.hq }} · <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+      </div>
+      <nav class="footer__legal" aria-label="Legal">
+        {%- for l in site.legal %}<a href="{{ l.url }}">{{ l.title }}</a>{%- endfor %}
+      </nav>
+    </div>
+  </div>
+</footer>

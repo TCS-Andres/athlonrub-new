@@ -1,0 +1,23 @@
+{%- comment -%} settings: style, eyebrow, heading, text, cols (3|4), center. blocks: { icon, title, text } {%- endcomment -%}
+{%- assign s = section.settings -%}
+{%- assign style = s.style | default: 'paper' -%}
+<section class="section section--{{ style }}{% if style == 'dark' %} surface-field{% endif %}">
+  <div class="container">
+    {%- if s.heading %}
+    <div class="section-head{% if s.center %} section-head--center{% endif %}" data-reveal>
+      {%- if s.eyebrow %}<p class="eyebrow{% unless s.center %} eyebrow--start{% endunless %}">{{ s.eyebrow }}</p>{% endif %}
+      <h2 class="h2">{{ s.heading }}</h2>
+      {%- if s.text %}<p class="lead">{{ s.text }}</p>{% endif %}
+    </div>
+    {%- endif %}
+    <div class="icon-grid icon-grid--{{ s.cols | default: 3 }}">
+      {%- for b in section.blocks %}
+      <div class="icon-item" data-reveal style="--d:{{ forloop.index0 | times: 60 }}ms">
+        <span class="icon-chip">{% assign ic = 'icons/' | append: b.icon %}{% render ic %}</span>
+        <h3 class="icon-item__title">{{ b.title }}</h3>
+        <p class="icon-item__text">{{ b.text }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

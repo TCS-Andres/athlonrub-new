@@ -1,0 +1,26 @@
+{%- assign s = section.settings -%}
+{%- assign style = s.style | default: 'paper' -%}
+{%- assign lim = s.limit | default: 99 -%}
+<section class="section section--{{ style }}" id="faq">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="faq-aside" data-reveal>
+        <p class="eyebrow eyebrow--start">{{ s.eyebrow }}</p>
+        <h2 class="h1">{{ s.heading }}</h2>
+        <p class="lead">{{ s.text | default: "Didn't find what you were looking for? Talk to the team and we will get you to the right bottle." }}</p>
+        <div class="row">
+          <a class="btn btn--green" href="/pages/contact-us/">Contact us {% render 'snippets/arrow' %}</a>
+          {%- if s.limit %}<a class="btn btn--outline" href="/pages/faqs/">All questions</a>{% endif %}
+        </div>
+      </div>
+      <div class="accordion" data-reveal style="--d:120ms">
+        {%- for f in faqs limit: lim %}
+        <details{% if forloop.first and s.open_first %} open{% endif %}>
+          <summary>{{ f.q }}<span class="plus" aria-hidden="true"></span></summary>
+          <div class="answer"><p>{{ f.a }}</p></div>
+        </details>
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+</section>

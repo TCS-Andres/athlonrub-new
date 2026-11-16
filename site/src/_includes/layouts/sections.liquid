@@ -1,0 +1,13 @@
+---
+layout: layouts/base.liquid
+---
+{%- comment -%}
+  Renders a page from its front matter `sections:` list, in order.
+  Mirrors a Shopify JSON template: each entry has a `type` (the section
+  file) plus `settings` and optional `blocks`.
+{%- endcomment -%}
+{%- for section in sections -%}
+  {%- assign section_file = 'sections/' | append: section.type -%}
+  {% include section_file %}
+{%- endfor -%}
+{{ content }}
