@@ -181,6 +181,31 @@
     f.reset();
   }));
 
+  /* Hero background video: autoplays muted; paused for reduced-motion visitors and while
+     offscreen; the toggle satisfies WCAG 2.2.2 (pause moving content). */
+  const hv = $("[data-hero-video]"), ht = $("[data-video-toggle]");
+  if (hv) {
+    let userPaused = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (userPaused) { hv.removeAttribute("autoplay"); hv.pause(); }
+    const sync = () => {
+      if (!ht) return;
+      ht.classList.toggle("is-paused", hv.paused);
+      ht.setAttribute("aria-pressed", String(hv.paused));
+      ht.setAttribute("aria-label", hv.paused ? "Play background video" : "Pause background video");
+    };
+    const play = () => { if (!userPaused) hv.play().catch(() => {}); };
+    hv.addEventListener("play", sync);
+    hv.addEventListener("pause", sync);
+    ht?.addEventListener("click", () => {
+      userPaused = !hv.paused;
+      if (userPaused) hv.pause(); else hv.play().catch(() => {});
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([en]) => (en.isIntersecting ? play() : hv.pause()), { threshold: 0.15 }).observe(hv);
+    } else play();
+    sync();
+  }
+
   /* QA screenshot mode (?shot): everything visible, images eager */
   const SHOT = new URLSearchParams(location.search).has("shot");
   if (SHOT) $$("img[loading=lazy]").forEach((i) => (i.loading = "eager"));

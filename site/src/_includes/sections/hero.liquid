@@ -1,12 +1,30 @@
+{%- comment -%}
+  Home hero. settings: video_mp4, video_webm, video_poster (background video, from the V2 draft's
+  real athlonrub.com footage) or image / image_mobile (Seedream stills); product (cut-out shown over
+  the media); eyebrow, heading_lines, gold_line, text, CTAs. The video autoplays muted;
+  main.js pauses it for prefers-reduced-motion visitors and when it scrolls offscreen.
+{%- endcomment -%}
 {%- assign s = section.settings -%}
-<section class="hero" aria-label="Introduction">
+<section class="hero{% if s.video_mp4 %} hero--video{% endif %}" aria-label="Introduction">
   <div class="hero__media">
+    {%- if s.video_mp4 %}
+    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="{{ s.video_poster | v }}" aria-hidden="true" tabindex="-1" data-hero-video>
+      {%- if s.video_webm %}<source src="{{ s.video_webm | v }}" type="video/webm">{% endif %}
+      <source src="{{ s.video_mp4 | v }}" type="video/mp4">
+    </video>
+    {%- else %}
     {%- assign d = images[s.image] -%}
     {%- assign m = images[s.image_mobile] -%}
     <picture>
       {%- if m %}<source media="(max-width: 767px)" srcset="{{ m.srcSm | v }} {{ m.smW }}w, {{ m.src | v }} {{ m.w }}w" sizes="100vw">{% endif %}
       <img src="{{ d.src | v }}" srcset="{{ d.srcSm | v }} {{ d.smW }}w, {{ d.src | v }} {{ d.w }}w" sizes="100vw" width="{{ d.w }}" height="{{ d.h }}" alt="{{ d.alt }}" fetchpriority="high" decoding="async">
     </picture>
+    {%- endif %}
+    {%- if s.product %}
+    <a class="hero__product" href="{{ s.product_url }}" aria-label="{{ s.product_alt }}">
+      {% render 'snippets/bottle', cutout: s.product, images: images, alt: s.product_alt, loading: 'eager', hd: true %}
+    </a>
+    {%- endif %}
   </div>
   <div class="container">
     <div class="hero__content">
@@ -30,4 +48,10 @@
       {%- endif %}
     </div>
   </div>
+  {%- if s.video_mp4 %}
+  <button class="hero__toggle" type="button" data-video-toggle aria-pressed="false" aria-label="Pause background video">
+    <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+    <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+  </button>
+  {%- endif %}
 </section>
