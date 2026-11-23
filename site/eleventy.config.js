@@ -13,7 +13,10 @@ import { readFileSync } from "node:fs";
 // recomputed before every build and appended as ?v= to asset URLs. Any change
 // to those files gives every asset a new URL, so browsers never pair new
 // markup with a stale cached stylesheet or photo.
-const VERSIONED = ["src/assets/css/main.css", "src/assets/js/main.js", "src/assets/js/assistant.js", "src/_data/images.json"];
+const VERSIONED = [
+  "src/assets/css/main.css", "src/assets/js/main.js", "src/assets/js/assistant.js", "src/_data/images.json",
+  "src/assets/video/hero-ambient.mp4", "src/assets/video/hero-ambient.webm", "src/assets/video/hero-ambient-poster.jpg",
+];
 let assetVersion = "dev";
 const computeVersion = () => {
   const h = createHash("sha1");

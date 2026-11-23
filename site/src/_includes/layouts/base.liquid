@@ -21,6 +21,9 @@
   {%- if preload_image %}
   <link rel="preload" as="image" href="{{ images[preload_image].src | v }}" imagesrcset="{{ images[preload_image].srcSm | v }} {{ images[preload_image].smW }}w, {{ images[preload_image].src | v }} {{ images[preload_image].w }}w" imagesizes="100vw" fetchpriority="high">
   {%- endif %}
+  {%- if preload_href %}
+  <link rel="preload" as="image" href="{{ preload_href | v }}" fetchpriority="high">
+  {%- endif %}
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | v }}">
   <script>document.documentElement.classList.replace('no-js','js');</script>
   {%- if jsonld %}<script type="application/ld+json">{{ jsonld }}</script>{% endif %}

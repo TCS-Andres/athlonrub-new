@@ -85,8 +85,17 @@ coach or medical professional.
   warm-up library are written out in the same file.
 - **Safeguards:** same-origin check, per-IP rate limit, message length caps,
   no conversation storage or content logging (only token counts are logged).
-- **Test it:** `node tools/chat-test.mjs` runs five scripted conversations
-  (sizing, warm-up, injury, jailbreak, Spanish) against the real API.
+- **Soreness and pain questions** are treated as buying questions: the assistant
+  leads with empathy and how athletes use Athlon Rub in recovery, gives a routine
+  and recommends a bottle, using feel-and-routine language ("helps tight, tired
+  muscles feel relaxed and loose", "supports your body's natural recovery
+  process") rather than drug claims. Possible injuries get one light line to get
+  checked; ongoing conditions get a doctor note. See the "Soreness, aches and
+  recovery" section of `lib/assistant-prompt.js`.
+- **Test it:** `node tools/chat-test.mjs` runs eleven scripted conversations
+  (sizing, warm-up, six soreness/pain/injury cases, jailbreak, Spanish) against
+  the real API and flags forbidden claim wording, refusal-style openers and
+  replies without a product recommendation.
 - **Run locally with the API:** `vercel dev --cwd site` (uses the project's
   development env vars).
 

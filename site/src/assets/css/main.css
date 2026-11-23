@@ -473,6 +473,47 @@ ul, ol { margin: 0; padding: 0; }
   .hero__ctas .btn { flex: 1 1 100%; }
 }
 
+/* Video hero: the V2 draft's athlonrub.com footage with the real bottle standing over it */
+.hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+.hero--video .hero__media::after {
+  background:
+    linear-gradient(90deg, rgba(6,25,15,.94) 0%, rgba(6,25,15,.7) 34%, rgba(6,25,15,.25) 62%, rgba(6,25,15,.45) 100%),
+    linear-gradient(0deg, rgba(6,25,15,.75) 0%, rgba(6,25,15,0) 35%);
+}
+.hero__product {
+  position: absolute; z-index: 1; display: none; align-items: flex-end; justify-content: center;
+  right: max(9%, calc((100% - var(--container)) / 2 + 7%)); bottom: 15%; height: min(52%, 470px);
+}
+.hero__product::before {
+  content: ""; position: absolute; left: 50%; bottom: 18%; width: 340%; aspect-ratio: 1; transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(202,154,58,.32), rgba(202,154,58,.08) 55%, transparent 75%); z-index: -1; pointer-events: none;
+}
+.hero__product::after {
+  content: ""; position: absolute; left: 50%; bottom: -14px; width: 160%; height: 30px; transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(0,0,0,.7), transparent); z-index: -1;
+}
+.hero__product img { height: 100%; width: auto; filter: drop-shadow(0 24px 24px rgba(0,0,0,.5)); transition: transform var(--t-slow) var(--ease-out); }
+.hero__product:hover img { transform: translateY(-6px); }
+@media (min-width: 1000px) { .hero__product { display: flex; } }
+.hero__toggle {
+  position: absolute; z-index: 2; right: var(--gutter); top: var(--s-5); width: 40px; height: 40px;
+  display: grid; place-items: center; border-radius: 50%; cursor: pointer;
+  background: rgba(6,25,15,.55); color: var(--on-dark); border: 1px solid rgba(238,232,218,.3);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: border-color var(--t-fast);
+}
+.hero__toggle:hover { border-color: var(--gold); color: var(--gold); }
+.hero__toggle svg { width: 16px; height: 16px; }
+.hero__toggle .i-play, .hero__toggle.is-paused .i-pause { display: none; }
+.hero__toggle.is-paused .i-play { display: block; }
+@media (max-width: 639px) {
+  /* Video hero on phones: a wider crop of the footage, the bottle standing in its lower right */
+  .hero--video .hero__media { aspect-ratio: 1 / 1; }
+  .hero--video .hero__media::after { background: linear-gradient(180deg, rgba(6,25,15,.25) 0%, rgba(6,25,15,0) 30%, rgba(6,25,15,.2) 65%, var(--green-950) 100%); }
+  .hero__product { display: flex; right: 7%; bottom: 9%; height: 62%; }
+  .hero__product::before { width: 300%; }
+  .hero__toggle { top: var(--s-3); right: var(--s-3); width: 36px; height: 36px; }
+}
+
 /* Sub-page hero */
 .page-hero { position: relative; color: var(--on-dark); background: var(--green-950); overflow: hidden; }
 .page-hero__media { position: absolute; inset: 0; }
