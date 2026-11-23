@@ -1,7 +1,8 @@
 /* Athlon Rub assistant widget. No dependencies.
    Talks to /api/chat (NDJSON stream), renders a safe markdown subset and
    [[product:handle]] markers as product cards whose "Add to bag" buttons reuse
-   the storefront bag in main.js. The conversation lives in sessionStorage so it
+   the storefront bag in main.js, and [[video:key]] / [[video:key@m:ss]] markers as
+   video cards that play inline (youtube-nocookie) only after a click. The conversation lives in sessionStorage so it
    follows the shopper across pages and is gone when the tab closes. */
 (() => {
   const root = document.querySelector("[data-assistant]");
@@ -20,6 +21,9 @@
   let products = [];
   try { products = JSON.parse(document.getElementById("assistant-products").textContent); } catch {}
   const byHandle = Object.fromEntries(products.map((p) => [p.handle, p]));
+  let videos = [];
+  try { videos = JSON.parse(document.getElementById("assistant-videos").textContent); } catch {}
+  const byVideo = Object.fromEntries(videos.map((v) => [v.key, v]));
 
   const GREETING = "Hey, I'm the Athlon Rub assistant. I can help you pick the right size, explain how to use it, or build a warm-up for your sport. What do you train?";
   const store = {
@@ -48,6 +52,27 @@
     </div>`;
   }
 
+  const toSec = (t) => t.split(":").reduce((a, n) => a * 60 + Number(n), 0);
+  function videoCard(key, t) {
+    const v = byVideo[key];
+    if (!v) return "";
+    const chap = t ? (v.chapters || []).find((c) => c.t === t) : null;
+    const start = chap ? toSec(chap.t) : 0;
+    const href = `https://www.youtube.com/watch?v=${v.id}${start ? `&t=${start}s` : ""}`;
+    const meta = chap ? `From ${chap.t}: ${esc(chap.label)}` : esc(v.who);
+    return `<div class="a-video" data-video="${v.id}" data-start="${start}">
+      <button type="button" class="a-video__play" aria-label="Play video: ${esc(v.title)}">
+        <img src="https://i.ytimg.com/vi/${v.id}/mqdefault.jpg" alt="" loading="lazy" width="320" height="180">
+        <span class="a-video__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+        <span class="a-video__len">${esc(chap ? chap.t : v.length)}</span>
+      </button>
+      <div class="a-video__body">
+        <span class="a-video__title">${esc(v.title)}</span>
+        <span class="a-video__meta">${meta} · <a href="${href}" target="_blank" rel="noopener">YouTube</a></span>
+      </div>
+    </div>`;
+  }
+
   function safeHref(url) {
     if (/^\/(?!\/)[\w\-/.#?=&]*$/.test(url)) return url;
     if (/^https:\/\/(www\.)?athlonrub\.com(\/[\w\-/.#?=&]*)?$/.test(url)) return url;
@@ -66,7 +91,7 @@
     return s;
   }
 
-  // Safe markdown subset: paragraphs, **bold**, links, "- " and "1." lists, product cards.
+  // Safe markdown subset: paragraphs, **bold**, links, "- " and "1." lists, product and video cards.
   function render(text, streaming) {
     if (streaming) text = text.replace(/\[\[[^\]]*$/, "");
     const out = [];
@@ -76,12 +101,15 @@
       const line = raw.trim();
       const prod = line.match(/^\[\[product:([\w-]+)\]\]$/);
       if (prod) { close(); out.push(card(prod[1])); continue; }
+      const vid = line.match(/^\[\[video:([\w-]+)(?:@(\d{1,2}:\d{2}))?\]\]$/);
+      if (vid) { close(); out.push(videoCard(vid[1], vid[2])); continue; }
       const ul = line.match(/^[-*]\s+(.*)$/);
-      const ol = line.match(/^\d+[.)]\s+(.*)$/);
+      const ol = line.match(/^(\d+)[.)]\s+(.*)$/);
       if (ul || ol) {
         const kind = ul ? "ul" : "ol";
-        if (list !== kind) { close(); out.push(`<${kind}>`); list = kind; }
-        out.push(`<li>${inline((ul || ol)[1])}</li>`);
+        // A numbered list interrupted by bullets keeps counting from the model's own number.
+        if (list !== kind) { close(); out.push(kind === "ol" && ol[1] !== "1" ? `<ol start="${Number(ol[1])}">` : `<${kind}>`); list = kind; }
+        out.push(`<li>${inline(ul ? ul[1] : ol[2])}</li>`);
         continue;
       }
       close();
@@ -194,6 +222,19 @@
   form.addEventListener("submit", (e) => { e.preventDefault(); send(input.value); });
   input.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(input.value); } });
   input.addEventListener("input", autosize);
+  // Video cards: swap the thumbnail for the player only when the shopper asks for it.
+  log.addEventListener("click", (e) => {
+    const b = e.target.closest(".a-video__play");
+    if (!b) return;
+    const box = b.closest("[data-video]");
+    const f = document.createElement("iframe");
+    f.src = `https://www.youtube-nocookie.com/embed/${box.dataset.video}?autoplay=1&rel=0&playsinline=1${Number(box.dataset.start) ? `&start=${box.dataset.start}` : ""}`;
+    f.title = b.getAttribute("aria-label").replace(/^Play video: /, "");
+    f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+    f.allowFullscreen = true;
+    f.className = "a-video__frame";
+    b.replaceWith(f);
+  });
   chips.addEventListener("click", (e) => { const b = e.target.closest("[data-prompt]"); if (b) send(b.dataset.prompt); });
   // "Ask" links anywhere on the site: <a data-ask="Build me a warm-up for soccer">
   document.addEventListener("click", (e) => {

@@ -65,6 +65,11 @@ export default function (eleventyConfig) {
       }))
     ).replace(/</g, "\\u003c")
   );
+  eleventyConfig.addFilter("chat_videos", (arr) =>
+    JSON.stringify(
+      (arr || []).map((v) => ({ key: v.key, id: v.id, title: v.title, length: v.length, who: v.who, chapters: v.chapters }))
+    ).replace(/</g, "\\u003c")
+  );
   eleventyConfig.addFilter("json_attr", (v) => JSON.stringify(v).replace(/"/g, "&quot;"));
 
   return {

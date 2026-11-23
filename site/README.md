@@ -92,14 +92,24 @@ coach or medical professional.
   process") rather than drug claims. Possible injuries get one light line to get
   checked; ongoing conditions get a doctor note. See the "Soreness, aches and
   recovery" section of `lib/assistant-prompt.js`.
-- **Test it:** `node tools/chat-test.mjs` runs eleven scripted conversations
-  (sizing, warm-up, six soreness/pain/injury cases, jailbreak, Spanish) against
-  the real API and flags forbidden claim wording, refusal-style openers and
-  replies without a product recommendation.
+- **Warm-ups** use each sport's own routine and the standard exercise names
+  (jump rope, shadowboxing, teeps, A-skips, strides, ramp-up sets), never the
+  RAMP labels. Fight day in Muay Thai and kickboxing gets the coach-led 5 to 10
+  minute pre-fight Thai Oil massage from Kru Yai Jenypher Lanthier's instructional.
+- **Videos:** `src/_data/videos.json` lists Athlon Rub's YouTube videos with
+  chapters and when to share each one. The assistant writes `[[video:key]]` or
+  `[[video:key@m:ss]]`, and the widget shows a card that plays inline
+  (youtube-nocookie) only after a click. Add a video there and both the prompt
+  and the widget pick it up on the next build.
+- **Test it:** `node tools/chat-test.mjs` runs sixteen scripted conversations
+  (sizing, warm-ups, six soreness/pain/injury cases, Muay Thai beginner, fight
+  day, soccer, video request, pro athletes, jailbreak, Spanish) against the real
+  API and flags forbidden claim wording, refusal-style openers, RAMP labels,
+  replies without a product recommendation, and which video each reply shows.
 - **Run locally with the API:** `vercel dev --cwd site` (uses the project's
   development env vars).
 
-Cost, measured: the 7.7K-token system prompt is cached after the first call,
+Cost, measured: the 12K-token system prompt is cached after the first call,
 so a typical reply costs about 1 to 2 cents and starts streaming in 1 to 3
 seconds.
 
